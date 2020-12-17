@@ -25,12 +25,15 @@ SECRET_KEY = 'rt=3pl4(29rgj1!$qwes5wn=%^mm&#&zcwo4eo__o4yjsjqf$v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["0.0.0.0", "localhost"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'patients.apps.PatientsConfig',
+    'doctors.apps.DoctorsConfig',
+    'pharma.apps.PharmaConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
