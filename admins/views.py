@@ -3,5 +3,5 @@ from django.http import HttpResponse
 
 
 # Edit the function below.
-def login(request):
-    return HttpResponse("Login page")
+def home(request):
+    return render(request, "admins/home.html")

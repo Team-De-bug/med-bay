@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+    <head>
+        <title>Med-Bay</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+        <script type="text/javascript" src="{% static 'template.js' %}"></script>
+    </head>
+
+    <body onload="closeSidebar()">
+        <div class="floating-bar" id="floating-bar">
+            <div class="menu-bar">
+                <button class="side-bar-btn" value="click" onclick="closeSidebar()">
+                    <img class="side-bar-btn-icon" src="{% static 'images/menu.svg' %}" margin="0" height="100%"/>
+                </button>
+                <img id="logo" src="{% static 'images/med-bay.png' %}">
+                <div class="user-btns">
+                    <button id="login-btn">
+                        <img id="login-btn-img" src="{% static 'images/user.png' %}" height="40vh">
+                    </button>
+                </div>
+            </div>
+            <div class="side-bar-top">
+                <label id="side-bar-title">Navigation</label>
+            </div>
+        </div>
+        <div class="root-grid" id="root-grid">
+            <div class="side-bar">
+            </div>
+            <div class="main">
+
+                {%block body%}
+
+                {%endblock%}
+            </div>
+            <div class="footer">
+                <label>Med-Bay &copy; 2020</label>
+            </div>
+        </div>
+    </body>
+</html>
