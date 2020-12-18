@@ -8,7 +8,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
 
-    <body onload="closeSidebar()">
+    <body onload="showLogo()">
+        <div id="loadLogo"><img id="loadLogoImg" src="{%static 'images/med-bay.png'%}"></div>
         <div class="floating-bar" id="floating-bar">
             <div class="menu-bar">
                 <button class="side-bar-btn" value="click" onclick="closeSidebar()">

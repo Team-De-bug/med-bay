@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
-/*Variables*/
+/*Variables Start*/
 :root {
     --header-height: 7vh;
 }
+/*Variables End*/
 
 html, body {
     margin: 0;
@@ -24,6 +25,28 @@ button {
 }
 
 /*Template Start*/
+#loadLogo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: #E00043;
+    transition: all, 0.5s;
+    z-index: 999;
+}
+
+#loadLogoImg {
+    opacity: 0%;
+    height: 30%;
+    transition: opacity, 2s;
+}
+
 .root-grid {
     display: inline-grid;
     grid-gap: 0;
@@ -292,3 +315,60 @@ button {
     background-color: #1B4969;
     width: 100%;
 }
+/*Login End*/
+
+/*Patient List Start*/
+.patient-container-root {
+    margin: auto;
+    width: 95%;
+    height: 100%;
+}
+
+.patient-container-root h3 {
+    color: black;
+    margin-left: 2vw;
+}
+
+.patient-list-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.patient-container {
+    display: grid;
+    background-color: #E00043;
+    border-radius: 8px;
+    padding: 2vh 1vw 2vh 1vw;
+    grid-gap: 0px;
+    margin: 2vh 1.5vw 2vh 1.5vw;
+    cursor: pointer;
+    transition: all, 0.3s;
+}
+
+.patient-container:hover {
+    transform: scale(1.025, 1.025);
+    box-shadow: 0 0 20px #888888;
+    background-color: #F00048;
+}
+
+.patient-detail-label {
+    cursor: pointer;
+    width: 95%;
+}
+
+.patient-detail {
+    background-color: RGBA(0, 0, 0, 0.2);
+    border-style: none;
+    padding: 1vh 1vw 1vh 1vw;
+    margin: 1vh 0 1vh 0;
+    color: white;
+    font-family: 'Rubik';
+    border-radius: 8px;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
+
+.patient-detail:hover {
+    cursor: alias;
+}
+/*Patient List End*/
