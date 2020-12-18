@@ -29,7 +29,7 @@ button {
     width: 100vw;
     transition: all 1s;
     grid-template-rows: auto 6%;
-    grid-template-columns: 18% auto;
+    grid-template-columns: 0% auto;
     background-color: transparent;
     grid-template-areas: 
         'side-bar   main'
@@ -44,7 +44,7 @@ button {
     right: 0;
     top: 0;
     height: var(--header-height);
-    grid-template-columns: 18% auto;
+    grid-template-columns: 0% auto;
     grid-template-areas: 'side-bar-top   menu-bar';
     transition: all 1s;
 }
@@ -65,7 +65,7 @@ button {
 
 #side-bar-title {
     margin-left: 2vh;
-    font-size: 1.75vw;
+    font-size: 0vw;
     transition: all 0.75s;
 }
 
