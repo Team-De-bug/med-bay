@@ -1,7 +1,6 @@
 /*Variables*/
 :root {
-    --header-height: 5vh;
-    --header-height-hover: 7vh;
+    --header-height: 7vh;
 }
 
 
@@ -13,7 +12,13 @@ html, body {
 }
 
 button {
+    border-style: none;
+    padding: 0px;
+    margin: 0px;
     color: white;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
 }
 
 /*Template*/
@@ -22,6 +27,7 @@ button {
     grid-gap: 0;
     height: 100vh;
     width: 100vw;
+    transition: all 1s;
     grid-template-rows: auto 6%;
     grid-template-columns: 18% auto;
     background-color: transparent;
@@ -40,6 +46,7 @@ button {
     height: var(--header-height);
     grid-template-columns: 18% auto;
     grid-template-areas: 'side-bar-top   menu-bar';
+    transition: all 1s;
 }
 
 .side-bar {
@@ -52,16 +59,24 @@ button {
     background-color: #2C82C1;
     grid-area: side-bar-top;
     
-    font-size: 2vw;
-    
     flex-wrap: wrap;
     align-content: center;
-    justify-content: center;
+}
+
+#side-bar-title {
+    margin-left: 2vh;
+    font-size: 1.75vw;
+    transition: all 0.75s;
 }
 
 .menu-bar { 
+    display: grid;
+    grid-gap: 0px;
+    height: var(--header-height);
     background-color: #E00043;
     grid-area: menu-bar;
+    grid-template-columns: 4.25% auto 4.25%;
+    grid-template-areas: 'nav-btn logo user-buttons'
 }
 
 .main {
@@ -73,13 +88,37 @@ button {
     display: flex;
     background-color: #1C1C1C;
     grid-area: footer;
-    border-width    : 5% 0px 0px 0px;
+    border-width: 0.5vh 0px 0px 0px;
     border-style: solid;
     border-color: #E00043;
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
     font-size: 2vh;
+}
+
+.user-btns {
+    display: grid;
+    grid-gap: 0px;
+    grid-area: user-buttons;
+    height: var(--header-height);
+}
+
+/*Decorative Objects*/
+
+/*Menu Bar Logo*/
+#logo {
+    grid-area: logo;
+    height: 90.5%;
+    padding: 0;
+    margin: 0;
+    border-radius: 0 0 8px 8px;
+    transition: padding-top, 0.25s;
+}
+
+#logo:hover {
+    padding-top: 4vh;
+    background-color: #B40036;
 }
 
 /*Interactive Objects*/
@@ -96,6 +135,7 @@ button {
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
+    grid-area: nav-btn;
 }
 
 .side-bar-btn:hover {
@@ -104,4 +144,24 @@ button {
 
 .side-bar-btn:active {
     background-color: #A30031
+}
+
+#login-btn {
+    font-size: 100%;
+    height: var(--header-height);
+    background-color: transparent;
+    right: 100px;
+}
+
+#login-btn-img {
+    font-size: 100%;
+    border-radius: 0 0 8px 8px;
+    background-color: transparent;
+    right: 100px;
+    transition: padding-top, 0.25s;
+}
+
+#login-btn-img:hover {
+    padding-top: 4vh;
+    background-color: #B40036;
 }
