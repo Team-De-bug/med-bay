@@ -1,0 +1,24 @@
+{%extends "template.html" %}
+
+{% block body %}
+<div id="login-window">
+    <div id="login-title">
+        <label id="login-label">Login</label>
+    </div>
+    <form id="login-form">
+<!--        <label id="username-label" for="username">Username:</label><br>-->
+        <input class="login-input" type="text" id="username" name="username" placeholder="Username" required><br>
+<!--        <label id="password-label" for="password">Password:</label><br>-->
+        <input class="login-input" type="password" id="password" name="password" placeholder="Password" required><br>
+        <input id="login-submit-btn" type="submit" value="Login">
+    </form>
+</div>
+{%endblock%}
+
+{%block nav %}
+<ul id="nav-list">
+    <a class="nav-link" href="/"><li class="nav-item">Home</li></a>
+    <a class="nav-link" href="#"><li class="nav-item">About</li></a>
+    <a class="nav-link" href="#"><li class="nav-item">Booking</li></a>
+</ul>
+{%endblock%}

@@ -1,13 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
 /*Variables*/
 :root {
     --header-height: 7vh;
 }
 
-
 html, body {
     margin: 0;
     height: 100%;
-    font-family: sans-serif
+    color: white;
+    font-family: 'Rubik';
+    background-color: #F7F7F7;
 }
 
 button {
@@ -20,19 +23,19 @@ button {
     justify-content: center;
 }
 
-/*Template*/
+/*Template Start*/
 .root-grid {
     display: inline-grid;
     grid-gap: 0;
-    height: 100vh;
+    height: 93vh;
     width: 100vw;
-    transition: all 1s;
+    transition: width, 1s;
     grid-template-rows: auto 6%;
     grid-template-columns: 0% auto;
     background-color: transparent;
     grid-template-areas: 
         'side-bar   main'
-        'footer     footer'
+        'footer     footer';
 }
 
 .floating-bar {
@@ -49,13 +52,13 @@ button {
 }
 
 .side-bar {
-    background-color: #215880;
+    background-color: #383B3C;
     grid-area: side-bar;
 }
 
 .side-bar-top {
     display: flex;
-    background-color: #2C82C1;
+    background-color: #A30031;
     grid-area: side-bar-top;
     
     flex-wrap: wrap;
@@ -69,18 +72,18 @@ button {
 }
 
 .menu-bar { 
-    display: grid;
-    grid-gap: 0px;
+    display: inline-flex;
     height: var(--header-height);
     background-color: #E00043;
     grid-area: menu-bar;
-    grid-template-columns: 4.25% auto 4.25%;
-    grid-template-areas: 'nav-btn logo user-buttons'
 }
 
 .main {
     background-color: #F7F7F7;
     grid-area: main;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
 }
 
 .footer {
@@ -101,11 +104,16 @@ button {
     grid-gap: 0px;
     grid-area: user-buttons;
     height: var(--header-height);
+    margin-left: 10%;
 }
 
 /*Decorative Objects*/
 
 /*Menu Bar Logo*/
+#logo-div {
+    width: 100%;
+}
+
 #logo {
     grid-area: logo;
     height: 90.5%;
@@ -163,4 +171,124 @@ button {
 #login-btn-img:hover {
     padding-top: 4vh;
     background-color: #B40036;
+    cursor: pointer;
+}
+
+/*Side Bar*/
+#nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    width: inherit;
+    background-color: #2C2C2C;
+    padding: 2vh 0 2vh 1vw;
+}
+
+.nav-item:hover {
+    background-color: #242424;
+}
+
+.nav-link {
+    background-color: #2C2C2C;
+    font-size: 1.5vw;
+}
+
+.nav-link:link {
+    color: white;
+    opacity: 0%;
+    text-decoration: none;
+    transition: all, 0.75s;
+    text-overflow: clip;
+}
+
+.nav-link:visited {
+    color: white;
+    text-decoration: none;
+}
+/*Template End*/
+
+/*Login Start*/
+#login-window {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: auto;
+    background-color: #2C82C1;
+    padding: 0% 0% 2% 0%;
+    border-radius: 16px;
+}
+
+#login-title {
+    background-color: #215880;
+    width: 100%;
+    height: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 5%;
+    border-radius: 16px 16px 0 0;
+}
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 80%;
+    justify-content: center;
+    font-size: 3vh;
+    font-weight: bold;
+}
+
+#login-submit-btn {
+    width: 50%;
+    height: 6vh;
+    background-color: #215880;
+    border-style: none;
+    border-radius: 16px;
+    margin-top: 1vh;
+    padding: 1vh;
+    color: white;
+    font-weight: bold;
+    font-size: 2.5vh;
+    transition: all, 0.5s;
+}
+
+#login-submit-btn:hover {
+    background-color: #1B4969;
+    width: 100%;
+    cursor: pointer;
+}
+
+#login-submit-btn:active {
+    background-color: #153851;
+}
+
+.login-input {
+    background-color: #215880;
+    border-style: none;
+    border-radius: 16px;
+    width: 50%;
+    height: 4vh;
+    margin: 1vh 0 1vh 0;
+    padding: 1vh 1vw 1vh 1vw;
+    color: white;
+    font-size: 2.5vh;
+    font-weight: bold;
+    transition: all, 0.5s;
+}
+
+.login-input:hover {
+    background-color: #153851;
+    width: 70%;
+}
+
+.login-input:focus {
+    background-color: #1B4969;
+    width: 100%;
 }

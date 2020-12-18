@@ -5,6 +5,7 @@
         <title>Med-Bay</title>
         <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
         <script type="text/javascript" src="{% static 'template.js' %}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
 
     <body onload="closeSidebar()">
@@ -13,11 +14,15 @@
                 <button class="side-bar-btn" value="click" onclick="closeSidebar()">
                     <img class="side-bar-btn-icon" src="{% static 'images/menu.svg' %}" margin="0" height="100%"/>
                 </button>
-                <img id="logo" src="{% static 'images/med-bay.png' %}">
+                <div id="logo-div">
+                    <img id="logo" src="{% static 'images/med-bay.png' %}">
+                </div>
                 <div class="user-btns">
-                    <button id="login-btn">
-                        <img id="login-btn-img" src="{% static 'images/user.png' %}" height="40vh">
-                    </button>
+                    <a href="/staff">
+                        <button id="login-btn">
+                            <img id="login-btn-img" src="{% static 'images/user.png' %}" height="40vh">
+                        </button>
+                    </a>
                 </div>
             </div>
             <div class="side-bar-top">
@@ -26,9 +31,11 @@
         </div>
         <div class="root-grid" id="root-grid">
             <div class="side-bar">
+                {%block nav %}
+                
+                {%endblock%}
             </div>
             <div class="main">
-
                 {%block body%}
 
                 {%endblock%}
