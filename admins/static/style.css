@@ -11,7 +11,7 @@ body {
     height: 100%;
     color: white;
     font-family: 'Rubik';
-    background-color: #E3E3E3;
+    background-color: white;
 }
 
 button {
@@ -37,7 +37,7 @@ button {
     right: 0;
     top: 0;
     background-color: #E00043;
-    transition: all, 0.5s;
+    transition: all 0.5s;
     z-index: 999;
 }
 
@@ -102,7 +102,7 @@ button {
 }
 
 .main {
-    background-color: #E3E3E3;
+    background-color: transparent;
     grid-area: main;
     display: flex;
     flex-wrap: wrap;
@@ -224,7 +224,7 @@ button {
     color: white;
     opacity: 0%;
     text-decoration: none;
-    transition: all, 0.75s;
+    transition: all 0.75s;
     text-overflow: clip;
 }
 
@@ -280,7 +280,7 @@ button {
     color: white;
     font-weight: bold;
     font-size: 2.5vh;
-    transition: all, 0.5s;
+    transition: all 0.5s;
 }
 
 #login-submit-btn:hover {
@@ -304,7 +304,7 @@ button {
     color: white;
     font-size: 2.5vh;
     font-weight: bold;
-    transition: all, 0.5s;
+    transition: all 0.5s;
 }
 
 .login-input:hover {
@@ -343,7 +343,7 @@ button {
     grid-gap: 0px;
     margin: 2vh 1.5vw 2vh 1.5vw;
     cursor: pointer;
-    transition: all, 0.3s;
+    transition: all 0.3s;
 }
 
 .patient-container:hover {
@@ -367,7 +367,7 @@ button {
     border-radius: 8px;
     -webkit-appearance: none;
     -moz-appearance: textfield;
-    transition: all, 0.25s;
+    transition: all 0.25s;
 }
 
 .patient-detail:hover {
@@ -391,7 +391,7 @@ button {
     background-color: RGBA(0, 0, 0, 0.4);
     backdrop-filter: blur(2px);
     z-index: 999;
-    transition: all, 0.1;
+    transition: all 0.1;
 }
 
 .patient-full-container {
@@ -403,7 +403,7 @@ button {
     width: 80%;
     grid-gap: 0px;
     margin: 1.5vw 1.5vw;
-    transition: all, 0.3s;
+    transition: all 0.3s;
     box-shadow: 0 0 50px 2px #000000;
     z-index: 999;
     transform: inherit;
@@ -432,7 +432,7 @@ button {
     align-self: flex-end;
     font-size: 2.25vh;
     cursor: pointer;
-    transition: all, 0.5s;
+    transition: all 0.5s;
 }
 
 .save-diagnosis-btn:hover {
@@ -466,8 +466,7 @@ button {
     padding: 2vh 1vw 2vh 1vw;
     grid-gap: 0px;
     margin: 2vh 1.5vw 2vh 1.5vw;
-    cursor: pointer;
-    transition: all, 0.3s;
+    transition: all 0.3s;
 }
 
 .prescription-container:hover {
@@ -491,7 +490,7 @@ button {
     border-radius: 8px;
     -webkit-appearance: none;
     -moz-appearance: textfield;
-    transition: all, 0.25s;
+    transition: all 0.25s;
 }
 
 .prescription-detail:hover {
@@ -522,5 +521,54 @@ button {
 .prescription:hover {
     transform: scale(1.25, 1.25);
     box-shadow: 0 0 10px RGBA(0, 0, 0, 0.75);
+}
+
+.prescription-black-out {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    overflow: scroll;
+    background-color: RGBA(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+    transition: all 0.1;
+}
+
+.prescription-full-container {
+    color: black;
+    display: flex;
+    flex-direction: column; 
+    background-color: white;
+    border-radius: 8px;
+    padding: 2vh 1vw 2vh 1vw;
+    width: 80%;
+    grid-gap: 0px;
+    margin: 3vh 1.5vw 2vh 1.5vw;
+    transition: all 0.3s;
+    box-shadow: 0 0 50px 2px #000000;
+    z-index: 999;
+    transform: inherit;
+}
+
+.prescription-full-container .prescription-detail {
+    color: black;
+}
+
+.close-prescription-full-btn {
+    color: black;
+    font-weight: bold;
+    width: 2vw;
+    height: 2vw;
+    background-color: RGBA(0, 0, 0, 0.2);
+    align-self: flex-end;
+    border-radius: 8px;
+    cursor: pointer;
 }
 /*Prescription List end*/

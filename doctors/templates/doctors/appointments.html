@@ -5,7 +5,7 @@
 <!--Full Detail Div-->
 <div id="{{case.id}}" class="patient-black-out">
     <div class="patient-full-container">
-        <button class="close-patient-full-btn" onclick="closePatientFull('sampleID')">X</button>
+        <button class="close-patient-full-btn" onclick="closePatientFull()">X</button>
         <label class="patient-full-detail-label">Name: </label>
         <input class="patient-detail" id="name" type="text" value="{{case.patient.name}}" onclick="copyDetail('name')" readonly><br>
         <label class="patient-full-detail-label">Age: </label>
@@ -30,15 +30,15 @@
 <div class="patient-container-root">
     <h3 id="patient-list-title">Appointed Patients</h3><br>
     <div class="patient-list-container">
-        <div class="patient-container" onclick="showPatientFull('sampleID')">
-            <label class="patient-detail-label" class="patient-detail-label" onclick="showPatientFull('sampleID')">Name: </label>
+        <div class="patient-container" onclick="showPatientFull({{case.id}})">
+            <label class="patient-detail-label" class="patient-detail-label" onclick="showPatientFull({{case.id}})">Name: </label>
             <input class="patient-detail" id="name" type="text" value="{{case.patient.name}}" readonly><br>
-            <label class="patient-detail-label" onclick="showPatientFull('sampleID')">Age: </label>
+            <label class="patient-detail-label" onclick="showPatientFull({{case.id}})">Age: </label>
             <input class="patient-detail" id="age" type="text" value="{{case.patient.age}}" pattern="[0-9]+" readonly><br>
-            <label class="patient-detail-label" onclick="showPatientFull('sampleID')">Gender: </label>
+            <label class="patient-detail-label" onclick="showPatientFull({{case.id}})">Gender: </label>
             <input class="patient-detail" id="gender" type="text" value="{{case.patient.gender}}" size="1" readonly><br>
-            <label class="patient-detail-label" onclick="showPatientFull('sampleID')">Appointment Date: </label>
-            <input class="patient-detail" id="date" type="date" value="{{case.patient.appointed_date.date}}" onclick="showPatientFull('sampleID')" readonly>
+            <label class="patient-detail-label" onclick="showPatientFull({{case.id}})">Appointment Date: </label>
+            <input class="patient-detail" id="date" type="date" value="{{case.patient.appointed_date.date}}" onclick="showPatientFull({{case.id}})" readonly>
         </div>
     </div>
 </div>
