@@ -14,8 +14,8 @@
         <input class="patient-detail" id="gender" type="text" value="{{case.patient.gender}}" size="1" onclick="copyDetail('gender')" readonly><br>
         <label class="patient-full-detail-label">Appointment Date and Time: </label>
         <span>
-            <input class="patient-detail" id="date" type="date" value="{{case.appointed_date.date}}" readonly>
-            <input class="patient-detail" id="time" type="time" value="{{case.appointed_date.time}}"><br>
+        <input class="patient-detail" id="date" type="date" value="{{case.patient.appointed_date.date}}" readonly>
+        <input class="patient-detail" id="time" type="time" value="{{case.patient.appointed_date.time}}" readonly><br>
         </span>
         <form id="doctor-patient-form" style="display: flex; flex-direction: column;">
             {% csrf_token %}
