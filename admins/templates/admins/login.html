@@ -1,15 +1,19 @@
 {%extends "template.html" %}
-
 {% block body %}
+
+{{form.errors}}
 <div id="login-window">
     <div id="login-title">
         <label id="login-label">Login</label>
     </div>
-    <form id="login-form">
+    <form id="login-form" method="post">
+        {% csrf_token %}
 <!--        <label id="username-label" for="username">Username:</label><br>-->
-        <input class="login-input" type="text" id="username" name="username" placeholder="Username" required autofocus><br>
+<!--        <input class="login-input" type="text" id="username" name="username" placeholder="Username" required autofocus><br> -->
+        {{form.username}}
 <!--        <label id="password-label" for="password">Password:</label><br>-->
-        <input class="login-input" type="password" id="password" name="password" placeholder="Password" required><br>
+<!--        <input class="login-input" type="password" id="password" name="password" placeholder="Password" required><br> -->
+        {{form.password}}
         <input id="login-submit-btn" type="submit" value="Login">
     </form>
 </div>
