@@ -99,6 +99,7 @@ button {
     height: var(--header-height);
     background-color: #E00043;
     grid-area: menu-bar;
+    justify-content: space-between;
 }
 
 .main {
@@ -125,29 +126,25 @@ button {
 .user-btns {
     display: grid;
     grid-gap: 0px;
-    grid-area: user-buttons;
     height: var(--header-height);
-    margin-left: 10%;
 }
 
 /*Decorative Objects*/
 
 /*Menu Bar Logo*/
 #logo-div {
-    width: 100%;
+    height: var(--header-height);
 }
 
 #logo {
-    grid-area: logo;
-    height: 90.5%;
-    padding: 0;
-    margin: 0;
+    height: var(--header-height);
     border-radius: 0 0 8px 8px;
     transition: padding-top, 0.25s;
 }
 
 #logo:hover {
     padding-top: 4vh;
+    height: 10vh;
     background-color: #B40036;
     cursor: pointer;
 }
@@ -156,17 +153,12 @@ button {
 
 /*Side Bar Button*/
 .side-bar-btn {
-    display: flex;
     height: var(--header-height);
     width: var(--header-height);
     background-color: #E00043;
     border-style: none;
     padding: 0px;
     margin: 0px;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-    grid-area: nav-btn;
 }
 
 .side-bar-btn:hover {
@@ -180,14 +172,12 @@ button {
 #login-btn {
     height: var(--header-height);
     background-color: transparent;
-    right: 100px;
 }
 
 #login-btn-img {
     height: var(--header-height);
     border-radius: 0 0 8px 8px;
     background-color: transparent;
-    right: 100px;
     transition: padding-top, 0.25s;
 }
 
@@ -384,14 +374,14 @@ button {
     height: 100vh;
     width: 100vw;
     display: none;
-    flex-wrap: wrap;
+    flex-direction: column;
+    overflow: scroll;
     align-content: center;
     justify-content: center;
-    overflow: scroll;
     background-color: RGBA(0, 0, 0, 0.4);
     backdrop-filter: blur(2px);
     z-index: 999;
-    transition: all 0.1;
+    transition: all 0.1s;
 }
 
 .patient-full-container {
@@ -508,6 +498,11 @@ button {
     border-radius: 8px;
 }
 
+.prescriptions-full-list {
+    list-style-type: none;
+    width: inherit;
+}
+
 .prescription {
     width: 50%;
     background-color: #FFFFFF;
@@ -531,14 +526,13 @@ button {
     height: 100vh;
     width: 100vw;
     display: flex;
-    flex-wrap: wrap;
     flex-direction: column;
     align-content: center;
     overflow: scroll;
     background-color: RGBA(0, 0, 0, 0.4);
     backdrop-filter: blur(2px);
     z-index: 999;
-    transition: all 0.1;
+    transition: all 0.1s;
 }
 
 .prescription-full-container {
@@ -550,11 +544,15 @@ button {
     padding: 2vh 1vw 2vh 1vw;
     width: 80%;
     grid-gap: 0px;
-    margin: 3vh 1.5vw 2vh 1.5vw;
+    margin: 3vh auto 2vh auto;
     transition: all 0.3s;
     box-shadow: 0 0 50px 2px #000000;
     z-index: 999;
     transform: inherit;
+}
+
+.prescription-full-container:focus {
+    transform: scale(1.1, 1.1);
 }
 
 .prescription-full-container .prescription-detail {
@@ -570,5 +568,16 @@ button {
     align-self: flex-end;
     border-radius: 8px;
     cursor: pointer;
+}
+
+.prescription-assigned-table th, td {
+    border-collapse: collapse;   
+    border: 2px solid transparent;
+}
+
+.prescription-assigned-table th{
+    background-color: white;
+    padding: 1vh 1vw 1vh 1vw;
+    border-radius: 8px;
 }
 /*Prescription List end*/
