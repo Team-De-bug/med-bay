@@ -92,4 +92,6 @@ function showPrescriptionFull(prescripId) {
     
 }
 
-function closePrescriptionFull
+function closePrescriptionFull() {
+    
+}
