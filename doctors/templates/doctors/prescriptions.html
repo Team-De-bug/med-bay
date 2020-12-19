@@ -2,45 +2,10 @@
 
 {%block body %}
 <div id="prescripID" class="prescription-black-out">
-    <div class="prescription-full-container" tabindex="1">
-        <button class="close-prescription-full-btn" tabindex="1" onclick="closePrescriptionFull('prescripID')">X</button>
-        <label class="prescription-full-detail-label">Name:</label>
-        <input class="prescription-detail" tabindex="-1" id="name" type="text" value="Johnny Dough" readonly>
-    </div>
-    <div class="prescription-full-container" tabindex="1">
-        <label class="prescription-full-detail-label">Prescription #1</label>
-        <ul class="prescriptions-full-list">
-            <li class="prescription-detail">
-                <div>
-                    Some Medicine
-                    <table class="prescription-assigned-table">
-                        <tr>
-                            <th>Days</th>
-                            <th>Mon</th>
-                            <th>Tue</th>
-                            <th>Wed</th>
-                            <th>Thur</th>
-                            <th>Fri</th>
-                            <th>Sat</th>
-                            <th>Sun</th>
-                        </tr>
-                        <tr>
-                            <th>Assigned</th>
-                            <td>&#10004;</td>
-                            <td>&#10004;</td>
-                            <td>&#10004;</td>
-                            <td>&#10004;</td>
-                            <td>&#10004;</td>
-                            <td>&#10008;</td>
-                            <td>&#10008;</td>
-                        </tr>
-                    </table>
-                </div>
-            </li>
-        </ul>
+    <div class="prescription-full-container">
+        <button class="close-prescription-full-btn" onclick="closePrescriptionFull('prescripID')">X</button>
     </div>
 </div>
-    
 
 <div class="prescription-container-root">
     <h3 id="prescription-list-title">Your Authorised Prescriptions</h3><br>
