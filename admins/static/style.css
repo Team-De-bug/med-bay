@@ -178,14 +178,13 @@ button {
 }
 
 #login-btn {
-    font-size: 100%;
     height: var(--header-height);
     background-color: transparent;
     right: 100px;
 }
 
 #login-btn-img {
-    font-size: 100%;
+    height: var(--header-height);
     border-radius: 0 0 8px 8px;
     background-color: transparent;
     right: 100px;
