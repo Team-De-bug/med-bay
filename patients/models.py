@@ -28,5 +28,6 @@ class Cases(models.Model):
     doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True)
     patient = models.ForeignKey(Patient, on_delete=models.SET_NULL, null=True)
     desc = models.TextField()
+    appointed_date = models.DateTimeField()
     state = models.CharField(max_length=3, choices=states)
     status = models.CharField(max_length=3, choices=status_options)

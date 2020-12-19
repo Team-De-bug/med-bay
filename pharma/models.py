@@ -12,6 +12,6 @@ class Stock(models.Model):
 
 # Prescription
 class Prescription(models.Model):
-    case = models.ForeignKey(Cases, on_delete=models.SET_NULL, null=True)
+    case = models.OneToOneField(Cases, on_delete=models.SET_NULL, null=True)
     medicines = models.ManyToManyField(Stock)
     status = models.BooleanField(default=False)
