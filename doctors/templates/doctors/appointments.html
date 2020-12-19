@@ -3,9 +3,9 @@
 {%block body %}
 
 <!--Full Detail Div-->
-<div id="patient-black-out">
+<div id="sampleID" class="patient-black-out">
     <div class="patient-full-container">
-        <button class="close-patient-full-btn" onclick="closePatientFull()">X</button>
+        <button class="close-patient-full-btn" onclick="closePatientFull('sampleID')">X</button>
         <label class="patient-full-detail-label">Name: </label>
         <input class="patient-detail" id="name" type="text" value="Johnny Dough" onclick="copyDetail('name')" readonly><br>
         <label class="patient-full-detail-label">Age: </label>
@@ -26,7 +26,7 @@
 <div class="patient-container-root">
     <h3 id="patient-list-title">Appointed Patients</h3><br>
     <div class="patient-list-container">
-        <div id="sampleID" class="patient-container" onclick="showPatientFull('sampleID')">
+        <div class="patient-container" onclick="showPatientFull('sampleID')">
             <label class="patient-detail-label" class="patient-detail-label" onclick="showPatientFull('sampleID')">Name: </label>
             <input class="patient-detail" id="name" type="text" value="Johnny Dough" readonly><br>
             <label class="patient-detail-label" onclick="showPatientFull('sampleID')">Age: </label>

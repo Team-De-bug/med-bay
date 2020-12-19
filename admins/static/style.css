@@ -376,7 +376,7 @@ button {
     box-shadow: 0 0 5px RGBA(0, 0, 0, 0.75);
 }
 
-#patient-black-out {
+.patient-black-out {
     position: fixed;
     left: 0;
     right: 0;
@@ -384,7 +384,6 @@ button {
     height: 100vh;
     width: 100vw;
     display: none;
-    opacity: 0%;
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
