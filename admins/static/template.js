@@ -1,23 +1,5 @@
 var sidebarIsClosed = false;
 
-function showLogo() {
-    
-    closeSidebar();
-    
-    if (sessionStorage.getItem('first') == null) {
-        document.getElementById("loadLogoImg").style.opacity = "100%";
-        setTimeout(function () { document.getElementById("loadLogoImg").style.opacity = "0"; }, 3000);
-        console.log("Logo gone");
-        setTimeout(function () {document.getElementById("loadLogo").style.opacity = "0"; }, 5000);
-        setTimeout(function () {document.getElementById("loadLogo").style.display = "none"; }, 7000);
-        
-        sessionStorage.setItem('first', 'false');
-        
-    } else {
-        document.getElementById("loadLogo").style.display = "none";
-    }
-}
-
 function closeSidebar() {
     var navItems = document.getElementsByClassName("nav-link");
     //if the sidebar is not closed
@@ -39,10 +21,29 @@ function closeSidebar() {
         document.getElementById('side-bar-title').style.opacity = "100%";
         document.getElementById('side-bar-title').style.fontSize = "1.75vw";
         for (i = 0; i < navItems.length; i++) {
+            navItems.item(i).style.display = "block";
             navItems.item(i).style.opacity = "100%";
             navItems.item(i).style.fontSize = "1.5vw";
         }
         sidebarIsClosed = false;
+    }
+}
+
+function showLogo() {
+    
+    closeSidebar();
+    
+    if (sessionStorage.getItem('newSession') === null) {
+        document.getElementById("loadLogoImg").style.opacity = "100%";
+        setTimeout(function () { document.getElementById("loadLogoImg").style.opacity = "0"; }, 3000);
+        console.log("Logo gone");
+        setTimeout(function () {document.getElementById("loadLogo").style.opacity = "0"; }, 5000);
+        setTimeout(function () {document.getElementById("loadLogo").style.display = "none"; }, 7000);
+        
+        sessionStorage.setItem('newSession', 'false');
+        
+    } else {
+        document.getElementById("loadLogo").style.display = "none";
     }
 }
 
@@ -70,12 +71,25 @@ function showPatientFull(patientId) {
     
 }
 
-function closePatientFull(patientId) {
+function closePatientFull() {
     var patients = document.getElementsByClassName("patient-black-out");
     
     for (i = 0; i < patients.length; i++) {
-        if (patients.item(i).id == patientId) {
-            patients.item(i).style.display="none";
-        }
+            patients.item(i).style.display = "none";
+
     }
 }
+
+function showPrescriptionFull(prescripId) {
+    
+    var precriptions = document.getElementsByClassName("prescription");
+    
+    for (i = 0; i < precriptions.length; i++) {
+        if (precriptions.item(i).id == prescripId) {
+            precriptions.item(i).style.display = "block";
+        }
+    }
+    
+}
+
+function closePrescriptionFull

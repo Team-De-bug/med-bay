@@ -11,9 +11,12 @@
         <label class="patient-full-detail-label">Age: </label>
         <input class="patient-detail" id="age" type="text" value="{{case.patient.age}}" pattern="[0-9]+" onclick="copyDetail('age')" readonly><br>
         <label class="patient-full-detail-label">Gender: </label>
-        <input class="patient-detail" id="gender" type="text" value="{{case.patient.gender}}" size="1" onclick="copyDetail('gender')" readonly><br>
-        <label class="patient-full-detail-label">Appointment Date: </label>
-        <input class="patient-detail" id="date" type="text" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" value="13/12/2020" onclick="copyDetail('date')" readonly><br>
+        <input class="patient-detail" id="gender" type="text" value="M" size="1" onclick="copyDetail('gender')" readonly><br>
+        <label class="patient-full-detail-label">Appointment Date and Time: </label>
+        <span>
+            <input class="patient-detail" id="date" type="date" value="2020-12-13" readonly>
+            <input class="patient-detail" id="time" type="time" value="09:09"><br>
+        </span>
         <form id="doctor-patient-form" style="display: flex; flex-direction: column;">
             {% csrf_token %}
             <label class="patient-full-detail-label">Diagnosis: </label>
@@ -35,7 +38,7 @@
             <label class="patient-detail-label" onclick="showPatientFull('sampleID')">Gender: </label>
             <input class="patient-detail" id="gender" type="text" value="{{case.patient.gender}}" size="1" readonly><br>
             <label class="patient-detail-label" onclick="showPatientFull('sampleID')">Appointment Date: </label>
-            <input class="patient-detail" id="date" type="text" pattern="^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" value="13/12/2020" readonly>
+            <input class="patient-detail" id="date" type="date" value="2020-12-13" onclick="showPatientFull('sampleID')" readonly>
         </div>
     </div>
 </div>
