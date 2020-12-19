@@ -60,12 +60,22 @@ function copyDetail(detailId) {
 
 function showPatientFull(patientId) {
     
-    document.getElementById("patient-black-out").style.display="flex";
-    document.getElementById("patient-black-out").style.opacity="100%";
+    var patients = document.getElementsByClassName("patient-black-out");
+    
+    for (i = 0; i < patients.length; i++) {
+        if (patients.item(i).id == patientId) {
+            patients.item(i).style.display="flex";
+        }
+    }
     
 }
 
-function closePatientFull() {
-    document.getElementById("patient-black-out").style.display="none";
-    document.getElementById("patient-black-out").style.opacity="0%";
+function closePatientFull(patientId) {
+    var patients = document.getElementsByClassName("patient-black-out");
+    
+    for (i = 0; i < patients.length; i++) {
+        if (patients.item(i).id == patientId) {
+            patients.item(i).style.display="none";
+        }
+    }
 }
