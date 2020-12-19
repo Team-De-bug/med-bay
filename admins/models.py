@@ -10,3 +10,6 @@ class Staff(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone = models.CharField(max_length=10)
     role = models.CharField(max_length=20, choices=roles)
+
+    def __str__(self):
+        return f"{self.user.name}"

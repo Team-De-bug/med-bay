@@ -8,3 +8,6 @@ class Doctor(models.Model):
     speciality = models.CharField(max_length=50)
     availability = models.BooleanField(default=False)
     visit_cost = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.user.name}"

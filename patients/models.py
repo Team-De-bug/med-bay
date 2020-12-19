@@ -17,6 +17,9 @@ class Patient(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=10, default=None)
 
+    def __str__(self):
+        return f"{self.id}: {self.name}"
+
 
 # Created when a visit is done
 class Cases(models.Model):
@@ -31,3 +34,6 @@ class Cases(models.Model):
     appointed_date = models.DateTimeField("appointment date")
     state = models.CharField(max_length=3, choices=states)
     status = models.CharField(max_length=3, choices=status_options)
+
+    def __str__(self):
+        return f'case_id: {self.id}'
