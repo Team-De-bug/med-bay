@@ -6,3 +6,4 @@ __pycache__
 /.idea/modules.xml
 /.idea/inspectionProfiles/profiles_settings.xml
 /.idea/vcs.xml
+scripts/run.sh

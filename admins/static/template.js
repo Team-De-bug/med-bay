@@ -1,14 +1,17 @@
 var sidebarIsClosed = false;
 
 function showLogo() {
-    if (localStorage.getItem('first') == null) {
+    
+    closeSidebar();
+    
+    if (sessionStorage.getItem('first') == null) {
         document.getElementById("loadLogoImg").style.opacity = "100%";
         setTimeout(function () { document.getElementById("loadLogoImg").style.opacity = "0"; }, 3000);
         console.log("Logo gone");
         setTimeout(function () {document.getElementById("loadLogo").style.opacity = "0"; }, 5000);
         setTimeout(function () {document.getElementById("loadLogo").style.display = "none"; }, 7000);
         
-        localStorage.setItem('first', 'false');
+        sessionStorage.setItem('first', 'false');
         
     } else {
         document.getElementById("loadLogo").style.display = "none";
@@ -53,4 +56,16 @@ function copyDetail(detailId) {
     copyID.setSelectionRange(0, 99999)
     document.execCommand("copy");
     showMessage("Copied Pateint Detail: " + copyID.value);
+}
+
+function showPatientFull(patientId) {
+    
+    document.getElementById("patient-black-out").style.display="flex";
+    document.getElementById("patient-black-out").style.opacity="100%";
+    
+}
+
+function closePatientFull() {
+    document.getElementById("patient-black-out").style.display="none";
+    document.getElementById("patient-black-out").style.opacity="0%";
 }

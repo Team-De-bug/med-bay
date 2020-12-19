@@ -6,7 +6,7 @@
 }
 /*Variables End*/
 
-html, body {
+body {
     margin: 0;
     height: 100%;
     color: white;
@@ -149,6 +149,7 @@ button {
 #logo:hover {
     padding-top: 4vh;
     background-color: #B40036;
+    cursor: pointer;
 }
 
 /*Interactive Objects*/
@@ -324,9 +325,9 @@ button {
     height: 100%;
 }
 
-.patient-container-root h3 {
+#patient-list-title {
     color: black;
-    margin-left: 2vw;
+    margin: 2vh 2vw -2vh 2vw;
 }
 
 .patient-list-container {
@@ -366,9 +367,137 @@ button {
     border-radius: 8px;
     -webkit-appearance: none;
     -moz-appearance: textfield;
+    transition: all, 0.25s;
 }
 
 .patient-detail:hover {
     cursor: alias;
+    transform: scale(1.01, 1.01);
+    box-shadow: 0 0 5px RGBA(0, 0, 0, 0.75);
+}
+
+#patient-black-out {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    display: none;
+    opacity: 0%;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    overflow: scroll;
+    background-color: RGBA(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+    transition: all, 0.1;
+}
+
+.patient-full-container {
+    display: flex;
+    flex-direction: column; 
+    background-color: #E00043;
+    border-radius: 8px;
+    padding: 2vh 1vw 2vh 1vw;
+    width: 80%;
+    grid-gap: 0px;
+    margin: 1.5vw 1.5vw;
+    transition: all, 0.3s;
+    box-shadow: 0 0 50px 2px #000000;
+    z-index: 999;
+    transform: inherit;
+}
+
+.close-patient-full-btn {
+    width: 2vw;
+    background-color: RGBA(0, 0, 0, 0.2);
+    height: 2vw;
+    align-self: flex-end;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.close-patient-full-btn:hover {
+    
+}
+
+.save-diagnosis-btn {
+    color: white;
+    background-color: RGBA(0, 0, 0, 0.2);
+    border-style: none;
+    border-radius: 8px;
+    width: 10%;
+    height: 4vh;
+    align-self: flex-end;
+    font-size: 2.25vh;
+    cursor: pointer;
+    transition: all, 0.5s;
+}
+
+.save-diagnosis-btn:hover {
+    width: 25%;
+    transform: scale(1.01, 1.01);
+    box-shadow: 0 0 5px RGBA(0, 0, 0, 0.75);
 }
 /*Patient List End*/
+
+/*Prescription List Start*/
+.prescription-container-root {
+    margin: auto;
+    width: 95%;
+    height: 100%;
+}
+
+#prescription-list-title {
+    color: black;
+    margin: 2vh 2vw -2vh 2vw;
+}
+
+.prescription-list-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.prescription-container {
+    display: grid;
+    background-color: #E00043;
+    border-radius: 8px;
+    padding: 2vh 1vw 2vh 1vw;
+    grid-gap: 0px;
+    margin: 2vh 1.5vw 2vh 1.5vw;
+    cursor: pointer;
+    transition: all, 0.3s;
+}
+
+.prescription-container:hover {
+    transform: scale(1.025, 1.025);
+    box-shadow: 0 0 20px #888888;
+    background-color: #F00048;
+}
+
+.prescription-patient-label {
+    cursor: pointer;
+    width: 95%;
+}
+
+.prescription-detail {
+    background-color: RGBA(0, 0, 0, 0.2);
+    border-style: none;
+    padding: 1vh 1vw 1vh 1vw;
+    margin: 1vh 0 1vh 0;
+    color: white;
+    font-family: 'Rubik';
+    border-radius: 8px;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    transition: all, 0.25s;
+}
+
+.prescription-detail:hover {
+    cursor: alias;
+    transform: scale(1.01, 1.01);
+    box-shadow: 0 0 5px RGBA(0, 0, 0, 0.75);
+}
+/*Prescription List end*/
