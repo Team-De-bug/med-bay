@@ -11,11 +11,11 @@
         <label class="patient-full-detail-label">Age: </label>
         <input class="patient-detail" id="age" type="text" value="{{case.patient.age}}" pattern="[0-9]+" onclick="copyDetail('age')" readonly><br>
         <label class="patient-full-detail-label">Gender: </label>
-        <input class="patient-detail" id="gender" type="text" value="M" size="1" onclick="copyDetail('gender')" readonly><br>
+        <input class="patient-detail" id="gender" type="text" value="{{case.patient.gender}}" size="1" onclick="copyDetail('gender')" readonly><br>
         <label class="patient-full-detail-label">Appointment Date and Time: </label>
         <span>
-            <input class="patient-detail" id="date" type="date" value="2020-12-13" readonly>
-            <input class="patient-detail" id="time" type="time" value="09:09"><br>
+            <input class="patient-detail" id="date" type="date" value="{{case.patient.appointed_date.date}}" readonly>
+            <input class="patient-detail" id="time" type="time" value="{{case.patient.appointed_date.time}}"><br>
         </span>
         <form id="doctor-patient-form" style="display: flex; flex-direction: column;">
             {% csrf_token %}
@@ -38,7 +38,7 @@
             <label class="patient-detail-label" onclick="showPatientFull('sampleID')">Gender: </label>
             <input class="patient-detail" id="gender" type="text" value="{{case.patient.gender}}" size="1" readonly><br>
             <label class="patient-detail-label" onclick="showPatientFull('sampleID')">Appointment Date: </label>
-            <input class="patient-detail" id="date" type="date" value="2020-12-13" onclick="showPatientFull('sampleID')" readonly>
+            <input class="patient-detail" id="date" type="date" value="{{case.patient.appointed_date.date}}" onclick="showPatientFull('sampleID')" readonly>
         </div>
     </div>
 </div>
