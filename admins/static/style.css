@@ -11,7 +11,7 @@ body {
     height: 100%;
     color: white;
     font-family: 'Rubik';
-    background-color: #F7F7F7;
+    background-color: #E3E3E3;
 }
 
 button {
@@ -81,7 +81,7 @@ button {
 
 .side-bar-top {
     display: flex;
-    background-color: #A30031;
+    background-color: #CC003D;
     grid-area: side-bar-top;
     
     flex-wrap: wrap;
@@ -102,7 +102,7 @@ button {
 }
 
 .main {
-    background-color: #F7F7F7;
+    background-color: #E3E3E3;
     grid-area: main;
     display: flex;
     flex-wrap: wrap;
@@ -207,15 +207,16 @@ button {
 
 .nav-item {
     width: inherit;
-    background-color: #2C2C2C;
+    background-color: RGBA(0, 0, 0, 0.3);
     padding: 2vh 0 2vh 1vw;
 }
 
 .nav-item:hover {
-    background-color: #242424;
+    background-color: RGBA(0, 0, 0, 0.45);
 }
 
 .nav-link {
+    display: block;
     background-color: #2C2C2C;
     font-size: 1.5vw;
 }
@@ -371,7 +372,7 @@ button {
 }
 
 .patient-detail:hover {
-    cursor: alias;
+    cursor: pointer;
     transform: scale(1.01, 1.01);
     box-shadow: 0 0 5px RGBA(0, 0, 0, 0.75);
 }
@@ -495,8 +496,32 @@ button {
 }
 
 .prescription-detail:hover {
-    cursor: alias;
+    cursor: default;
     transform: scale(1.01, 1.01);
     box-shadow: 0 0 5px RGBA(0, 0, 0, 0.75);
+}
+
+.prescriptions-list {
+    width: inherit;
+    height: 12.5vh;
+    background-color: RGBA(0, 0, 0, 0.2);
+    padding: 2%;
+    display: flex;
+    border-radius: 8px;
+}
+
+.prescription {
+    width: 50%;
+    background-color: #FFFFFF;
+    color: black;
+    margin: 2%;
+    border-radius: 4px;
+    padding: 4%;
+    transition: all 0.25s;
+}
+
+.prescription:hover {
+    transform: scale(1.25, 1.25);
+    box-shadow: 0 0 10px RGBA(0, 0, 0, 0.75);
 }
 /*Prescription List end*/
