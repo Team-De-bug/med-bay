@@ -12,5 +12,6 @@ def appointment(request):
         return HttpResponseForbidden(HttpResponse("<h1>Only for doctors</h1>"))
 
     cases = user.staff.doctor.cases_set.filter(status="t")
+
     print(cases)
     return render(request, 'doctors/appointments.html', context={"cases": cases})
