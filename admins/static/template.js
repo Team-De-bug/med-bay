@@ -1,5 +1,7 @@
 var sidebarIsClosed = false;
 
+var xhttp = new XMLHttpRequest();
+
 function closeSidebar() {
     var navItems = document.getElementsByClassName("nav-link");
     //if the sidebar is not closed
@@ -81,21 +83,25 @@ function closePatientFull() {
 }
 
 function showPrescriptionFull(prescripId) {
-    var precriptions = document.getElementsByClassName("prescription-black-out");
     
-    for (i = 0; i < precriptions.length; i++) {
-        if (precriptions.item(i).id == prescripId) {
-            precriptions.item(i).style.display = "flex";
+    document.getElementById("prescription-black-out").style.display = "flex"
+    
+    var prescriptions = document.getElementsByClassName("prescription-full-container")
+    
+    for (i = 0; i < prescriptions.length; i++) {
+        if (prescriptions.item(i).id === prescripId) {
+            prescriptions.item(i).style.display = "flex";
         }
     }
     
 }
 
 function closePrescriptionFull() {
-    var precriptions = document.getElementsByClassName("prescription-black-out");
+    document.getElementById("prescription-black-out").style.display = "none"
     
-    for (i = 0; i < precriptions.length; i++) {
-            precriptions.item(i).style.display = "none";
-
+    var prescriptions = document.getElementsByClassName("prescription-full-container")
+    
+    for (i = 0; i < prescriptions.length; i++) {
+            prescriptions.item(i).style.display = "none";
     }
 }
