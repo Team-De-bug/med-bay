@@ -25,11 +25,13 @@
         </form>
     </div>
 </div>
+{% endfor %}
 
 <!--Summary Detail Div-->
 <div class="patient-container-root">
     <h3 id="patient-list-title">Appointed Patients</h3><br>
     <div class="patient-list-container">
+        {% for case in cases %}
         <div class="patient-container" onclick="showPatientFull({{case.id}})">
             <label class="patient-detail-label" class="patient-detail-label" onclick="showPatientFull({{case.id}})">Name: </label>
             <input class="patient-detail" id="name" type="text" value="{{case.patient.name}}" readonly><br>
@@ -40,11 +42,12 @@
             <label class="patient-detail-label" onclick="showPatientFull({{case.id}})">Appointment Date: </label>
             <input class="patient-detail" id="date" type="text" value="{{case.appointed_date.date}}" onclick="showPatientFull({{case.id}})" readonly>
         </div>
+        {% endfor %}
     </div>
 </div>
 
-{% endfor %}
 {% endblock %}
+
 {%block nav %}
 <ul id="nav-list">
     <a class="nav-link" href="/"><li class="nav-item">Home</li></a>
