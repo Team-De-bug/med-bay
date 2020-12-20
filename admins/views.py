@@ -16,8 +16,8 @@ class LoginView(auth_views.LoginView):
     form_class = AuthForm
 
 
-@login_required()
 # login redirect
+@login_required()
 def redirect_login(request):
     user = User.objects.filter(username=request.user)[0]
     if user.staff.role == "d":
