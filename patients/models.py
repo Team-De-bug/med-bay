@@ -6,8 +6,8 @@ from doctors.models import Doctor
 class Patient(models.Model):
     # Choice list
     blood_types = (("A+", "A+"), ("B+", "B+"), ("O+", "O+"), ("AB+", "AB+"),
-                   ("A-", "A-"), ("B-", "B+"), ("O-", "O+"), ("AB-", "AB-"))
-    gender_list = (("m", "male"), ("f", "female"), ("t", "trans"))
+                   ("A-", "A-"), ("B-", "B-"), ("O-", "O-"), ("AB-", "AB-"))
+    gender_list = (("M", "male"), ("F", "female"), ("T", "trans"))
 
     # Fields
     name = models.CharField(max_length=100)

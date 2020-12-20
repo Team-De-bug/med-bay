@@ -1,14 +1,27 @@
-{%extends "template.html"%}
+{%extends "template.html" %}
+{%load static%}
 
 {%block body%}
-<span style="color: black">Hi</span>
+<div class="shop-container-root">
+    <h3 id="shop-list-title">Items in stock</h3><br>
+    <div class="shop-list-container">
+        <div class="stock-item-container">
+            <label class="stock-detail-label">Item: </label>
+            <input class="stock-detail" id="name" type="text" value="Dolo 650" readonly><br>
+            <label class="stock-detail-label">Price: </label>
+            <span class="stock-detail" tabindex="0"><span class="stock-price">&#8377;</span> <input tabindex="-1" class="stock-price" id="age" type="text" value="150" pattern="[0-9]+" readonly></span><br>
+            <span>
+                <label class="stock-detail-label">Amount:</label>
+                <input class="stock-detail" id="amount" type="number" min="1" max="15" value="1"><br>
+                <input class="stock-detail" id="add-to-cart" type="button" value="Add To Cart">
+            </span>
+        </div>
+    </div>
+</div>
 {%endblock%}
 
-{%block nav%}
-<ul id="nav-list">
-    <a class="nav-link" href="/staff"><li class="nav-item">Home</li></a>
-    <a class="nav-link" href="/doctor"><li class="nav-item">Doctor's Dashboard</li></a>
-    <a class="nav-link" href="/doctor/prescriptions"><li class="nav-item">Authorised Prescriptions</li></a>
-    <a class="nav-link" href="/doctor/pharma"><li class="nav-item">Pharmacy</li></a>
-</ul>
+
+{%block script%}
+<script >
+</script>
 {%endblock%}
