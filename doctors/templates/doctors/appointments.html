@@ -17,7 +17,7 @@
         <input class="patient-detail" id="date" type="text" value="{{case.appointed_date.date}}" readonly>
         <input class="patient-detail" id="time" type="text" value="{{case.appointed_date.time}}" readonly><br>
         </span>
-        <form id="{{case.id}}" class="doctor-patient-form" style="display: flex; flex-direction: column;">
+        <form method="post" id="{{case.id}}" class="doctor-patient-form" style="display: flex; flex-direction: column;">
             {% csrf_token %}
             <label class="patient-full-detail-label">Patient Has Prescription(s):</label>
             <input class="patient-detail" id="has-prescription" name="has-prescription" type="checkbox">

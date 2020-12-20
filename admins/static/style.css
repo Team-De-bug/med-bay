@@ -620,3 +620,11 @@ button {
     border-radius: 8px;
 }
 /*Prescription List end*/
+
+/*Error Start*/
+.error-root {
+    color: black;
+    margin: auto;
+    text-align: center;
+}
+/*Error End*/
