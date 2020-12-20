@@ -11,7 +11,7 @@
         <label class="patient-full-detail-label">Age: </label>
         <input class="patient-detail" id="age" type="text" value="{{case.patient.age}}" pattern="[0-9]+" onclick="copyDetail('age')" readonly><br>
         <label class="patient-full-detail-label">Gender: </label>
-        <input class="patient-detail" id="gender" type="text" value="{{case.patient.gender}}" size="1" onclick="copyDetail('gender')" readonly><br>
+        <input class="patient-detail" id="gender" type="text" value="{{case.patient.gender | upper}}" size="1" onclick="copyDetail('gender')" readonly><br>
         <label class="patient-full-detail-label">Appointment Date and Time: </label>
         <span>
         <input class="patient-detail" id="date" type="text" value="{{case.appointed_date.date}}" readonly>
