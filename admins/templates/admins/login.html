@@ -3,10 +3,10 @@
 
 
 <div id="login-window">
-    {{form.non_field_errors}}
     <div id="login-title">
         <label id="login-label">Staff Login</label>
     </div>
+    {{form.non_field_errors.as_text}}
     <form id="login-form" method="post">
         {% csrf_token %}
 <!--        <label id="username-label" for="username">Username:</label><br>-->
