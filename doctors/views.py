@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseForbidden, HttpResponse
+from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 def appointment(request):
     user = User.objects.filter(username=request.user)[0]
     if user.staff.role != "d":
-        return HttpResponseForbidden(HttpResponse("<h1>Only for doctors</h1>"))
+        raise PermissionDenied
 
     cases = user.staff.doctor.cases_set.filter(status="t")
 

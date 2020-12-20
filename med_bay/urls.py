@@ -21,3 +21,6 @@ urlpatterns = [
     path('doctor/', include('doctors.urls')),
     path('admin/', admin.site.urls),
 ]
+
+handler404 = 'med_bay.views.error_404_handler'
+handler403 = 'med_bay.views.error_403_handler'
