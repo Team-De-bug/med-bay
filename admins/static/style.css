@@ -137,16 +137,19 @@ button {
 }
 
 #logo {
-    height: var(--header-height);
+    padding-top: 4vh;
+    height: 6vh;
     border-radius: 0 0 8px 8px;
+    background-color: #B40036;
+    border: solid 4px #B40036;
+    border-top-width: 0;
     transition: padding-top, 0.25s;
 }
 
 #logo:hover {
-    padding-top: 4vh;
-    height: 10vh;
-    background-color: #B40036;
+    padding-top: 8vh;
     cursor: pointer;
+    border-top-width: 0;
 }
 
 /*Interactive Objects*/
@@ -360,6 +363,20 @@ button {
     transition: all 0.25s;
 }
 
+.patient-detail[type="checkbox"] {
+    align-self: flex-start;
+    transform: scale(1.4, 1.4)
+}
+
+.patient-detail[type="checkbox"]:hover {
+    transform: scale(1.5, 1.5);
+}
+
+.patient-detail > textarea {
+    cursor: text;
+    resize: vertical;
+}
+
 .patient-detail:hover {
     cursor: pointer;
     transform: scale(1.01, 1.01);
@@ -491,10 +508,10 @@ button {
 
 .prescriptions-list {
     width: inherit;
-    height: 12.5vh;
     background-color: RGBA(0, 0, 0, 0.2);
     padding: 2%;
     display: flex;
+    flex-wrap: wrap;
     border-radius: 8px;
 }
 
@@ -504,7 +521,8 @@ button {
 }
 
 .prescription {
-    width: 50%;
+    width: 37.5%;
+    height: 6vh;
     background-color: #FFFFFF;
     color: black;
     margin: 2%;
@@ -518,14 +536,14 @@ button {
     box-shadow: 0 0 10px RGBA(0, 0, 0, 0.75);
 }
 
-.prescription-black-out {
+#prescription-black-out {
     position: fixed;
     left: 0;
     right: 0;
     top: 0;
     height: 100vh;
     width: 100vw;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-content: center;
     overflow: scroll;
@@ -537,6 +555,26 @@ button {
 
 .prescription-full-container {
     color: black;
+    display: none;
+    flex-direction: column; 
+    background-color: white;
+    border-radius: 8px;
+    padding: 2vh 1vw 2vh 1vw;
+    width: 80%;
+    grid-gap: 0px;
+    margin: 3vh auto 2vh auto;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px 2px RGBA(0, 0, 0, 0.7);
+    z-index: 999;
+    transform: inherit;
+}
+
+.prescription-full-container:focus {
+    transform: scale(1.1, 1.1);
+}
+
+.prescription-full-header {
+    color: black;
     display: flex;
     flex-direction: column; 
     background-color: white;
@@ -546,13 +584,14 @@ button {
     grid-gap: 0px;
     margin: 3vh auto 2vh auto;
     transition: all 0.3s;
-    box-shadow: 0 0 50px 2px #000000;
+    box-shadow: 0 0 20px 2px #000000;
     z-index: 999;
     transform: inherit;
 }
 
-.prescription-full-container:focus {
+.prescription-full-header:focus {
     transform: scale(1.1, 1.1);
+    z-index: 99;
 }
 
 .prescription-full-container .prescription-detail {
