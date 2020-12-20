@@ -1,8 +1,9 @@
 {%extends "template.html" %}
 {% block body %}
 
-{{form.errors}}
+
 <div id="login-window">
+    {{form.non_field_errors}}
     <div id="login-title">
         <label id="login-label">Staff Login</label>
     </div>
