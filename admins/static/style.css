@@ -309,6 +309,12 @@ button {
     background-color: #1B4969;
     width: 100%;
 }
+
+#login-error {
+    width: 90%;
+    margin: auto;
+    padding: 1%;
+}
 /*Login End*/
 
 /*Patient List Start*/
