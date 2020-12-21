@@ -6,10 +6,16 @@ from .models import Stock
 from admins.models import Staff
 
 # Create your views here.
+@login_required
 def shop(request):
-    items = Stock.objects.all()
-    return render(request, "pharma/shop.html", context={'items':items})
-   
+    user = User.objects.filter(username=request.user).first()
+    if user.staff.role != "p":
+        raise PermissionDenied()
+    else:
+        items = Stock.objects.all()
+        return render(request, "pharma/shop.html", context={'items':items})
+
+
 def place(request):
     if request.method == "GET":
         ID = request.GET['id']
@@ -17,19 +23,17 @@ def place(request):
         item = item[0]
         user = User.objects.filter(username=request.user)
         user = user[0]
-        if user.staff.role == "p":
-            orders = user.cart.order_set.all()
-            in_cart = False
-            for order in orders:
-                if item == order.product:
-                    print("in cart")
-                    in_cart = True
-                    order.quantity += 1
-                    order.save()
-                    break
-
-            if not in_cart:
-                order = Order(cart=user.cart, product=item)
+        orders = user.cart.order_set.all()
+        in_cart = False
+        for order in orders:
+            if item == order.product:
+                print("in cart")
+                in_cart = True
+                order.quantity += 1
                 order.save()
-                user.cart.order_set.add(order)
-    return HttpResponse("success")
+                break
+
+        if not in_cart:
+            order = Order(cart=user.cart, product=item)
+            order.save()
+            user.cart.order_set.add(order)
