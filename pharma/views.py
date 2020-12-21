@@ -6,6 +6,6 @@ from .models import Stock
 
 # Create your views here.
 def shop(request):
-    items = Stock.objects.all()[0]
+    items = Stock.objects.all()
     return render(request, "pharma/shop.html", context={'items':items})
    

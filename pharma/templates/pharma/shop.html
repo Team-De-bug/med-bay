@@ -7,12 +7,12 @@
     <div class="shop-list-container">
         <div class="stock-item-container">
             <label class="stock-detail-label">Item: </label>
-            <input class="stock-detail" id="name" type="text" value="{{items}}" readonly><br>
+            <input class="stock-detail" id="name" type="text" value="{{items.name}}" readonly><br>
             <label class="stock-detail-label">Price: </label>
-            <span class="stock-detail" tabindex="0"><span class="stock-price">&#8377;</span> <input tabindex="-1" class="stock-price" id="age" type="text" value="150" pattern="[0-9]+" readonly></span><br>
+            <span class="stock-detail" tabindex="0"><span class="stock-price">&#8377;</span> <input tabindex="-1" class="stock-price" id="age" type="text" value="{{items.price}}" pattern="[0-9]+" readonly></span><br>
             <span>
                 <label class="stock-detail-label">Amount:</label>
-                <input class="stock-detail" id="amount" type="number" min="1" max="15" value="1"><br>
+                <input class="stock-detail" id="amount" type="number" min="1" max="15" value="{{items.quantity}}"><br>
                 <input class="stock-detail" id="add-to-cart" type="button" value="Add To Cart">
             </span>
         </div>
