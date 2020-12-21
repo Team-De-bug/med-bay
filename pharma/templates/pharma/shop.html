@@ -14,7 +14,7 @@
             <span>
                 <label class="stock-detail-label">Amount:</label>
                 <input class="stock-detail" id="amount" type="number" min="1" max="15" value="{{item.quantity}}"><br>
-                <input class="stock-detail" id="add-to-cart" type="button" value="Add To Cart">
+                <input class="stock-detail" id="add-to-cart" onclick="addtocart({{item.id}})" type="button" value="Add To Cart">
                 <input class="stock-detail" id="edit" type="button" value="Edit">
             </span>
         </div>
@@ -26,9 +26,7 @@
 
 {%block script%}
 <script>
-$(function() {
-    $('.stock-item-container').click(function() {
-      var id = this.id;
+    function addtocart(id) {
       console.log(id);
         $.ajax({
             url : '/pharmacy',
@@ -37,13 +35,12 @@ $(function() {
               },
             type : 'GET',
             success : function(response) {
-                alert("added to cart");
+                alert("Added To Cart");
             },
             error : function(error) {
-                alert("error unable to add to cart");
+                alert("Error: Unable To Add To Cart");
             }
         });
-    });
-});
+    }
 </script>
 {%endblock%}

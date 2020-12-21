@@ -51,5 +51,20 @@
         {% endfor %}
     </div>
 </div>
-
 {% endblock %}
+
+{%block script%}
+<script>
+$(document).ready(function(){
+    $('save-diagnosis-btn').click(function(){
+        var btnID = this.id;
+        console.log(btnID);
+        $('doctor-patient-form').each(function(i, form) {
+            if (form.id == btnID) {
+                console.log(form.id);
+            }
+        });
+    });
+});
+</script>
+{%endblock%}
