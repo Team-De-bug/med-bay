@@ -15,9 +15,12 @@ class Stock(models.Model):
 
 # Prescription
 class Prescription(models.Model):
+
+    status_list = (("c", "Created"), ('p', 'Prescribed'), ('d', 'Delivered'))
+
     case = models.OneToOneField(Cases, on_delete=models.SET_NULL, null=True)
     medicines = models.ManyToManyField(Stock)
-    status = models.BooleanField(default=False)
+    status = models.CharField(default='c', max_length=2, choices=status_list)
 
     def __str__(self):
         return f'{self.id}'
