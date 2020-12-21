@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
+from django.http import Http404
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
 from .forms import AuthForm
 
 
@@ -24,5 +24,7 @@ def redirect_login(request):
         return redirect('appointments')
     if user.staff.role == "a":
         return redirect('home')
+    if user.staff.role == "p":
+        return redirect('shop')
     else:
-        return Http404()
+        raise Http404("page not found")
