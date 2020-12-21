@@ -2,8 +2,10 @@ from django.db import models
 from patients.models import Cases
 from admins.models import Staff
 
+
 # Create your models here.
 class Stock(models.Model):
+
     name = models.CharField(max_length=30)
     desc = models.TextField()
     price = models.IntegerField()
@@ -25,9 +27,13 @@ class Prescription(models.Model):
     def __str__(self):
         return f'{self.id}'
 
-class Cart(models.Model):
-    user = models.OneToOneField(Staff, on_delete=models.CASCADE)
-    items = models.IntegerField(default=0, name="items")
+
+# Orders unit
+class Order(models.Model):
+
+    user = models.ForeignKey(Staff, on_delete=models.CASCADE)
+    item = models.ForeignKey(Stock, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
 
     def __str__(self):
-        return f'{self.user.username} cart'
+        return f'{self.user.user.username}, {self.item.name}'

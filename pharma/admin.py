@@ -4,3 +4,4 @@ from .models import *
 
 admin.site.register(Stock)
 admin.site.register(Prescription)
+admin.site.register(Order)
