@@ -3,6 +3,9 @@ from django import forms
 
 # Case processing form
 class CaseProcessing(forms.Form):
+
+    id = forms.IntegerField()
+
     has_pres = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': "patient-detail",
                                                                     'id': "has-prescription",
                                                                     'name': "has-prescription",

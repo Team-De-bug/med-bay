@@ -9,18 +9,47 @@ from .forms import CaseProcessing
 # Create your views here.
 @login_required()
 def appointment(request):
+
+    # Getting the user from the request
     user = User.objects.filter(username=request.user)[0]
+
+    # Making sure if the user is a doctor
     if user.staff.role != "d":
         raise PermissionDenied
 
+    # Getting the list of patients who are to be attended
+    cases = user.staff.doctor.cases_set.filter(status="t")
+
+    # Checking if a patient diagnosis is being sent
     if request.method == "POST":
         form_data = CaseProcessing(request.POST)
         if form_data.is_valid():
-            print("valid input")
-            print(form_data.cleaned_data['has_pres'])
+            case_id = form_data.cleaned_data['id']
+
+            # Making sure the form is not tamperd with and the case belongs to the doctor
+            case = None
+            for c in cases:
+                if c.id == case_id:
+                    case = c
+
+            # if the case belongs to the doctor and is to be handled
+            if case:
+
+                # Saving the case data and updating the case state
+                case.desc = form_data.cleaned_data['desc']
+                case.status = 'd'
+                case.save()
+
+                # If the case has a prescription then making one
+                if form_data.cleaned_data["has_pres"]:
+                    pres = Prescription(case=case)
+                    pres.save()
+
+        # returning the user back to appointments
         return redirect("red")
+
+    # If not then just loading the page
     else:
-        cases = user.staff.doctor.cases_set.filter(status="t")
         form = CaseProcessing()
         print(cases)
         return render(request, 'doctors/appointments.html', context={"cases": cases, 'form': form})
