@@ -16,6 +16,10 @@ class LoginView(auth_views.LoginView):
     form_class = AuthForm
 
 
+# Confirm Logout page
+def confirm_logout(request):
+    return render(request, "admins/confirm_logout.html")
+
 # login redirect
 @login_required()
 def redirect_login(request):

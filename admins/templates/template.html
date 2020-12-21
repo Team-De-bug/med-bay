@@ -9,9 +9,9 @@
         <script>
             function checkUser(user) {
                 if (user === 'd' || user === 'a' || user === 'p') {
-                    document.location = "/staff/signout";
+                    document.location = "{% url 'confirm-logout' %}";
                 } else {
-                    document.location = "/staff/login";
+                    document.location = "{% url 'login' %}";
                 }
             }
         </script>
