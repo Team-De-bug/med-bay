@@ -22,14 +22,9 @@
                     <img id="logo" onclick="document.location='/staff/redirect'" src="{% static 'images/med-bay.png' %}">
                 </div>
                 <div class="user-btns">
-                    <a href="#">
-                        <label>{{user}}</label>
-                    </a>
-                    <a href="/staff/login">
-                        <button id="login-btn">
-                            <img id="login-btn-img" src="{% static 'images/user.png' %}" height="40vh">
-                        </button>
-                    </a>
+                    <button id="login-btn">
+                        <img id="login-btn-img" title="{{user}}" src="{% static 'images/user.png' %}" height="40vh">
+                    </button>
                 </div>
             </div>
             <div class="side-bar-top">

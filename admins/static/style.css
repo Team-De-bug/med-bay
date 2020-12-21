@@ -38,7 +38,7 @@ button {
     top: 0;
     background-color: #E00043;
     transition: all 0.5s;
-    z-index: 999;
+    z-index: 99999;
 }
 
 #loadLogoImg {
@@ -50,10 +50,11 @@ button {
 .root-grid {
     display: inline-grid;
     grid-gap: 0;
-    height: 93vh;
+    height: 100%;
+    min-height: 100vh;
     width: 100vw;
     transition: width, 1s;
-    grid-template-rows: auto 6%;
+    grid-template-rows: auto 6vh;
     grid-template-columns: 0% auto;
     background-color: transparent;
     grid-template-areas: 
@@ -72,6 +73,7 @@ button {
     grid-template-columns: 0% auto;
     grid-template-areas: 'side-bar-top   menu-bar';
     transition: all 1s;
+    z-index: 9999;
 }
 
 .side-bar {
@@ -127,6 +129,7 @@ button {
     display: grid;
     grid-gap: 0px;
     height: var(--header-height);
+    grid-template-columns: auto auto;
 }
 
 /*Decorative Objects*/
@@ -661,6 +664,7 @@ button {
     padding: 2vh 1vw 2vh 1vw;
     grid-gap: 0px;
     margin: 2vh 1.5vw 2vh 1.5vw;
+    width: 20vw;
     transition: all 0.3s;
 }
 

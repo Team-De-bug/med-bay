@@ -18,7 +18,8 @@ def shop(request):
 
 def place(request):
     if request.method == "GET":
-        ID = request.GET['id']
+        ID = request.GET['product_id']
+        Amount = request.GET['product_amount']
         item = Stock.objects.filter(id=ID)
         item = item[0]
         user = User.objects.filter(username=request.user)
@@ -29,7 +30,7 @@ def place(request):
             if item == order.product:
                 print("in cart")
                 in_cart = True
-                order.quantity += 1
+                order.quantity += Amount
                 order.save()
                 break
 
