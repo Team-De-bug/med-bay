@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import Stock
+from .models import Stock, Cart
 from admins.models import Staff
 
 # Create your views here.
@@ -37,3 +37,21 @@ def place(request):
             order = Order(cart=user.cart, product=item)
             order.save()
             user.cart.order_set.add(order)
+
+"""def remove(request):
+
+    if request.method == "GET":
+        ID = request.GET['order_id']
+        print(ID)
+        order = Order.objects.filter(id=ID)
+        order = order[0]
+        order.delete()
+
+    return HttpResponse("success")
+
+
+def cart(request):
+    cart = Cart.objects.filter(user=request.user)
+    cart = cart[0].order_set.all()
+    print(cart)
+    return render(request, "sahara/cart.html", {'cart': cart})"""

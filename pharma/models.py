@@ -1,6 +1,6 @@
 from django.db import models
 from patients.models import Cases
-
+from admins.models import Staff
 
 # Create your models here.
 class Stock(models.Model):
@@ -24,3 +24,10 @@ class Prescription(models.Model):
 
     def __str__(self):
         return f'{self.id}'
+
+class Cart(models.Model):
+    user = models.OneToOneField(Staff, on_delete=models.CASCADE)
+    items = models.IntegerField(default=0, name="items")
+
+    def __str__(self):
+        return f'{self.user.username} cart'
