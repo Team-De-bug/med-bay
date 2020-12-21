@@ -175,6 +175,8 @@ button {
 #login-btn {
     height: var(--header-height);
     background-color: transparent;
+    display: flex;
+    flex-direction: column;
 }
 
 #login-btn-img {
@@ -662,6 +664,12 @@ button {
     transition: all 0.3s;
 }
 
+.stock-item-container:hover {
+    transform: scale(1.025, 1.025);
+    box-shadow: 0 0 20px #888888;
+    background-color: #F00048;
+}
+
 .stock-detail {
     background-color: RGBA(0, 0, 0, 0.2);
     border-style: none;
@@ -671,6 +679,9 @@ button {
     font-family: 'Rubik';
     border-radius: 8px;
     transition: all 0.25s;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    
 }
 
 .stock-detail:hover {

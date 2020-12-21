@@ -1,0 +1,11 @@
+{%extends "template.html"%}
+
+{%block body%}
+<div class="error-root">
+    <h1>You're already signed in as {{user}} {{user.staff.role}}</h1>
+    <span>
+        <h1>If you wish to login with another account</h1>
+        <button style="background-color: #E00043; padding: 1vh 1vw 1vh 1vw; font-size: 3vh; border-radius: 8px;">Sign Out</button>
+    </span>
+</div>
+{%endblock%}
