@@ -39,7 +39,7 @@ def place(request):
             order.save()
             user.cart.order_set.add(order)
 
-"""def remove(request):
+def remove(request):
 
     if request.method == "GET":
         ID = request.GET['order_id']
@@ -55,4 +55,4 @@ def cart(request):
     cart = Cart.objects.filter(user=request.user)
     cart = cart[0].order_set.all()
     print(cart)
-    return render(request, "sahara/cart.html", {'cart': cart})"""
+    return render(request, "pharma/cart.html", {'cart': cart})

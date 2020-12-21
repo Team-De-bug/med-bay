@@ -1,0 +1,54 @@
+{% extends 'sahara/template.html'%}
+{% load static%}
+
+{%block content%}
+{% for item in cart%}
+<div id="cart_item">
+    <div id="cart_img">
+        <img id="cart_img" src="{{ item.product.product_pic.url }}">
+    </div>
+    <div id="cart_info">
+        <table id="cart_table">
+            <tr>
+                <td>Product Name: {{item.product.product_name}}</td>
+            </tr>
+            <tr>
+                <td>Seller: {{item.product.seller}}r</td>
+
+                <td>Qty:
+                {{item.quantity}}
+            </tr>
+            <tr>
+                <td id="cart_price"> Price: ₹ {{item.product.cost}}</td>
+                <td><a href="#" id='{{item.id}}'>Delete</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+{% endfor %}
+
+
+<script >
+  $(function() {
+    $("a").click(function() {
+      var id = this.id;
+      console.log(id);
+        $.ajax({
+            url : '/remove',
+            data : {
+              'order_id' : id
+              },
+            type : 'GET',
+            success : function(response) {
+                alert("remover from cart");
+            },
+            error : function(error) {
+                alert("error unable to remove cart");
+            }
+        });
+    });
+});
+</script>
+
+{% endblock %}
