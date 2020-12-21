@@ -3,7 +3,7 @@
 
 {%block body%}
 <div class="shop-container-root">
-    <h3 id="shop-list-title">Items in stock</h3><br>
+    <h3 id="shop-list-title">Items In Stock</h3><br>
     <div class="shop-list-container">
         {%for item in items%}
         <div id="{{item.id}}" class="stock-item-container">
@@ -39,6 +39,9 @@
         
         if (amount > max) {
             amount = max;
+            inputAmount.val(amount.toString());
+        } else if ( amount < 1) {
+            amount = 1;
             inputAmount.val(amount.toString());
         }
         
