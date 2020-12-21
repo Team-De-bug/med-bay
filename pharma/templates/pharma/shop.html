@@ -26,10 +26,23 @@
 
 {%block script%}
 <script>
-$(document).ready(function(){
-    $('.stock-item-container').click(function(){
-        var id = this.id;
-        console.log(id);
+$(function() {
+    $('.stock-item-container').click(function() {
+      var id = this.id;
+      console.log(id);
+        $.ajax({
+            url : '/pharmacy',
+            data : {
+              'product_id' : id
+              },
+            type : 'GET',
+            success : function(response) {
+                alert("added to cart");
+            },
+            error : function(error) {
+                alert("error unable to add to cart");
+            }
+        });
     });
 });
 </script>
