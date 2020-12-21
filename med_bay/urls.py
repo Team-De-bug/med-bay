@@ -20,7 +20,7 @@ urlpatterns = [
     path('staff/', include('admins.urls')),
     path('doctor/', include('doctors.urls')),
     path('admin/', admin.site.urls),
-    path('pharmacy', include('pharma.urls'))
+    path('pharmacy/', include('pharma.urls'))
 ]
 
 handler404 = 'med_bay.views.error_404_handler'
