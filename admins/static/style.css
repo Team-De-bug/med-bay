@@ -688,16 +688,8 @@ button {
     transition: all 0.25s;
 }
 
-#add-to-cart {
+#add-to-cart, #edit {
     cursor: pointer;
-    transition: all 0.25;
-    width: 50%;
-}
-
-#add-to-cart:hover {
-    transform: scale(1.01, 1.01);
-    box-shadow: 0 0 5px RGBA(0, 0, 0, 0.75);
-    width: 100%;
 }
 
 /*Pharmacy End*/
