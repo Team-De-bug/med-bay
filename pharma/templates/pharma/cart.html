@@ -35,7 +35,7 @@ function removeFromCart(id, amount) {
     console.log(name);
     
     $.ajax({
-        url : '/pharmacy',
+        url : '/pharmacy/remove',
         data : {
             'product_id' : id,
             'remove_amount': amount
