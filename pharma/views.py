@@ -78,7 +78,7 @@ def remove(request):
 @login_required()
 def add_one(request):
     if request.method == "GET":
-        ID = int(request.get['product_id'])
+        ID = int(request.GET['product_id'])
         increase = 1
         user = User.objects.filter(username=request.user)[0]
         item = Stock.objects.filter(id=ID)[0]
@@ -87,6 +87,7 @@ def add_one(request):
         item.quantity -= increase
         order.save()
         item.save()
+    return render(request, "pharma/cart.html", {'cart' : cart})
 
 
 @login_required()
