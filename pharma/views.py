@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -19,32 +20,36 @@ def shop(request):
             items.remove(item)
     return render(request, "pharma/shop.html", context={'items': items})
 
+
+# Placing order when order button is pressed
+@login_required()
 def place(request):
     if request.method == "GET":
         ID = request.GET['product_id']
         item = Stock.objects.filter(id=ID)[0]
         user = User.objects.filter(username=request.user)[0]
-        orders = user.cart.order_set.all()
+        orders = user.staff.order_set.all()
+
+        # Checking if item already in cart
         in_cart = False
         for order in orders:
-            if item == order.product:
-                print("in cart")
-                in_cart = True
-                if item.quantity >= 1:
-                    order.quantity += 1
-                    item.quantity -= 1
-                    item.save()
-                    order.save()
-                break
-        
-        if not in_cart:
-            if item.quantity >= 1:
-                order = Order(quantity=item.quantity, user=user.staff, item=item)
-                order.save()
-                item.save()
-                user.cart.order_set.add(order)
-                item.quantity -= 1
-    return HttpResponse("success")
+            if order.item.id == item.id: in_cart = True
+
+        # If the item is already in cart
+        if in_cart:
+            order = user.staff.order_set.filter(item__id=item.id)[0]
+            order.quantity += 1
+
+        # Creating a new order if not already there
+        else:
+            order = Order(user=user.staff, item=item, quantity=1)
+
+        # Updating the item stock and saving changes
+        item.quantity -= 1
+        order.save()
+        item.save()
+
+        return HttpResponse("success")
 
 
 def remove(request):
