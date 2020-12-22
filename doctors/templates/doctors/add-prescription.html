@@ -2,24 +2,18 @@
 
 {%block body%}
 <div class="prescription-container-root">
-    <h3 id="prescription-list-title">Patient Prescriptions</h3><br>
+    <h3 id="prescription-list-title">Prescription #{{prescription.id}}</h3><br>
     <div class="prescription-container">
         <label class="prescription-patient-label" class="patient-detail-label" onclick="showPrescriptionfull('sampleID')">Name: </label>
         <input class="prescription-detail" id="{{case.id}}_name" type="text" value="Johnny Dough" readonly><br>
         <div>
             <label class="prescriptions-label">Prescriptions:</label>
             <div class="prescriptions-list" style="flex-direction: column;">
-                <div class="prescription-full">
-                    <select id="medicine-list">
-                        <option>Dolo 650</option>
-                        <option>Hi Me Is Option</option>
-                    </select>
-                </div>
                 <div class="prescription-full" onclick="addMedicine()" id="addMedicineBtn">
                     <label onclick="">Add Medicine</label>
                 </div>
             </div>
-            <button class="prescription-detail">Save</button>
+            <button class="prescription-detail" onclick="savePrescription(1)">Save</button>
         </div>
     </div>
 </div>
@@ -27,23 +21,79 @@
 
 {%block script%}
 <script>
-    function addMedicine() {
+    
+    function getMedicines() {
         
-        var medicineContainer = $("<div></div>").addClass('prescription-full');
-        var selector = $("<select></select>").attr('id', 'medicine-list');
-        medicineContainer.append(selector);
-        var medicines = ["Dolo 650", "Medicine 1", "Medicine 2"];
-        console.log(medicines);
-        $.each(medicines, function(index, item){
-            console.log(item);
-            var option = $("<option></option>");
-            option.text(item);
-            selector.append(option);
+        var medicineList;
+        
+        $.ajax({
+            async: false,
+            url: "/doctor/list_medicines",
+            type: 'GET',
+            success: function(data){
+                medicineList = data;
+            }
         });
         
-        $("#addMedicineBtn").before(medicineContainer);
-        
-//        console.log(prescription);
+        return medicineList;
     }
+                    
+    function addMedicine() {
+        
+        var medicines = getMedicines();
+        
+        console.log(medicines);
+        
+        var medicineContainer = $("<div></div>").addClass("prescription-full");
+        
+        medicineContainer.addClass("medicine-single");
+        
+        var selector = $("<select></select>").attr("id", "medicine-list");
+        
+        var quantity = $("<input>").addClass("prescription-detail");
+        
+        quantity.attr({type:"number", value:"1", step:"1", min:"1", max:"20", onKeyDown:"return false", id:"medicine-quantity"});
+        
+        medicineContainer.append(selector, quantity);
+            
+        for(var medicine in medicines) {
+            var option = $("<option></option>");
+            option.text(medicines[medicine]);
+            selector.append(option);
+        }
+        
+        $("#addMedicineBtn").before(medicineContainer);
+    }
+    
+    function savePrescription(caseId) {
+        var id = caseId;
+        var medicines = getMedicines();
+        var selectedItemsDict = {};
+        
+        var medicineContainers = $(".medicine-single");
+        
+        
+        for (i = 0; i < medicineContainers.length; i++) {
+            var medicineContainer = medicineContainers[i];
+            var inputs = medicineContainer.childNodes;
+            var itemSelector = inputs[0].value;
+            console.log(itemSelector);
+            var itemQuantity = inputs[1].value;
+            console.log(itemQuantity);
+            var itemId = 0;
+            
+            for (var medicine in medicines) {
+                if (itemSelector === medicines[medicine]) {
+                    itemId = medicine;
+                }
+            }
+            console.log(itemId);
+            
+            selectedItemsDict[itemId] = itemQuantity;
+            console.log(selectedItemsDict);
+            
+        }
+    }
+    
 </script>
 {%endblock%}

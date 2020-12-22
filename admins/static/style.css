@@ -510,8 +510,6 @@ button {
     color: white;
     font-family: 'Rubik';
     border-radius: 8px;
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
     transition: all 0.25s;
 }
 

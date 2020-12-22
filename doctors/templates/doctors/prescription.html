@@ -37,7 +37,7 @@
                         </li>
                     </ol>
                 </div>
-                <div class="prescription-full" onclick="location=''">
+                <div class="prescription-full" onclick="addPrescription(1)">
                     <label onclick="">Add Prescription</label>
                 </div>
             </div>
@@ -45,4 +45,28 @@
         </div>
     </div>
 </div>
+{%endblock%}
+
+{%block script%}
+<script>
+    function addPrescription(caseId) {
+        var id = caseId;
+        console.log(caseId);
+        
+        $.ajax({
+            url : '/doctor',
+            data : {
+                'case_id' : id
+              },
+            type : 'GET',
+            success : function(response) {
+                location="/doctor/add-prescription"
+            },
+            error : function(error) {
+                alert("Error: Unable To Add Prescription");
+                location.reload();
+            }
+        });
+    }
+</script>
 {%endblock%}
