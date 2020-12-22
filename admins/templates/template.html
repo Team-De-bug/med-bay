@@ -4,6 +4,13 @@
     <head>
         <title>Med-Bay</title>
         <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+        
+<!--        metas-->
+        {%block head%}
+        
+        {%endblock%}
+        
+<!--        scripts-->
         <script type="text/javascript" src="{% static 'template.js' %}"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
         <script>
@@ -45,7 +52,7 @@
                 <ul id="nav-list">
                     <a class="nav-link" href="/staff"><li class="nav-item">Home</li></a>
                     <a class="nav-link" href="/doctor"><li class="nav-item">Doctor's Dashboard</li></a>
-                    <a class="nav-link" href="/doctor/prescriptions/"><li class="nav-item">Authorised Prescriptions</li></a>
+                    <a class="nav-link" href="/doctor/prescription"><li class="nav-item">Authorised Prescriptions</li></a>
                     <a class="nav-link" href="/pharmacy"><li class="nav-item">Pharmacy</li></a>
                 </ul>
             </div>

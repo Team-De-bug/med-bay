@@ -5,7 +5,7 @@
     <div class="prescription-full-header" tabindex="1">
         <button class="close-prescription-full-btn" tabindex="1" onclick="closePrescriptionFull('prescripID')">X</button>
         <label class="prescription-full-detail-label">Name:</label>
-        <input class="prescription-detail" tabindex="-1" id="name" type="text" value="Johnny Dough" readonly>
+        <input class="prescription-detail" tabindex="-1" id="1_name" type="text" value="Johnny Dough" readonly>
     </div>
     <div id="prescripID" class="prescription-full-container" tabindex="1">
         <label class="prescription-full-detail-label">Prescription #1</label>
@@ -37,7 +37,7 @@
     <div class="prescription-list-container">
         <div class="prescription-container">
             <label class="prescription-patient-label" class="patient-detail-label" onclick="showPrescriptionfull('sampleID')">Name: </label>
-            <input class="prescription-detail" id="name" type="text" value="Johnny Dough" readonly><br>
+            <input class="prescription-detail" id="1_name" type="text" value="Johnny Dough" readonly><br>
             <div>
                 <label class="prescriptions-label">Prescriptions:</label>
                 <div class="prescriptions-list">
@@ -47,8 +47,8 @@
                     <div class="prescription" onclick="showPrescriptionFull('prescripID2')">
                         <label>#2</label>
                     </div>
-                    <div class="prescription">
-                        <label>+</label>
+                    <div class="prescription" onclick="document.location='#'">
+                        <label>View All</label>
                     </div>
                 </div>
             </div>
