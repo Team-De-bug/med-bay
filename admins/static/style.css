@@ -408,7 +408,7 @@ button {
     justify-content: center;
     background-color: RGBA(0, 0, 0, 0.4);
     backdrop-filter: blur(2px);
-    z-index: 999;
+    z-index: 9999;
     transition: all 0.1s;
 }
 
@@ -556,11 +556,12 @@ button {
     width: 100vw;
     display: none;
     flex-direction: column;
+    justify-content: center;
     align-content: center;
     overflow: scroll;
     background-color: RGBA(0, 0, 0, 0.4);
     backdrop-filter: blur(2px);
-    z-index: 999;
+    z-index: 9999;
     transition: all 0.1s;
 }
 
@@ -629,6 +630,20 @@ button {
     background-color: white;
     padding: 1vh 1vw 1vh 1vw;
     border-radius: 8px;
+}
+
+.prescription-full {
+    background-color: #FFFFFF;
+    color: black;
+    margin: 0.5%;
+    border-radius: 4px;
+    padding: 1%;
+    transition: all 0.25s;
+}
+
+.prescription-full:hover {
+    transform: scale(1.025, 1.025);
+    box-shadow: 0 0 10px RGBA(0, 0, 0, 0.75);
 }
 /*Prescription List end*/
 
@@ -705,6 +720,10 @@ button {
 
 #add-to-cart, #edit {
     cursor: pointer;
+}
+
+#cart-btn {
+    background-color: #E00043;
 }
 
 /*Pharmacy End*/

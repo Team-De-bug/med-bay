@@ -3,8 +3,10 @@
 
 {%block body%}
 <div class="shop-container-root">
-    <h3 id="shop-list-title">Items In Stock</h3><br>
-    <button class="stock-detail" onclick="document.location='cart'">Cart</button>
+    <span style="display: flex; align-content: space-between; align-items: flex-start">
+        <h3 id="shop-list-title">Items In Stock</h3>
+        <button class="stock-detail" id="cart-btn" onclick="document.location='cart'">Cart</button>
+    </span>
     <div class="shop-list-container">
         {%for item in items%}
         <div id="{{item.id}}" class="stock-item-container">
@@ -12,8 +14,8 @@
             <input class="stock-detail" id="{{item.id}}_name" type="text" value="{{item.name}}" readonly><br>
             <label class="stock-detail-label">Price: </label>
             <span class="stock-detail" tabindex="0"><span class="stock-price">&#8377;</span> <input tabindex="-1" class="stock-price" id="age" type="text" value="{{item.price}}" pattern="[0-9]+" readonly></span><br>
-            <span>
                 <label class="stock-detail-label">Amount:</label>
+            <span>
                 <input class="stock-detail" id="{{item.id}}_amount" type="number" min="1" max="{{item.quantity}}" step="1" value="1">
                 <label>/{{item.quantity}}</label><br>
                 <input class="stock-detail" id="add-to-cart" onclick="addtocart({{item.id}})" type="button" value="Add To Cart">
