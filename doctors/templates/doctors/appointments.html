@@ -21,7 +21,7 @@
             {% csrf_token %}
             {#{form.id}#}
             <input type="number" name="id" value="{{case.id}}" required="" id="id_id" style="display: none">
-            <label class="patient-full-detail-label">Patient Has Prescription(s):</label>
+            <label class="patient-full-detail-label">Authorise Prescription:</label>
             <!--<input class="patient-detail" id="has-prescription" name="has-prescription" type="checkbox"> -->
             {{form.has_pres}}
             <label class="patient-full-detail-label">Diagnosis: </label>

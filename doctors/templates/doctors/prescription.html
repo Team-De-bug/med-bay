@@ -1,0 +1,48 @@
+{%extends "template.html"%}
+
+{%block body%}
+<div class="prescription-container-root">
+    <h3 id="prescription-list-title">Patient Prescriptions</h3><br>
+    <div class="prescription-container">
+        <label class="prescription-patient-label" class="patient-detail-label" onclick="showPrescriptionfull('sampleID')">Name: </label>
+        <input class="prescription-detail" id="{{case.id}}_name" type="text" value="Johnny Dough" readonly><br>
+        <div>
+            <label class="prescriptions-label">Prescriptions:</label>
+            <div class="prescriptions-list" style="flex-direction: column;">
+                <div class="prescription-full">
+                    <label>#1</label>
+                    <ol>
+                        <li>
+                            <input type="text" class="prescription-detail" value="Dolo 650" readonly>
+                        </li>
+                        <li>
+                            <input type="text" class="prescription-detail" value="Medicine" readonly>
+                        </li>
+                    </ol>
+                </div>
+                <div class="prescription-full">
+                    <label>#2</label>
+                    <ol>
+                        <li>
+                            <input type="text" class="prescription-detail" value="Dolo 650" readonly>
+                        </li>
+                        <li>
+                            <input type="text" class="prescription-detail" value="Medicine" readonly>
+                        </li>
+                        <li>
+                            <input type="text" class="prescription-detail" value="Dolo 650" readonly>
+                        </li>
+                        <li>
+                            <input type="text" class="prescription-detail" value="Medicine" readonly>
+                        </li>
+                    </ol>
+                </div>
+                <div class="prescription-full" onclick="location=''">
+                    <label onclick="">Add Prescription</label>
+                </div>
+            </div>
+            <button class="prescription-detail" onclick="">Save</button>
+        </div>
+    </div>
+</div>
+{%endblock%}

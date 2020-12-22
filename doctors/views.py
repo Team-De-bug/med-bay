@@ -53,3 +53,39 @@ def appointment(request):
         form = CaseProcessing()
         print(cases)
         return render(request, 'doctors/appointments.html', context={"cases": cases, 'form': form})
+    
+    
+@login_required()
+def prescriptions(request):
+    
+    # Getting the user from the request
+    user = User.objects.filter(username=request.user)[0]
+
+    # Making sure if the user is a doctor
+    if user.staff.role != "d":
+        raise PermissionDenied
+    return render(request, 'doctors/prescriptions.html')
+
+@login_required()
+def prescription(request):
+    
+    # Getting the user from the request
+    user = User.objects.filter(username=request.user)[0]
+
+    # Making sure if the user is a doctor
+    if user.staff.role != "d":
+        raise PermissionDenied
+        
+    return render(request, 'doctors/prescription.html')
+
+@login_required()
+def addprescription(request):
+    
+    # Getting the user from the request
+    user = User.objects.filter(username=request.user)[0]
+
+    # Making sure if the user is a doctor
+    if user.staff.role != "d":
+        raise PermissionDenied
+        
+    return render(request, 'doctors/add-prescription.html')

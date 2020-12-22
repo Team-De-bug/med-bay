@@ -1,0 +1,49 @@
+{%extends "template.html"%}
+
+{%block body%}
+<div class="prescription-container-root">
+    <h3 id="prescription-list-title">Patient Prescriptions</h3><br>
+    <div class="prescription-container">
+        <label class="prescription-patient-label" class="patient-detail-label" onclick="showPrescriptionfull('sampleID')">Name: </label>
+        <input class="prescription-detail" id="{{case.id}}_name" type="text" value="Johnny Dough" readonly><br>
+        <div>
+            <label class="prescriptions-label">Prescriptions:</label>
+            <div class="prescriptions-list" style="flex-direction: column;">
+                <div class="prescription-full">
+                    <select id="medicine-list">
+                        <option>Dolo 650</option>
+                        <option>Hi Me Is Option</option>
+                    </select>
+                </div>
+                <div class="prescription-full" onclick="addMedicine()" id="addMedicineBtn">
+                    <label onclick="">Add Medicine</label>
+                </div>
+            </div>
+            <button class="prescription-detail">Save</button>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+{%block script%}
+<script>
+    function addMedicine() {
+        
+        var medicineContainer = $("<div></div>").addClass('prescription-full');
+        var selector = $("<select></select>").attr('id', 'medicine-list');
+        medicineContainer.append(selector);
+        var medicines = ["Dolo 650", "Medicine 1", "Medicine 2"];
+        console.log(medicines);
+        $.each(medicines, function(index, item){
+            console.log(item);
+            var option = $("<option></option>");
+            option.text(item);
+            selector.append(option);
+        });
+        
+        $("#addMedicineBtn").before(medicineContainer);
+        
+//        console.log(prescription);
+    }
+</script>
+{%endblock%}
