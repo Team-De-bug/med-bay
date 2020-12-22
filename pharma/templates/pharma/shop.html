@@ -4,6 +4,7 @@
 {%block body%}
 <div class="shop-container-root">
     <h3 id="shop-list-title">Items In Stock</h3><br>
+    <button class="stock-detail" onclick="document.location='pharmacy/cart'">Cart</button>
     <div class="shop-list-container">
         {%for item in items%}
         <div id="{{item.id}}" class="stock-item-container">
