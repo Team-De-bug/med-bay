@@ -105,5 +105,5 @@ def list_medicines(request):
     stocks = Stock.objects.all()
     medicines = {}
     for stock in stocks:
-        medicines[stock.id] = stock.name
+        medicines[f"{stock.id}"] = stock.name
     return HttpResponse(f"{medicines}")
