@@ -1,6 +1,6 @@
 from django.db import models
-from patients.models import Cases
 from admins.models import Staff
+from patients.models import Cases
 
 
 # Create your models here.
@@ -32,6 +32,17 @@ class Prescription(models.Model):
 class Order(models.Model):
 
     user = models.ForeignKey(Staff, on_delete=models.CASCADE)
+    item = models.ForeignKey(Stock, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f'{self.user.user.username}, {self.item.name}'
+
+
+# Medicine in prescription
+class Medicine(models.Model):
+
+    case = models.ForeignKey(Cases, on_delete=models.CASCADE)
     item = models.ForeignKey(Stock, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 
