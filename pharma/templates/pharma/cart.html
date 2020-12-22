@@ -15,9 +15,9 @@
             </span><br>
             <span>
                 <br>
-                <input class="stock-detail" id="remove-from-cart" onclick="removeFromCart({{order.id}}, {{order.quantity}})" type="button" value="Remove All">
-                <input class="stock-detail" id="remove-from-cart" onclick="removeFromCart({{order.id}}, 1)" type="button" value="-">
-                <input class="stock-detail" id="remove-from-cart" onclick="plusone({{order.id}})" type="button" value="+">
+                <input class="stock-detail" id="remove-from-cart" onclick="removeFromCart({{order.item.id}}, {{order.item.quantity}})" type="button" value="Remove All">
+                <input class="stock-detail" id="remove-from-cart" onclick="removeFromCart({{order.item.id}}, 1)" type="button" value="-">
+                <input class="stock-detail" id="remove-from-cart" onclick="plusone({{order.item.id}})" type="button" value="+">
             </span>
         </div>
         {% endfor %}
@@ -43,9 +43,11 @@ function removeFromCart(id, amount) {
         type : 'GET',
         success : function(response) {
             alert("Removed " + amount + " Of " + name + " From Cart");
+            location.reload();
         },
         error : function(error) {
             alert("Error: Unable To Remove From Cart");
+            location.reload();
         }
     });
 }
@@ -66,9 +68,11 @@ function plusone(id) {
         type : 'GET',
         success : function(response) {
             alert("Added 1 Of " + name + " To Cart");
+            location.reload();
         },
         error : function(error) {
             alert("Error: Unable To Add To Cart");
+            location.reload();
         }
     });
 }
