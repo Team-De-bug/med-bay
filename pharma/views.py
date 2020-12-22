@@ -67,6 +67,7 @@ def cart(request):
         order = Order.objects.filter(id=request.POST['order_id'])[0]
         item = Stock.objects.filter(id=order.product.id)[0]
 
+        print(order, item)
         if item.quantity > cq > 1:
             change = int(request.Post['qty']) - order.quantity
             order.quantity = int(request.Post['qty'])
@@ -86,25 +87,23 @@ def cart(request):
 
     user = User.objects.filter(username=request.user)[0]
     cart = user.staff
+    orders = cart.order_set.all()
     print(cart)
-    total = get_cart_total(cart)
-    orders = cart.order_set.all()
-    return render(request, "pharma/cart.html", {'cart' : cart})
-
-def get_total(order):
-    return order.quantity * order.product.cost
+    total = get_total(cart)
+    return render(request, "pharma/cart.html", {'cart': orders, 'total': total})
 
 
-def get_cart_total(cart):
-    orders = cart.order_set.all()
+# Getting cart total
+def get_total(cart):
     total = 0
-    for order in orders:
-        total += get_total(order)
-
+    # looping through all the orders in the cart and summing the prices
+    for order in cart.order_set.all():
+        total += order.quantity * order.item.price
     return total
+
 
 def bill(request):
     user = User.objects.filter(username=request.user.username)[0]
     orders = user.cart.order_set.all()
-    total = get_cart_total(user.cart)
+    total = get_total(user.cart)
     return render(request, 'pharma/bill.html', {'orders': orders, 'total':total})
