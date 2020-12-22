@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
-from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+from pharma.models import Prescription, Stock
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from pharma.models import Prescription, Stock
 from .forms import CaseProcessing
-
+import json
 
 # Create your views here.
 @login_required()
@@ -105,5 +105,5 @@ def list_medicines(request):
     stocks = Stock.objects.all()
     medicines = {}
     for stock in stocks:
-        medicines[f"{stock.id}"] = stock.name
-    return HttpResponse(f"{medicines}")
+        medicines[stock.id] = stock.name
+    return HttpResponse(json.dumps(medicines), content_type="application/json")
