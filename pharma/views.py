@@ -52,7 +52,7 @@ def place(request):
 
         return HttpResponse("success")
 
-
+@login_required()
 def remove(request):
 
     if request.method == "GET":
@@ -75,7 +75,22 @@ def remove(request):
 
     return render(request, "pharma/cart.html", {'cart' : cart})
 
+@login_required()
+def add_one(request):
+    if request.method == "GET":
+        ID = int(request.GET['product_id'])
+        increase = 1
+        user = User.objects.filter(username=request.user)[0]
+        item = Stock.objects.filter(id=ID)[0]
+        order = user.staff.order_set.filter(item__id=item.id)[0]
+        order.quantity += increase
+        item.quantity -= increase
+        order.save()
+        item.save()
+    return render(request, "pharma/cart.html", {'cart' : cart})
 
+
+@login_required()
 def cart(request):
     if request.method == "POST":
         cq = int(request.POST['qty'])

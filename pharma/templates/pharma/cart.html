@@ -15,7 +15,7 @@
             </span><br>
             <span>
                 <br>
-                <input class="stock-detail" id="remove-from-cart" onclick="removeFromCart({{order.item.id}}, {{order.item.quantity}})" type="button" value="Remove All">
+                <input class="stock-detail" id="remove-from-cart" onclick="removeFromCart({{order.item.id}}, {{order.quantity}})" type="button" value="Remove All">
                 <input class="stock-detail" id="remove-from-cart" onclick="removeFromCart({{order.item.id}}, 1)" type="button" value="-">
                 <input class="stock-detail" id="remove-from-cart" onclick="plusone({{order.item.id}})" type="button" value="+">
             </span>
@@ -61,7 +61,7 @@ function plusone(id) {
     amount += 1;
     
     $.ajax({
-        url : '/pharmacy',
+        url : '/pharmacy/add_one',
         data : {
             'product_id' : id
         },
