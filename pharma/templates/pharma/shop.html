@@ -58,9 +58,11 @@
             type : 'GET',
             success : function(response) {
                 alert("Added " + amount + " Of " + name + " To Cart");
+                location.reload();
             },
             error : function(error) {
                 alert("Error: Unable To Add To Cart");
+                location.reload();
             }
         });
     }

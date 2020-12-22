@@ -15,8 +15,8 @@
             </span><br>
             <span>
                 <br>
-                <input class="stock-detail" id="remove-from-cart" onclick="removefromCart({{order.id}}" type="button" value="Remove All">
-                <input class="stock-detail" id="remove-from-cart" onclick="removefromCart({{order.id}} 1)" type="button" value="-">
+                <input class="stock-detail" id="remove-from-cart" onclick="removeFromCart({{order.id}}, {{order.quantity}})" type="button" value="Remove All">
+                <input class="stock-detail" id="remove-from-cart" onclick="removeFromCart({{order.id}}, 1)" type="button" value="-">
                 <input class="stock-detail" id="remove-from-cart" onclick="plusone({{order.id}})" type="button" value="+">
             </span>
         </div>
@@ -27,25 +27,25 @@
 
 {%block script%}
 <script>
-function removefromCart(id, amount) {
+function removeFromCart(id, amount) {
     console.log(id);
     
-    var name = $('#'+id+'_name').val();
+    var name = $('#' + id + '_name').val();
     
     console.log(name);
     
     $.ajax({
         url : '/pharmacy',
         data : {
-            'order_id' : id,
-            'remove_amount' : amount
+            'product_id' : id,
+            'remove_amount': amount
         },
         type : 'GET',
         success : function(response) {
             alert("Removed " + amount + " Of " + name + " From Cart");
         },
         error : function(error) {
-            alert("Error: Unable To Remove Cart");
+            alert("Error: Unable To Remove From Cart");
         }
     });
 }
