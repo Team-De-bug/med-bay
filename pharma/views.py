@@ -26,6 +26,7 @@ def shop(request):
 def place(request):
     if request.method == "GET":
         ID = request.GET['product_id']
+        qty = int(request.GET['product_amount'])
         item = Stock.objects.filter(id=ID)[0]
         user = User.objects.filter(username=request.user)[0]
         orders = user.staff.order_set.all()
@@ -38,14 +39,14 @@ def place(request):
         # If the item is already in cart
         if in_cart:
             order = user.staff.order_set.filter(item__id=item.id)[0]
-            order.quantity += 1
+            order.quantity += qty
 
         # Creating a new order if not already there
         else:
-            order = Order(user=user.staff, item=item, quantity=1)
+            order = Order(user=user.staff, item=item, quantity=qty)
 
         # Updating the item stock and saving changes
-        item.quantity -= 1
+        item.quantity -= qty
         order.save()
         item.save()
 
