@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from pharma.models import Prescription
+from django.http import HttpResponse
+from pharma.models import Prescription, Stock
 from .forms import CaseProcessing
 
 
@@ -45,8 +46,13 @@ def appointment(request):
                     pres = Prescription(case=case)
                     pres.save()
 
-        # returning the user back to appointments
-        return redirect("red")
+                    # Redirecting user to prescription page
+                    response = redirect('add-prescription')
+                    response['Location'] += f'?id={case.id}'
+                    return response
+
+            # Redirecting user back to appointments page
+            return redirect("appointments")
 
     # If not then just loading the page
     else:
@@ -66,6 +72,7 @@ def prescriptions(request):
         raise PermissionDenied
     return render(request, 'doctors/prescriptions.html')
 
+
 @login_required()
 def prescription(request):
     
@@ -78,8 +85,9 @@ def prescription(request):
         
     return render(request, 'doctors/prescription.html')
 
+
 @login_required()
-def addprescription(request):
+def add_prescription(request):
     
     # Getting the user from the request
     user = User.objects.filter(username=request.user)[0]
@@ -89,3 +97,13 @@ def addprescription(request):
         raise PermissionDenied
         
     return render(request, 'doctors/add-prescription.html')
+
+
+# List available medicines
+@login_required()
+def list_medicines(request):
+    stocks = Stock.objects.all()
+    medicines = {}
+    for stock in stocks:
+        medicines[stock.id] = stock.name
+    return HttpResponse(f"{medicines}")
