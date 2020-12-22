@@ -56,15 +56,24 @@ def place(request):
 def remove(request):
 
     if request.method == "GET":
-        ID = request.GET['order_id']
-        print(ID)
-        order = Order.objects.filter(id=ID)[0]
-        item = Stock.objects.filter(id=order.product.id)[0]
-        item.quantity += order.quantity
-        order.delete()
+        ID = int(request.GET['product_id'])
+        reduce = int(request.GET['remove_amount'])
+        user = User.objects.filter(username=request.user)[0]
+        item = Stock.objects.filter(id=ID)[0]
+        order = user.staff.order_set.filter(item__id=item.id)[0]
+
+        # Checking if the quantity in order will be 0
+        if order.quantity == reduce:
+            order.delete()
+        else:
+            order.quantity -= reduce
+            order.save()
+
+        # Updating item quantity and saving changes
+        item.quantity += reduce
         item.save()
 
-    return HttpResponse("success")
+    return render(request, "pharma/cart.html", {'cart' : cart})
 
 
 def cart(request):
