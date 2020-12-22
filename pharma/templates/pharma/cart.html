@@ -1,17 +1,16 @@
 {%extends "template.html" %}
-{%load static%}
 
 {%block body%}
 <div class="shop-container-root">
     <h3 id="shop-list-title">Items In Cart</h3><br>
     <div class="shop-list-container">
-        <div id="{{item.id}}" class="stock-item-container">
+        <div id="{{cart}}" class="stock-item-container">
             <label class="stock-detail-label">Item: </label>
-            <input class="stock-detail" id="{{item.id}}_name" type="text" value="Dolo 650" readonly><br>
+            <input class="stock-detail" id="{{item.id}}_name" type="text" value="{{cart.name}}" readonly><br>
             <label class="stock-detail-label">Amount:</label>
-            <input class="stock-detail" id="{{item.id}}_amount" type="number" value="4" readonly>
+            <input class="stock-detail" id="{{item.id}}_amount" type="number" value="{{cart.quantity}}" readonly>
             <label class="stock-detail-label">Price: </label>
-            <span class="stock-detail" tabindex="0"><span class="stock-price">&#8377;</span> <input tabindex="-1" class="stock-price" id="age" type="text" value="{% widthratio 150 1 3 %}" pattern="[0-9]+" readonly>
+            <span class="stock-detail" tabindex="0"><span class="stock-price">&#8377;</span> <input tabindex="-1" class="stock-price" id="age" type="text" value="{{cart.price}}" pattern="[0-9]+" readonly>
             </span><br>
             <span>
                 <label>{{item.quantity}}</label>
