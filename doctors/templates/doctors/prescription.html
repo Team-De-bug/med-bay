@@ -15,8 +15,31 @@
         <input class="prescription-detail" id="{{pres.case.id}}_id" type="text" value="{{pres.case.appointed_date.time}}" readonly><br>
         <label class="patient-detail-label">Diagnosis:</label>
         <textarea class="prescription-detail" readonly style="resize: vertical">{{pres.case.desc}}</textarea>
-        <button class="prescription-detail" onclick="">Edit Prescription</button>
+        <button class="prescription-detail" onclick="redirectToAdd({{pres.case.id}})">Edit Prescription</button>
     </div>
     {% endfor %}
 </div>
+{%endblock%}
+
+{%block script%}
+<script>
+
+    function redirectToAdd(caseId) {
+        
+        var url = "/doctor/add-prescription"
+        
+        $.ajax({
+            url: url,
+            data: {
+                'id': caseId
+            },
+            type: 'GET',
+            success: function(){
+                document.location = url + "?id=" + caseId;
+            }
+        });
+        
+    }
+    
+</script>
 {%endblock%}
