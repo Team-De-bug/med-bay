@@ -528,13 +528,14 @@ button {
     border-radius: 8px;
 }
 
-.prescriptions-full-list {
+.case-full-list {
     list-style-type: none;
-    width: inherit;
+    width: 70vw;
+    margin: 0;
 }
 
-.prescription {
-    width: 37.5%;
+.case {
+    width: 100%;
     height: 6vh;
     background-color: #FFFFFF;
     color: black;
@@ -544,8 +545,9 @@ button {
     transition: all 0.25s;
 }
 
-.prescription:hover {
-    transform: scale(1.25, 1.25);
+.case:hover {
+    transform: scale(1.01, 1.01);
+    cursor: pointer;
     box-shadow: 0 0 10px RGBA(0, 0, 0, 0.75);
 }
 
@@ -558,20 +560,18 @@ button {
     width: 100vw;
     display: none;
     flex-direction: column;
-    justify-content: center;
-    align-content: center;
     overflow: scroll;
     background-color: RGBA(0, 0, 0, 0.4);
     backdrop-filter: blur(2px);
     z-index: 9999;
     transition: all 0.1s;
+    overflow: scroll;
 }
 
 .prescription-full-container {
-    color: black;
     display: none;
     flex-direction: column; 
-    background-color: white;
+    background-color: #E00043;
     border-radius: 8px;
     padding: 2vh 1vw 2vh 1vw;
     width: 80%;
@@ -583,15 +583,10 @@ button {
     transform: inherit;
 }
 
-.prescription-full-container:focus {
-    transform: scale(1.1, 1.1);
-}
-
 .prescription-full-header {
-    color: black;
     display: flex;
     flex-direction: column; 
-    background-color: white;
+    background-color: #E00043;
     border-radius: 8px;
     padding: 2vh 1vw 2vh 1vw;
     width: 80%;
@@ -603,17 +598,7 @@ button {
     transform: inherit;
 }
 
-.prescription-full-header:focus {
-    transform: scale(1.1, 1.1);
-    z-index: 99;
-}
-
-.prescription-full-container .prescription-detail {
-    color: black;
-}
-
 .close-prescription-full-btn {
-    color: black;
     font-weight: bold;
     width: 2vw;
     height: 2vw;

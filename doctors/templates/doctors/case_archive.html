@@ -1,0 +1,79 @@
+{%extends "template.html" %}
+
+{%block body %}
+<div id="prescription-black-out">
+<!-- loop -->
+    <div class="prescription-full-header" tabindex="1">
+        <button class="close-prescription-full-btn" tabindex="1" onclick="closeCaseFull('caseID')">X</button>
+        <label class="prescription-full-detail-label">Name:</label>
+        <input class="prescription-detail" tabindex="-1" id="patientID_name" type="text" value="Johnny Dough" readonly>
+        <label class="prescription-full-detail-label">Age:</label>
+        <input class="prescription-detail" tabindex="-1" id="patientID_age" type="text" value="99" readonly>
+        <label class="prescription-full-detail-label">Gender:</label>
+        <input class="prescription-detail" tabindex="-1" id="patientID_gender" type="text" value="M" readonly>
+        <label class="prescription-full-detail-label">No. Cases:</label>
+        <input class="prescription-detail" tabindex="-1" id="patientID_cases" type="text" value="2" readonly>
+        <label class="prescription-full-detail-label">Diagnosis:</label>
+        <textarea class="prescription-detail" tabindex="-1" id="patientID_diagnosis" readonly value="He is being treated"></textarea>
+    </div>
+<!-- end loop -->
+    
+<!-- cases loop -->
+    <div id="caseID" class="prescription-full-container" tabindex="1">
+        <label class="prescription-full-detail-label">Case #1</label>
+        <span>
+            <label class="prescription-full-detail-label">Case ID:</label>
+            <input class="prescription-detail" tabindex="-1" id="patientID_caseID" type="text" value="1" readonly><br>
+            <label class="prescription-full-detail-label">Appointed Date:</label>
+            <input class="prescription-detail" tabindex="-1" id="caseID_date" type="text" value="13-12-2020" readonly><br>
+            <label class="prescription-full-detail-label">Appointed Time:</label>
+            <input class="prescription-detail" tabindex="-1" id="caseID_time" type="text" value="07:01 am" readonly>
+        </span>
+        <ul class="case-full-list">
+        <!-- prescription loop -->
+            <li class="prescription-detail">
+                <label class="prescription-full-detail-label">Prescription #presID</label><br><br>
+                <label class="prescription-full-detail-label">Prescribed Medicines:</label>
+                <ul class="prescription-detail" style="list-style-type: none">
+                <!-- medicine loop -->
+                    <li>medicine_name X medcine_qty</li>
+                <!-- end loop -->
+                </ul>
+            </li>
+        <!-- end loop -->
+        </ul>
+    </div>
+<!-- end loop -->
+    
+</div>
+    
+
+<div class="prescription-container-root">
+    <h3 id="prescription-list-title">Patient Archive</h3><br>
+    <div class="prescription-list-container">
+        <!-- patient loop -->
+        <div class="prescription-container">
+            <label class="prescription-patient-label" class="patient-detail-label">Name: </label>
+            <input class="prescription-detail" id="patientID_name" type="text" value="Johnny Dough" readonly><br>
+            <label class="prescription-patient-label" class="patient-detail-label">Age: </label>
+            <input class="prescription-detail" id="patientID_age" type="text" value="99" readonly><br>
+            <label class="prescription-patient-label" class="patient-detail-label">Gender: </label>
+            <input class="prescription-detail" id="patientID_gender" type="text" value="M" readonly><br>
+            <label class="prescription-patient-label" class="patient-detail-label">No. Cases: </label>
+            <input class="prescription-detail" id="patientID_cases" type="text" value="2" readonly><br>
+            <div>
+                <label class="prescriptions-label">Cases:</label>
+                <div class="prescriptions-list" style="overflow: scroll; height: 15vh">
+                    <!-- case loop -->
+                    <div class="case" onclick="showCaseFull('caseID')">
+                        <label>#caseID</label>
+                    </div>
+                    <!-- end loop -->
+                </div>
+            </div>
+        </div>
+        <!-- end loop -->
+    </div>
+</div>
+
+{%endblock%}

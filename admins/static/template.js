@@ -82,7 +82,7 @@ function closePatientFull() {
     }
 }
 
-function showPrescriptionFull(prescripId) {
+function showCaseFull(prescripId) {
     
     document.getElementById("prescription-black-out").style.display = "flex"
     
@@ -96,7 +96,7 @@ function showPrescriptionFull(prescripId) {
     
 }
 
-function closePrescriptionFull() {
+function closeCaseFull() {
     document.getElementById("prescription-black-out").style.display = "none"
     
     var prescriptions = document.getElementsByClassName("prescription-full-container")

@@ -35,7 +35,8 @@
 
 <!--Summary Detail Div-->
 <div class="patient-container-root">
-    <h3 id="patient-list-title">Appointed Patients</h3><br>
+    <h3 id="patient-list-title">Doctor's Dashboard</h3><br>
+    <h4 id="patient-list-title">Appointed Patients</h4><br>
     <div class="patient-list-container">
         {% for case in cases %}
         <div class="patient-container" onclick="showPatientFull({{case.id}})">
