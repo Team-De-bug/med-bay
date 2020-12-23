@@ -35,7 +35,8 @@ def place(request):
         # Checking if item already in cart
         in_cart = False
         for order in orders:
-            if order.item.id == item.id: in_cart = True
+            if order.item.id == item.id:
+                in_cart = True
 
         # If the item is already in cart
         if in_cart:
@@ -52,6 +53,7 @@ def place(request):
         item.save()
 
         return HttpResponse("success")
+
 
 @login_required()
 def remove(request):
@@ -74,7 +76,8 @@ def remove(request):
         item.quantity += reduce
         item.save()
 
-    return render(request, "pharma/cart.html", {'cart' : cart})
+    return render(request, "pharma/cart.html", {'cart': cart})
+
 
 @login_required()
 def add_one(request):
@@ -88,7 +91,7 @@ def add_one(request):
         item.quantity -= increase
         order.save()
         item.save()
-    return render(request, "pharma/cart.html", {'cart' : cart})
+    return render(request, "pharma/cart.html", {'cart': cart})
 
 
 @login_required()
@@ -114,7 +117,7 @@ def cart(request):
             print(cart)
             messages.error(request, f'not possible!')
             
-            return render(request, "pharma/cart.html", {'cart' : cart})
+            return render(request, "pharma/cart.html", {'cart': cart})
 
     user = User.objects.filter(username=request.user)[0]
     cart = user.staff
@@ -147,7 +150,6 @@ def bill(request):
     # ToDo
     # Generating the bill objects
 
-
     return render(request, 'pharma/bill.html')
 
 
@@ -163,9 +165,6 @@ def add_stock(request):
 
             stock = Stock.objects.create(name=name, desc="med", price=price, quantity=quantity)
             stock.save()
-        
-        else:
-            form = StockForm()
 
     return render(request, 'pharma/add_stock.html')
 
