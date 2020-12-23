@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
+from pharma.models import Prescription, Stock, Medicine
 from django.core.exceptions import PermissionDenied
-from pharma.models import Prescription, Stock
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -116,6 +116,7 @@ def list_medicines(request):
 
 
 # Saving the prescription
+@login_required()
 def save_prescription(request):
 
     # Getting the user from the request
@@ -124,3 +125,23 @@ def save_prescription(request):
     # Making sure if the user is a doctor
     if user.staff.role != "d":
         raise PermissionDenied
+
+    # Getting the medicines and the related case
+    case = Cases.objects.get(id=int(request.GET['case_id']))
+    medicines = json.loads(request.GET["medicines"])
+
+    # Printing the value for debubbing purposes
+    print(case, medicines)
+
+    # Making the medicine instances and relating to case
+    for med in medicines:
+        item = Stock.objects.get(id=int(med))
+        medicine = Medicine(prescription=case.prescription, item=item, quantity=int(medicines[med]))
+        medicine.save()
+
+    # Updating prescription state
+    case.prescription.status = 'p'
+    case.prescription.save()
+
+    # returning success message
+    return HttpResponse("success")

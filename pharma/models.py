@@ -19,9 +19,7 @@ class Stock(models.Model):
 class Prescription(models.Model):
 
     status_list = (("c", "Created"), ('p', 'Prescribed'), ('d', 'Delivered'))
-
     case = models.OneToOneField(Cases, on_delete=models.SET_NULL, null=True)
-    medicines = models.ManyToManyField(Stock)
     status = models.CharField(default='c', max_length=2, choices=status_list)
 
     def __str__(self):
@@ -42,9 +40,9 @@ class Order(models.Model):
 # Medicine in prescription
 class Medicine(models.Model):
 
-    case = models.ForeignKey(Cases, on_delete=models.CASCADE)
+    prescription = models.ForeignKey(Prescription, on_delete=models.CASCADE)
     item = models.ForeignKey(Stock, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
-        return f'{self.user.user.username}, {self.item.name}'
+        return f'{self.prescription.id},{self.item.name}, {self.quantity}'
