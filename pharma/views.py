@@ -170,9 +170,11 @@ def bill(request):
     # Generating the bill objects
     bill = Bill(name=request.GET["name"], contact_num=request.GET["phone"], date=timezone.now())
     bill.save()
+    total = 0
 
     # Creating the billunits and removing orders
     for order in orders:
+        total += order.quantity
         unit = BillUnit(name=order.item.name, quantity=order.quantity,
                         desc=order.item.desc, price=order.item.price,
                         bill=bill)
@@ -183,7 +185,7 @@ def bill(request):
     bill_units = bill.billunit_set.all()
     print(bill_units, bill)
 
-    return render(request, 'pharma/bill.html', context={'bill': bill, 'bill_unit': bill_units})
+    return render(request, 'pharma/bill.html', context={'bill': bill, 'bill_unit': bill_units, "total": total})
 
 
 @login_required()
