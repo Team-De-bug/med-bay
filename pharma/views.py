@@ -156,3 +156,7 @@ def add_stock(request):
             form = StockForm()
 
     return render(request, 'pharma/add_stock.html')
+
+@login_required()
+def remove_stock(request):
+    return render(request)
