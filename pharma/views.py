@@ -154,6 +154,7 @@ def add_stock(request):
 
     return render(request, 'pharma/add_stock.html')
 
+
 @login_required()
 def remove_stock(request):
     items = Stock.objects.all()

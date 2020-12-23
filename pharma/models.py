@@ -46,3 +46,23 @@ class Medicine(models.Model):
 
     def __str__(self):
         return f'{self.prescription.id},{self.item.name}, {self.quantity}'
+
+
+# Bill
+class Bill(models.Model):
+
+    def __str__(self):
+        return f'bill-id: {self.id}'
+
+
+# part of the bill
+class BillUnit(models.Model):
+
+    bill = models.ForeignKey(Bill, models.CASCADE)
+    name = models.CharField(max_length=30)
+    desc = models.TextField()
+    price = models.IntegerField()
+    quantity = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.name}"
