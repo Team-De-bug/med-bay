@@ -3,18 +3,20 @@
 {%block body%}
 <div class="prescription-container-root">
     <h3 id="prescription-list-title">Patient Prescriptions</h3><br>
+    {% for pres in prescriptions %}
     <div class="prescription-container">
         <label class="patient-detail-label">Patient Name:</label>
-        <input class="prescription-detail" id="{{case.id}}_name" type="text" value="Johnny Dough" readonly><br>
+        <input class="prescription-detail" id="{{pres.case.id}}_name" type="text" value="{{pres.case.patient.name}}" readonly><br>
         <label class="prescription-detail-label">Case ID:</label>
-        <input class="prescription-detail" id="{{case.id}}_id" type="text" value="1" readonly><br>
+        <input class="prescription-detail" id="{{pres.case.id}}_id" type="text" value="{{pres.case.id}}" readonly><br>
         <label class="prescription-detail-label">Date:</label>
-        <input class="prescription-detail" id="{{case.id}}_id" type="text" value="20-12-2020" readonly><br>
+        <input class="prescription-detail" id="{{pres.case.id}}_id" type="text" value="{{pres.case.appointed_date.date}}" readonly><br>
         <label class="prescription-detail-label">Time:</label>
-        <input class="prescription-detail" id="{{case.id}}_id" type="text" value="07:01 am" readonly><br>
+        <input class="prescription-detail" id="{{pres.case.id}}_id" type="text" value="{{pres.case.appointed_date.time}}" readonly><br>
         <label class="patient-detail-label">Diagnosis:</label>
-        <textarea class="prescription-detail" readonly style="resize: vertical">{{case.diagnosis}}</textarea>
+        <textarea class="prescription-detail" readonly style="resize: vertical">{{pres.case.desc}}</textarea>
         <button class="prescription-detail" onclick="">Edit Prescription</button>
     </div>
+    {% endfor %}
 </div>
 {%endblock%}

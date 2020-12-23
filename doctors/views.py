@@ -75,6 +75,7 @@ def prescriptions(request):
     return render(request, 'doctors/prescriptions.html')
 
 
+# Recover prescriptions in case of issues
 @login_required()
 def prescription(request):
     
@@ -84,8 +85,18 @@ def prescription(request):
     # Making sure if the user is a doctor
     if user.staff.role != "d":
         raise PermissionDenied
-        
-    return render(request, 'doctors/prescription.html')
+
+    # Getting the list of cases
+    cases = Cases.objects.filter(doctor=user.staff.doctor)
+    prescriptions = []
+
+    for case in cases:
+        # checking if prescription exists and the state is created
+        if hasattr(case, 'prescription'):
+            if case.prescription.status == 'c':
+                prescriptions.append(case.prescription)
+
+    return render(request, 'doctors/prescription.html', context={"prescriptions": prescriptions})
 
 
 @login_required()
