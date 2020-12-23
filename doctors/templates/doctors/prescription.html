@@ -4,69 +4,17 @@
 <div class="prescription-container-root">
     <h3 id="prescription-list-title">Patient Prescriptions</h3><br>
     <div class="prescription-container">
-        <label class="prescription-patient-label" class="patient-detail-label" onclick="showPrescriptionfull('sampleID')">Name: </label>
+        <label class="patient-detail-label">Patient Name:</label>
         <input class="prescription-detail" id="{{case.id}}_name" type="text" value="Johnny Dough" readonly><br>
-        <div>
-            <label class="prescriptions-label">Prescriptions:</label>
-            <div class="prescriptions-list" style="flex-direction: column;">
-                <div class="prescription-full">
-                    <label>#1</label>
-                    <ol>
-                        <li>
-                            <input type="text" class="prescription-detail" value="Dolo 650" readonly>
-                        </li>
-                        <li>
-                            <input type="text" class="prescription-detail" value="Medicine" readonly>
-                        </li>
-                    </ol>
-                </div>
-                <div class="prescription-full">
-                    <label>#2</label>
-                    <ol>
-                        <li>
-                            <input type="text" class="prescription-detail" value="Dolo 650" readonly>
-                        </li>
-                        <li>
-                            <input type="text" class="prescription-detail" value="Medicine" readonly>
-                        </li>
-                        <li>
-                            <input type="text" class="prescription-detail" value="Dolo 650" readonly>
-                        </li>
-                        <li>
-                            <input type="text" class="prescription-detail" value="Medicine" readonly>
-                        </li>
-                    </ol>
-                </div>
-                <div class="prescription-full" onclick="addPrescription(1)">
-                    <label onclick="">Add Prescription</label>
-                </div>
-            </div>
-            <button class="prescription-detail" onclick="">Save</button>
-        </div>
+        <label class="prescription-detail-label">Case ID:</label>
+        <input class="prescription-detail" id="{{case.id}}_id" type="text" value="1" readonly><br>
+        <label class="prescription-detail-label">Date:</label>
+        <input class="prescription-detail" id="{{case.id}}_id" type="text" value="20-12-2020" readonly><br>
+        <label class="prescription-detail-label">Time:</label>
+        <input class="prescription-detail" id="{{case.id}}_id" type="text" value="07:01 am" readonly><br>
+        <label class="patient-detail-label">Diagnosis:</label>
+        <textarea class="prescription-detail" readonly style="resize: vertical">{{case.diagnosis}}</textarea>
+        <button class="prescription-detail" onclick="">Edit Prescription</button>
     </div>
 </div>
-{%endblock%}
-
-{%block script%}
-<script>
-    function addPrescription(caseId) {
-        var id = caseId;
-        console.log(caseId);
-        
-        $.ajax({
-            url : '/doctor',
-            data : {
-                'case_id' : id
-              },
-            type : 'GET',
-            success : function(response) {
-                location="/doctor/add-prescription"
-            },
-            error : function(error) {
-                alert("Error: Unable To Add Prescription");
-                location.reload();
-            }
-        });
-    }
-</script>
 {%endblock%}
