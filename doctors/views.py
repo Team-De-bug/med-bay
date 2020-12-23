@@ -5,7 +5,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from .forms import CaseProcessing
+from patients.models import Cases
 import json
+
 
 # Create your views here.
 @login_required()
@@ -95,8 +97,12 @@ def add_prescription(request):
     # Making sure if the user is a doctor
     if user.staff.role != "d":
         raise PermissionDenied
-        
-    return render(request, 'doctors/add-prescription.html')
+
+    # Getting the case from case id
+    case = Cases.objects.get(id=int(request.GET["id"]))
+
+    # Rendering the html file
+    return render(request, 'doctors/add-prescription.html', context={"case": case})
 
 
 # List available medicines
@@ -107,3 +113,14 @@ def list_medicines(request):
     for stock in stocks:
         medicines[stock.id] = stock.name
     return HttpResponse(json.dumps(medicines), content_type="application/json")
+
+
+# Saving the prescription
+def save_prescription(request):
+
+    # Getting the user from the request
+    user = User.objects.filter(username=request.user)[0]
+
+    # Making sure if the user is a doctor
+    if user.staff.role != "d":
+        raise PermissionDenied

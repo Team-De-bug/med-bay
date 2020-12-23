@@ -2,10 +2,10 @@
 
 {%block body%}
 <div class="prescription-container-root">
-    <h3 id="prescription-list-title">Prescription #{{prescription.id}}</h3><br>
+    <h3 id="prescription-list-title">Prescription {{case.prescription.id}}</h3><br>
     <div class="prescription-container">
-        <label class="prescription-patient-label" class="patient-detail-label" onclick="showPrescriptionfull('sampleID')">Name: </label>
-        <input class="prescription-detail" id="{{case.id}}_name" type="text" value="Johnny Dough" readonly><br>
+        <label class="prescription-patient-label" class="patient-detail-label">Name: </label>
+        <input class="prescription-detail" id="{{case.id}}_name" type="text" value="{{case.patient.name}}" readonly><br>
         <div>
             <label class="prescriptions-label">Prescriptions:</label>
             <div class="prescriptions-list" style="flex-direction: column;">
@@ -13,7 +13,7 @@
                     <label onclick="">Add Medicine</label>
                 </div>
             </div>
-            <button class="prescription-detail" onclick="savePrescription(1)">Save</button>
+            <button class="prescription-detail" onclick="savePrescription({{case.id}})">Save</button>
         </div>
     </div>
 </div>
