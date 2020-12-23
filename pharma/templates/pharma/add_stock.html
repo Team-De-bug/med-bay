@@ -1,0 +1,21 @@
+{%extends "template.html"%}
+
+{%block body%}
+<div class="shop-container-root">
+    <span>
+        <h3 id="shop-list-title">Add New Stock</h3>
+    </span>
+    <form id="{{item.id}}" class="stock-item-container">
+        <label class="stock-detail-label">Item Name: </label>
+        <input class="stock-detail" id="{{item.id}}_name" type="text" name="name" placeholder="Medicine"><br>
+        <label class="stock-detail-label">Price: </label>
+        <span>
+            <span class="stock-price">&#8377;</span>
+            <input class="stock-detail" id="age" type="text" pattern="[0-9]+" name="price" placeholder="100">
+        </span><br>
+        <label class="stock-detail-label">Total Quantity:</label>
+        <input class="stock-detail" id="{{item.id}}_amount" type="number" step="1" name="quantity" placeholder="100"><br>
+        <input class="stock-detail" id="edit" type="submit" value="Add">
+    </form>
+</div>
+{%endblock%}
