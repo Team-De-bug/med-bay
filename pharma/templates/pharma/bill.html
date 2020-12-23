@@ -1,0 +1,9 @@
+{%extends "template"%}
+
+{%block body%}
+<div>
+    {% for order in orders %}
+        <label>{{order.name}}</label>
+    {%endfor%}
+</div>
+{%endblock%}
