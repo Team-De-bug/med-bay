@@ -4,7 +4,7 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Stock, Order, Bill, BillUnit
-from .forms import StockForm
+from .forms import StockForm, BillForm
 
 
 # Create your views here.
@@ -137,7 +137,17 @@ def get_total(cart):
 
 
 def bill_info(request):
-    return render(request, "pharma/bill_info.html")
+    if request.method == "POST":
+        form = BillForm(request.POST)
+
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            phone = form.cleaned_data['phone']
+
+    else:
+        form = BillForm()
+
+    return render(request, "pharma/bill_info.html", context={'form':form})
 
 
 def bill(request):

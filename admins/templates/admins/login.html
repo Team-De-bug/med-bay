@@ -2,12 +2,12 @@
 {% block body %}
 
 
-<div id="login-window">
-    <div id="login-title">
-        <label id="login-label">Staff Login</label>
+<div id="form-window">
+    <div id="form-title">
+        <label id="form-label">Staff Login</label>
     </div>
-    <span id="login-error">{{form.non_field_errors.as_text}}</span>
-    <form id="login-form" method="post">
+    <span id="form-error">{{form.non_field_errors.as_text}}</span>
+    <form id="form" method="post">
         {% csrf_token %}
 <!--        <label id="username-label" for="username">Username:</label><br>-->
 <!--        <input class="login-input" type="text" id="username" name="username" placeholder="Username" required autofocus><br> -->
@@ -15,7 +15,7 @@
 <!--        <label id="password-label" for="password">Password:</label><br>-->
 <!--        <input class="login-input" type="password" id="password" name="password" placeholder="Password" required><br> -->
         {{form.password}}
-        <input id="login-submit-btn" type="submit" value="Login">
+        <input id="submit-btn" type="submit" value="Login">
     </form>
 </div>
 {%endblock%}

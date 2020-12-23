@@ -236,8 +236,8 @@ button {
 
 /*Template End*/
 
-/*Login Start*/
-#login-window {
+/*Form Start*/
+#form-window {
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -247,7 +247,7 @@ button {
     border-radius: 16px;
 }
 
-#login-title {
+#form-title {
     background-color: #215880;
     width: 100%;
     height: 2em;
@@ -261,7 +261,7 @@ button {
     border-radius: 16px 16px 0 0;
 }
 
-#login-form {
+#form {
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -271,7 +271,7 @@ button {
     font-weight: bold;
 }
 
-#login-submit-btn {
+#submit-btn {
     width: 50%;
     height: 6vh;
     background-color: #215880;
@@ -285,17 +285,17 @@ button {
     transition: all 0.5s;
 }
 
-#login-submit-btn:hover {
+#submit-btn:hover {
     background-color: #1B4969;
     width: 100%;
     cursor: pointer;
 }
 
-#login-submit-btn:active {
+#submit-btn:active {
     background-color: #153851;
 }
 
-.login-input {
+.form-input {
     background-color: #215880;
     border-style: none;
     border-radius: 16px;
@@ -309,22 +309,22 @@ button {
     transition: all 0.5s;
 }
 
-.login-input:hover {
+.form-input:hover {
     background-color: #153851;
     width: 70%;
 }
 
-.login-input:focus {
+.form-input:focus {
     background-color: #1B4969;
     width: 100%;
 }
 
-#login-error {
+#form-error {
     width: 90%;
     margin: auto;
     padding: 1%;
 }
-/*Login End*/
+/*Form End*/
 
 /*Patient List Start*/
 .patient-container-root {
