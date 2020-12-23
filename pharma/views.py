@@ -4,6 +4,7 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Stock, Order
+from .forms import StockForm
 
 
 # Create your views here.
@@ -140,4 +141,18 @@ def bill(request):
 
 @login_required()
 def add_stock(request):
-    return render(request, 'pharma/add_stock')
+    if request.method == "POST":
+        form = StockForm(request.POST)
+
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            price = form.cleaned_data['price']
+            quantity = form.cleaned_data['quantity']
+
+            stock = Stock.objects.create(name=name, desc="med", price=price, quantity=quantity)
+            stock.save()
+        
+        else:
+            form = StockForm()
+
+    return render(request, 'pharma/add_stock.html')

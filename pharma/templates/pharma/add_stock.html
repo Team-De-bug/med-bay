@@ -5,13 +5,14 @@
     <span>
         <h3 id="shop-list-title">Add New Stock</h3>
     </span>
-    <form class="stock-item-container">
+    <form method="POST" class="stock-item-container">
+        {% csrf_token %}
         <label class="stock-detail-label">Item Name: </label>
         <input class="stock-detail" id="name" type="text" name="name" placeholder="Medicine"><br>
         <label class="stock-detail-label">Price: </label>
         <span>
             <span class="stock-price">&#8377;</span>
-            <input class="stock-detail" id="age" type="text" pattern="[0-9]+" name="price" placeholder="100">
+            <input class="stock-detail" id="age" type="number" pattern="[0-9]+" name="price" placeholder="100">
         </span><br>
         <label class="stock-detail-label">Total Quantity:</label>
         <input class="stock-detail" id="amount" type="number" step="1" name="quantity" placeholder="100"><br>
