@@ -1,9 +1,41 @@
-{%extends "template"%}
+{%extends "template.html"%}
 
 {%block body%}
-<div>
-    {% for order in orders %}
-        <label>{{order.name}}</label>
-    {%endfor%}
-</div>
+<table class="bill-table">
+    <tr>
+        <th class="bill-header">S.No.</th>
+        <th class="bill-header">Item Name</th>
+        <th class="bill-header">Quantity</th>
+        <th class="bill-header">Item Price</th>
+        <th class="bill-header">Total Price</th>
+    </tr>
+    <tr>
+        <td class="bill-item">1.</td>
+        <td class="bill-item">Dolo 650</td>
+        <td class="bill-item">5</td>
+        <td class="bill-item">2</td>
+        <td class="bill-item">10</td>
+    </tr>
+    <tr>
+        <td class="bill-item">2.</td>
+        <td class="bill-item">Dolo 650</td>
+        <td class="bill-item">5</td>
+        <td class="bill-item">2</td>
+        <td class="bill-item">10</td>
+    </tr>
+    <tr>
+        <td class="bill-item">3.</td>
+        <td class="bill-item">Dolo 650</td>
+        <td class="bill-item">5</td>
+        <td class="bill-item">2</td>
+        <td class="bill-item">10</td>
+    </tr>
+    <tr>
+        <td class="bill-item-grandtotal">-</td>
+        <td class="bill-item-grandtotal">Grand Total</td>
+        <td class="bill-item-grandtotal">-</td>
+        <td class="bill-item-grandtotal">-</td>
+        <td class="bill-item-grandtotal">30</td>
+    </tr>
+</table>
 {%endblock%}

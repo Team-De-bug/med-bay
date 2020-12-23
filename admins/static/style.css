@@ -713,4 +713,29 @@ button {
     background-color: #E00043;
 }
 
+/*Pharmacy Cart Bill*/
+
+.bill-table {
+    width: 90%;
+    border: none;
+    border-collapse: collapse;
+    margin: 5%;
+}
+
+.bill-header, .bill-item, .bill-item-grandtotal {
+    color: black;
+    border: 3px solid black;
+    border-top: none;
+    padding: 2vh;
+}
+
+.bill-item {
+    border-bottom: none;
+}
+
+.bill-item-grandtotal {
+    border-bottom: none;
+    border-top: 3px solid #6C6C6C;
+}
+/*Pharmacy Cart Bill End*/
 /*Pharmacy End*/
