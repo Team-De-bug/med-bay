@@ -42,8 +42,6 @@
         
         var medicines = getMedicines();
         
-        console.log(medicines);
-        
         var medicineContainer = $("<div></div>").addClass("prescription-full");
         
         medicineContainer.addClass("medicine-single");
@@ -66,9 +64,10 @@
     }
     
     function savePrescription(caseId) {
-        var id = caseId;
         var medicines = getMedicines();
-        var selectedItemsDict = {};
+        var selectedItems = [];
+        var finalItems = {};
+        var index = 0;
         
         var medicineContainers = $(".medicine-single");
         
@@ -77,22 +76,48 @@
             var medicineContainer = medicineContainers[i];
             var inputs = medicineContainer.childNodes;
             var itemSelector = inputs[0].value;
-            console.log(itemSelector);
             var itemQuantity = inputs[1].value;
-            console.log(itemQuantity);
             var itemId = 0;
-            
+            var values = [];            
             for (var medicine in medicines) {
                 if (itemSelector === medicines[medicine]) {
                     itemId = medicine;
                 }
             }
-            console.log(itemId);
             
-            selectedItemsDict[itemId] = itemQuantity;
-            console.log(selectedItemsDict);
+            values = [itemId, itemQuantity];
             
+            selectedItems[index] = values;
+            index++;
         }
+        
+        for (var item of selectedItems) {
+            if (item[0] in finalItems) {
+                finalItems[item[0]] = parseInt(item[1]) + parseInt(finalItems[item[0]]);
+                finalItems[item[0]] = finalItems[item[0]].toString();
+            } else {
+                finalItems[item[0]] = item[1];
+            }
+        }
+        
+        console.log(JSON.stringify(finalItems));
+        
+        $.ajax({
+            url: "/doctor/save_prescription",
+            type: 'GET',
+            data: {
+                'case_id': caseId,
+                'medicines': JSON.stringify(finalItems)
+            },
+            success: function() {
+                alert("Prescription has been saved");
+                location="/doctor";
+            },
+            errot: function() {
+                alert("Could not save prescription");
+                location.reload();
+            }
+        });
     }
     
 </script>
