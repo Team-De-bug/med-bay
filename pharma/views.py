@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.utils import timezone
 from django.http import HttpResponse
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
@@ -115,7 +116,6 @@ def cart(request):
             cart = user.staff
             cart = cart[0].order_set.all()
             print(cart)
-            messages.error(request, f'not possible!')
             
             return render(request, "pharma/cart.html", {'cart': cart})
 
@@ -144,6 +144,11 @@ def bill_info(request):
             name = form.cleaned_data['name']
             phone = form.cleaned_data['phone']
 
+            # Redirecting user to prescription page
+            response = redirect('bill')
+            response['Location'] += f'?name={name}&phone={phone}'
+            return response
+
     else:
         form = BillForm()
 
@@ -156,11 +161,22 @@ def bill(request):
     user = User.objects.get(username=request.user)
     orders = user.staff.order_set.all()
     print(orders)
+    print(request.GET)
 
-    # ToDo
     # Generating the bill objects
+    bill = Bill(name=request.GET["name"], contact_num=request.GET["phone"], date=timezone.now())
+    bill.save()
 
-    return render(request, 'pharma/bill.html')
+    for order in orders:
+        unit = BillUnit(name=order.item.name, quantity=order.quantity,
+                        desc=order.item.desc, price=order.item.price,
+                        bill=bill)
+        unit.save()
+        order.delete()
+
+    bill_units = bill.billunit_set.all()
+    print(bill_units, bill)
+    return render(request, 'pharma/bill.html', context={'bill': bill, 'bill_unit': bill_units})
 
 
 @login_required()
