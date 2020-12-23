@@ -35,7 +35,11 @@
                 </div>
                 <div class="user-btns">
                     <button id="login-btn">
+                        {% if not request.user.is_authenticated %}
                         <img id="login-btn-img" onclick="checkUser('{{user.staff.role}}')" title="{{user}}" src="{% static 'images/user.png' %}" height="40vh">
+                        {% else %}
+                        <img id="login-btn-img" onclick="checkUser('{{user.staff.role}}')" title="{{user}}" src="{% static 'images/user_loggedin.png' %}" height="40vh">
+                        {%endif%}
                     </button>
                 </div>
             </div>
@@ -47,9 +51,13 @@
             <div class="side-bar">
                 <ul id="nav-list">
                     <a class="nav-link" href="/staff"><li class="nav-item">Home</li></a>
+                    {% if user.staff.role == "d" %}
                     <a class="nav-link" href="/doctor"><li class="nav-item">Doctor's Dashboard</li></a>
                     <a class="nav-link" href="/doctor/prescriptions"><li class="nav-item">Authorised Prescriptions</li></a>
+                    <a class="nav-link" href="/doctor/prescription"><li class="nav-item">Recover Unsaved Prescriptions</li></a>
+                    {% elif user.staff.role == "p" %}
                     <a class="nav-link" href="/pharmacy"><li class="nav-item">Pharmacy</li></a>
+                    {%endif%}
                 </ul>
             </div>
             <div class="main">
