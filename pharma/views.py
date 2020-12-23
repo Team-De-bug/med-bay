@@ -136,6 +136,8 @@ def get_total(cart):
     return total
 
 
+# Getting the name and phone number for bill
+@login_required()
 def bill_info(request):
     if request.method == "POST":
         form = BillForm(request.POST)
@@ -155,6 +157,8 @@ def bill_info(request):
     return render(request, "pharma/bill_info.html", context={'form':form})
 
 
+# showing the bill after purchase
+@login_required()
 def bill(request):
 
     # Getting the orders
@@ -167,6 +171,7 @@ def bill(request):
     bill = Bill(name=request.GET["name"], contact_num=request.GET["phone"], date=timezone.now())
     bill.save()
 
+    # Creating the billunits and removing orders
     for order in orders:
         unit = BillUnit(name=order.item.name, quantity=order.quantity,
                         desc=order.item.desc, price=order.item.price,
@@ -174,8 +179,10 @@ def bill(request):
         unit.save()
         order.delete()
 
+    # getting all the bill units to send in context
     bill_units = bill.billunit_set.all()
     print(bill_units, bill)
+
     return render(request, 'pharma/bill.html', context={'bill': bill, 'bill_unit': bill_units})
 
 
