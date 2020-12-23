@@ -2,7 +2,6 @@
 
 {%block body%}
 <table class="bill-table">
-    
     <tr>
         <th class="bill-header">S.No.</th>
         <th class="bill-header">Item Name</th>
@@ -10,34 +9,23 @@
         <th class="bill-header">Item Price</th>
         <th class="bill-header">Total Price</th>
     </tr>
-    <tr>
-        <td class="bill-item">1.</td>
-        <td class="bill-item">Dolo 650</td>
-        <td class="bill-item">5</td>
-        <td class="bill-item">2</td>
-        <td class="bill-item">10</td>
-    </tr>
-    <tr>
-        <td class="bill-item">2.</td>
-        <td class="bill-item">Dolo 650</td>
-        <td class="bill-item">5</td>
-        <td class="bill-item">2</td>
-        <td class="bill-item">10</td>
-    </tr>
-    <tr>
-        <td class="bill-item">3.</td>
-        <td class="bill-item">Dolo 650</td>
-        <td class="bill-item">5</td>
-        <td class="bill-item">2</td>
-        <td class="bill-item">10</td>
-    </tr>
+    
+    {% for unit in bill_unit %}
+        <tr>
+            <td class="bill-item">{{forloop.counter}}.</td>
+            <td class="bill-item">{{unit.name}}</td>
+            <td class="bill-item">{{unit.quantity}}</td>
+            <td class="bill-item">&#8377;{{unit.price}}</td>
+            <td class="bill-item">&#8377;{%widthratio unit.price 1 unit.quantity%}</td>
+        </tr>
+    {%endfor%}
+    
     <tr>
         <td class="bill-item-grandtotal">-</td>
         <td class="bill-item-grandtotal">Grand Total</td>
         <td class="bill-item-grandtotal">-</td>
         <td class="bill-item-grandtotal">-</td>
-        <td class="bill-item-grandtotal">30</td>
+        <td class="bill-item-grandtotal">&#8377;{{total}}</td>
     </tr>
 </table>
-
 {%endblock%}

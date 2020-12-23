@@ -161,6 +161,8 @@ def bill_info(request):
 @login_required()
 def bill(request):
 
+    total = 0
+    
     # Getting the orders
     user = User.objects.get(username=request.user)
     orders = user.staff.order_set.all()
@@ -176,6 +178,9 @@ def bill(request):
         unit = BillUnit(name=order.item.name, quantity=order.quantity,
                         desc=order.item.desc, price=order.item.price,
                         bill=bill)
+        
+        total += order.item.price
+        
         unit.save()
         order.delete()
 
@@ -183,7 +188,7 @@ def bill(request):
     bill_units = bill.billunit_set.all()
     print(bill_units, bill)
 
-    return render(request, 'pharma/bill.html', context={'bill': bill, 'bill_unit': bill_units})
+    return render(request, 'pharma/bill.html', context={'bill': bill, 'bill_unit': bill_units, 'total':total})
 
 
 @login_required()
