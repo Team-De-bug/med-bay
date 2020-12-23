@@ -134,10 +134,7 @@ def get_total(cart):
 
 
 def bill(request):
-    user = User.objects.filter(username=request.user.username)[0]
-    orders = user.cart.order_set.all()
-    total = get_total(user.cart)
-    return render(request, 'pharma/bill.html', {'orders': orders, 'total':total})
+    return render(request, 'pharma/bill.html')
 
 @login_required()
 def add_stock(request):
