@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import Stock, Order
+from .models import Stock, Order, Bill, BillUnit
 from .forms import StockForm
 
 
@@ -133,8 +133,23 @@ def get_total(cart):
     return total
 
 
+def bill_info(request):
+    return render(request, "pharma/bill_info.html")
+
+
 def bill(request):
+
+    # Getting the orders
+    user = User.objects.get(username=request.user)
+    orders = user.staff.order_set.all()
+    print(orders)
+
+    # ToDo
+    # Generating the bill objects
+
+
     return render(request, 'pharma/bill.html')
+
 
 @login_required()
 def add_stock(request):

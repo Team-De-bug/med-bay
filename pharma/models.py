@@ -51,8 +51,12 @@ class Medicine(models.Model):
 # Bill
 class Bill(models.Model):
 
+    name = models.CharField(max_length=50)
+    contact_num = models.CharField(max_length=10)
+    date = models.DateTimeField()
+
     def __str__(self):
-        return f'bill-id: {self.id}'
+        return f'bill-id: {self.id}| date: {self.date}'
 
 
 # part of the bill
