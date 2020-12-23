@@ -25,7 +25,10 @@
         </div>
         {% endfor %}
         
-        <h3 id="cart-total" style="color: black; margin: 2vh 2vw -2vh 2vw">Grand Total: &#8377;{{total}}</h3>
+        <span>
+            <h3 id="cart-total" style="color: black; margin: 2vh 2vw -2vh 2vw">Grand Total: &#8377;{{total}}</h3>
+            <button class="stock-detail" id="proceed-checkout-btn" onclick="document.location='/pharmacy/bill_info'" style="margin: 2vh 2vw -2vh 2vw; font-size: 3vh">Proceed to checkout</button>
+        </span>
     </div>
 </div>
 {%endblock%}

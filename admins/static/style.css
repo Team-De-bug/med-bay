@@ -709,7 +709,7 @@ button {
     cursor: pointer;
 }
 
-#cart-btn,#remove-stock-btn {
+#cart-btn,#remove-stock-btn, #proceed-checkout-btn {
     background-color: #E00043;
 }
 
