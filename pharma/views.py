@@ -246,3 +246,9 @@ def remove_stock(request):
     items = Stock.objects.filter(deleted=False)
 
     return render(request, 'pharma/remove_stock.html', context={'items': items})
+
+
+# Bill archive
+def bill_archive(request):
+    validate_access(request, 'p')
+    return render(request, 'pharma/bill_archive.html')
