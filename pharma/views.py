@@ -206,7 +206,7 @@ def bill(request):
     bill_units = bill.billunit_set.all()
     print(bill_units, bill)
 
-    return render(request, 'pharma/bill.html', context={'bill': bill, 'bill_unit': bill_units, 'total':total})
+    return render(request, 'pharma/bill.html', context={'bill': bill, 'bill_unit': bill_units, 'total': total})
 
 
 @login_required()
@@ -254,3 +254,16 @@ def bill_archive(request):
     validate_access(request, 'p')
     bills = Bill.objects.all()
     return render(request, 'pharma/bill_archive.html', context={"bills": bills})
+
+
+# Bill archive viewer
+def bill_archive_viewer(request):
+
+    bill = Bill.objects.get(id=int(request.GET['id']))
+    bill_units = bill.billunit_set.all()
+    total = 0
+
+    for unit in bill_units:
+        total += unit.price * unit.quantity
+
+    return render(request, 'pharma/bill.html', context={'bill': bill, 'bill_unit': bill_units, 'total': total})

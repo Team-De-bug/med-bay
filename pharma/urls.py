@@ -12,5 +12,6 @@ urlpatterns = [
     path("remove_stock", views.remove_stock, name="remove_stock"),
     path("bill", views.bill, name="bill"),
     path("cart", views.cart, name="cart"),
-    path('bill_archive', views.bill_archive, name="bill_archive")
+    path('bill_archive', views.bill_archive, name="bill_archive"),
+    path("bill_archive_viewer", views.bill_archive_viewer, name="bill_archive_viewer")
 ]
