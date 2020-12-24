@@ -32,7 +32,7 @@ def attendance(request):
 
         # Updating the doctor attendance
         for doc in data:
-            doctor = doctors.get(id=int(doc))
+            doctor = doctors.get(id=int(doc)).doctor
             doctor.availability = data[doc]
             doctor.save()
 
