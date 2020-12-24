@@ -249,6 +249,7 @@ def remove_stock(request):
 
 
 # Bill archive
+@login_required()
 def bill_archive(request):
     validate_access(request, 'p')
     return render(request, 'pharma/bill_archive.html')
