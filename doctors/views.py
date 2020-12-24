@@ -72,7 +72,18 @@ def case_archive(request):
     # Making sure if the user is a doctor
     if user.staff.role != "d":
         raise PermissionDenied
-    return render(request, 'doctors/case_archive.html')
+
+    # Getting the cases under the doctor
+    cases = user.staff.doctor.cases_set.filter(status='d')
+    patients = {}
+
+    # Adding patients as the keys and the done cases as values
+    for case in cases:
+        if case.patient not in patients:
+            patients[case.patient] = case.patient.cases_set.filter(status='d')
+
+    print(patients)
+    return render(request, 'doctors/case_archive.html', context={'patients': patients})
 
 
 # Recover prescriptions in case of issues

@@ -81,27 +81,3 @@ function closePatientFull() {
 
     }
 }
-
-function showCaseFull(prescripId) {
-    
-    document.getElementById("prescription-black-out").style.display = "flex"
-    
-    var prescriptions = document.getElementsByClassName("prescription-full-container")
-    
-    for (i = 0; i < prescriptions.length; i++) {
-        if (prescriptions.item(i).id === prescripId) {
-            prescriptions.item(i).style.display = "flex";
-        }
-    }
-    
-}
-
-function closeCaseFull() {
-    document.getElementById("prescription-black-out").style.display = "none"
-    
-    var prescriptions = document.getElementsByClassName("prescription-full-container")
-    
-    for (i = 0; i < prescriptions.length; i++) {
-            prescriptions.item(i).style.display = "none";
-    }
-}
