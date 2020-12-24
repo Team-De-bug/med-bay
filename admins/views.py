@@ -46,6 +46,14 @@ def attendance(request):
 @login_required()
 def create_patient(request):
     validate_access(request, 'a')
+
+    # if form data provided
+    if request.method == "POST":
+        form = PatientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("home")
+
     form = PatientForm()
     return render(request, "admins/create_patient.html", context={'form': form})
 
