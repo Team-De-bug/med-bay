@@ -3,8 +3,8 @@ from django.contrib.auth import views as auth_views
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from .forms import AuthForm, PatientForm
 from .utils import validate_access
-from .forms import AuthForm
 from .models import Staff
 import json
 
@@ -42,21 +42,12 @@ def attendance(request):
     return render(request, "admins/attendance.html", context={'doctors': doctors})
 
 
-"""
-# update_attendance in the background
-def update_attendance(request):
-    
-    # Checking if the user is an Admin member
-    user = User.objects.get(username=request.user)
-    if user.staff.role != 'a':
-        raise PermissionDenied("Only for Admin members")
-    
-    # Updating the attendance
-    doctors = Staff.objects.filter(role='d')
-    
-    # Returning success
-    return HttpResponse("success")
-"""
+# Patient Creation Page
+@login_required()
+def create_patient(request):
+    validate_access(request, 'a')
+    form = PatientForm()
+    return render(request, "admins/create_patient.html", context={'form': form})
 
 
 """ <===========================|******| Base Routes |******|===========================> """
