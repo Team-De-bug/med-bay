@@ -1,49 +1,50 @@
 {%extends "template.html" %}
 
-{%block body %}
+{% block body %}
+
 <div id="prescription-black-out">
-<!-- loop -->
-    <div class="prescription-full-header" tabindex="1">
-        <button class="close-prescription-full-btn" tabindex="1" onclick="closeCaseFull('caseID')">X</button>
+    {% for patient, cases in patients.items %}
+    <div class="prescription-full-header" id={{paitent.id}} tabindex="1">
+        <button class="close-prescription-full-btn" tabindex="1" onclick="closeCaseFull({{paitent.id}})">X</button>
         <label class="prescription-full-detail-label">Name:</label>
-        <input class="prescription-detail" tabindex="-1" id="patientID_name" type="text" value="Johnny Dough" readonly>
+        <input class="prescription-detail" tabindex="-1" id="{{patient.id}}_name" type="text" value="{{patient.name}}" readonly>
         <label class="prescription-full-detail-label">Age:</label>
-        <input class="prescription-detail" tabindex="-1" id="patientID_age" type="text" value="99" readonly>
+        <input class="prescription-detail" tabindex="-1" id="{{patient.id}}_age" type="text" value="{{patient.age}}" readonly>
         <label class="prescription-full-detail-label">Gender:</label>
-        <input class="prescription-detail" tabindex="-1" id="patientID_gender" type="text" value="M" readonly>
+        <input class="prescription-detail" tabindex="-1" id="{{patient.id}}_gender" type="text" value="{{patient.gender | upper}}" readonly>
         <label class="prescription-full-detail-label">No. Cases:</label>
-        <input class="prescription-detail" tabindex="-1" id="patientID_cases" type="text" value="2" readonly>
+        <input class="prescription-detail" tabindex="-1" id="{{patient.id}}_cases" type="text" value="{{cases.count}}" readonly>
         <label class="prescription-full-detail-label">Diagnosis:</label>
-        <textarea class="prescription-detail" tabindex="-1" id="patientID_diagnosis" readonly value="He is being treated"></textarea>
+        <textarea class="prescription-detail" tabindex="-1" id="{{patient.id}}_diagnosis" readonly value="He is being treated"></textarea>
     </div>
-<!-- end loop -->
+    {% endfor %}
     
-<!-- cases loop -->
-    <div id="caseID" class="prescription-full-container" tabindex="1">
+    {% for patient, cases in patients.items %}
+    {% for case in cases %}
+    <div id="{{case.id}}" class="prescription-full-container" tabindex="1">
         <label class="prescription-full-detail-label">Case #1</label>
         <span>
             <label class="prescription-full-detail-label">Case ID:</label>
-            <input class="prescription-detail" tabindex="-1" id="patientID_caseID" type="text" value="1" readonly><br>
+            <input class="prescription-detail" tabindex="-1" id="{{patient.id}}_{{case.id}}" type="text" value="{{case.id}}" readonly><br>
             <label class="prescription-full-detail-label">Appointed Date:</label>
-            <input class="prescription-detail" tabindex="-1" id="caseID_date" type="text" value="13-12-2020" readonly><br>
+            <input class="prescription-detail" tabindex="-1" id="{{case.id}}_date" type="text" value="{{case.appointed_date.date}}" readonly><br>
             <label class="prescription-full-detail-label">Appointed Time:</label>
-            <input class="prescription-detail" tabindex="-1" id="caseID_time" type="text" value="07:01 am" readonly>
+            <input class="prescription-detail" tabindex="-1" id="{{case.id}}_time" type="text" value="{{case.appointed_date.time}}" readonly>
         </span>
         <ul class="case-full-list">
-        <!-- prescription loop -->
             <li class="prescription-detail">
                 <label class="prescription-full-detail-label">Prescription #presID</label><br><br>
                 <label class="prescription-full-detail-label">Prescribed Medicines:</label>
                 <ul class="prescription-detail" style="list-style-type: none">
-                <!-- medicine loop -->
-                    <li>medicine_name X medcine_qty</li>
-                <!-- end loop -->
+                    {% for medicine in case.prescription.medicine_set.all %}
+                    <li>{{medicine.item.name}} X {{medcine.quantity}}</li>
+                    {% endfor %}
                 </ul>
             </li>
-        <!-- end loop -->
         </ul>
     </div>
-<!-- end loop -->
+    {% endfor %}
+    {% endfor %}
     
 </div>
     
@@ -51,29 +52,28 @@
 <div class="prescription-container-root">
     <h3 id="prescription-list-title">Patient Archive</h3><br>
     <div class="prescription-list-container">
-        <!-- patient loop -->
+        {% for patient, cases in patients.items %}
         <div class="prescription-container">
             <label class="prescription-patient-label" class="patient-detail-label">Name: </label>
-            <input class="prescription-detail" id="patientID_name" type="text" value="Johnny Dough" readonly><br>
+            <input class="prescription-detail" id="{{patient.id}}_name" type="text" value="{{patient.name}}" readonly><br>
             <label class="prescription-patient-label" class="patient-detail-label">Age: </label>
-            <input class="prescription-detail" id="patientID_age" type="text" value="99" readonly><br>
+            <input class="prescription-detail" id="{{patient.id}}_age" type="text" value="{{patient.age}}" readonly><br>
             <label class="prescription-patient-label" class="patient-detail-label">Gender: </label>
-            <input class="prescription-detail" id="patientID_gender" type="text" value="M" readonly><br>
+            <input class="prescription-detail" id="{{patient.id}}_gender" type="text" value="{{patient.gender | upper}}" readonly><br>
             <label class="prescription-patient-label" class="patient-detail-label">No. Cases: </label>
-            <input class="prescription-detail" id="patientID_cases" type="text" value="2" readonly><br>
+            <input class="prescription-detail" id="{{patient.id}}_cases" type="text" value="{{cases.count}}" readonly><br>
             <div>
                 <label class="prescriptions-label">Cases:</label>
                 <div class="prescriptions-list" style="overflow: scroll; height: 15vh">
-                    <!-- case loop -->
-                    <div class="case" onclick="showCaseFull('caseID')">
-                        <label>#caseID</label>
+                    {% for case in cases %}
+                    <div class="case" onclick="showCaseFull({{case.id}})">
+                        <label>Case #{{forloop.counter}}</label>
                     </div>
-                    <!-- end loop -->
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        <!-- end loop -->
+        {% endfor %}
     </div>
 </div>
-
-{%endblock%}
+{% endblock %}
