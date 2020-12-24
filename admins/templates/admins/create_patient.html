@@ -1,9 +1,25 @@
 {% extends 'template.html' %}
 
 {% block body %}
-<form action="/your-name/" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Submit">
-</form>
+<div id="form-window">
+    <div id="form-title">
+        <label id="form-label">Create Patient</label>
+    </div>
+    <form id="form" method="post">
+        {% csrf_token %}
+        <label>Name:</label><br>
+        {{form.name}}
+        <label>Age:</label><br>
+        {{form.age}}
+        <label>Gender:</label><br>
+        {{form.gender}}
+        <label>Blood Group:</label><br>
+        {{form.blood_type}}
+        <label>Email:</label><br>
+        {{form.email}}
+        <label>Phone:</label><br>
+        {{form.phone}}
+        <input type="submit" id="submit-btn" value="Submit">
+    </form>
+</div>
 {% endblock %}

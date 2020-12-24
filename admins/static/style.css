@@ -242,7 +242,7 @@ button {
     display: flex;
     flex-direction: column;
     width: 50%;
-    margin: auto;
+    margin: 5vh auto 5vh auto;
     background-color: #2C82C1;
     padding: 0% 0% 2% 0%;
     border-radius: 16px;
@@ -310,14 +310,28 @@ button {
     transition: all 0.5s;
 }
 
-.form-input:hover {
+.form-input:hover, .form-input-dropdown:hover {
     background-color: #153851;
     width: 70%;
 }
 
-.form-input:focus {
+.form-input:focus, .form-input-dropdown:focus {
     background-color: #1B4969;
     width: 100%;
+}
+
+.form-input-dropdown {
+    background-color: #215880;
+    border-style: none;
+    border-radius: 16px;
+    width: 50%;
+    height: 8vh;
+    margin: 1vh 0 1vh 0;
+    padding: 1vh 1vw 1vh 1vw;
+    color: white;
+    font-size: 2.5vh;
+    font-weight: bold;
+    transition: all 0.5s;
 }
 
 #form-error {
