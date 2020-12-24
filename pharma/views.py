@@ -160,8 +160,6 @@ def bill_info(request):
 # showing the bill after purchase
 @login_required()
 def bill(request):
-
-    total = 0
     
     # Getting the orders
     user = User.objects.get(username=request.user)
@@ -176,12 +174,11 @@ def bill(request):
 
     # Creating the billunits and removing orders
     for order in orders:
-        total += order.quantity
         unit = BillUnit(name=order.item.name, quantity=order.quantity,
                         desc=order.item.desc, price=order.item.price,
                         bill=bill)
         
-        total += order.item.price
+        total += order.item.price * order.quantity
         
         unit.save()
         order.delete()
