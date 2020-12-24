@@ -707,7 +707,7 @@ button {
     cursor: pointer;
 }
 
-#cart-btn,#remove-stock-btn, #proceed-checkout-btn {
+#cart-btn,#remove-stock-btn, #proceed-checkout-btn, #bill-archive-btn {
     background-color: #E00043;
 }
 

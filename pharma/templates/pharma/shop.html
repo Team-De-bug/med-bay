@@ -6,7 +6,9 @@
     <span style="display: flex; align-content: space-between; align-items: flex-start">
         <h3 id="shop-list-title">Items In Stock</h3>
         <button class="stock-detail" id="cart-btn" onclick="document.location='{% url 'pharma:cart' %}'">Cart</button><pre>  </pre>
-        <button class="stock-detail" id="remove-stock-btn" onclick="document.location='{% url 'pharma:remove_stock' %}'">Remove Stocks</button>
+        <button class="stock-detail" id="remove-stock-btn" onclick="document.location='{% url 'pharma:remove_stock' %}'">Remove Stocks</button><pre>  </pre>
+        <button class="stock-detail" id="bill-archive-btn" onclick="document.location='{% url 'pharma:bill_archive' %}'">View Bill Archive</button>
+        
     </span>
     <div class="shop-list-container">
         {%for item in items%}
