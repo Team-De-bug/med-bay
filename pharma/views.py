@@ -148,7 +148,7 @@ def bill_info(request):
 
     # Redirecting back to home if there are no orders
     if not orders:
-        return redirect("pharma: shop")
+        return redirect("pharma:shop")
 
     # Checking if the form data is recieved
     if request.method == "POST":
@@ -159,7 +159,7 @@ def bill_info(request):
             phone = form.cleaned_data['phone']
 
             # Redirecting user to prescription page
-            response = redirect('pharma: bill')
+            response = redirect('pharma:bill')
             response['Location'] += f'?name={name}&phone={phone}'
             return response
 
@@ -181,7 +181,7 @@ def bill(request):
 
     # Redirecting back to home if there are no orders
     if not orders:
-        return redirect("pharma: shop")
+        return redirect("pharma:shop")
 
     # Generating the bill objects
     bill = Bill(name=request.GET["name"], contact_num=request.GET["phone"], date=timezone.now())
@@ -219,7 +219,7 @@ def add_stock(request):
             stock = Stock.objects.create(name=name, desc="med", price=price, quantity=quantity)
             stock.save()
 
-            return redirect("pharma: shop")
+            return redirect("pharma:shop")
 
     return render(request, 'pharma/add_stock.html')
 
