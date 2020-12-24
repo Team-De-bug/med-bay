@@ -1,11 +1,10 @@
+from .models import Stock, Order, Bill, BillUnit, Prescription
 from django.contrib.auth.decorators import login_required
-from .models import Stock, Order, Bill, BillUnit
 from django.shortcuts import render, redirect
 from admins.utils import validate_access
 from .forms import StockForm, BillForm
 from django.http import HttpResponse
 from django.utils import timezone
-
 
 # Create your views here.
 @login_required
@@ -267,3 +266,10 @@ def bill_archive_viewer(request):
         total += unit.price * unit.quantity
 
     return render(request, 'pharma/bill.html', context={'bill': bill, 'bill_unit': bill_units, 'total': total})
+
+
+@login_required()
+def order_prescription(request):
+    validate_access(request, 'p')
+    prescriptions = Prescription.objects.filter(status='p')
+    return render(request, 'pharma/orders.html', context={'prescriptions': prescriptions})
