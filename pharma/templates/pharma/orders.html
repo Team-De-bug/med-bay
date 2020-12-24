@@ -14,12 +14,12 @@
             <label class="stock-detail-label">Case No.:</label>
             <input class="stock-detail" id="{{prescription.id}}_case" type="text" value="{{prescription.case.id}}" readonly><br>
             <label class="stock-detail-label">Medicines Prescribed:</label>
-            <span class="stock-detail">
+            <span class="stock-detail" style="overflow: scroll; height: 8vh">
                 {% for medicine in prescription.medicine_set.all %}
-                <input class="stock-detail" id="{{prescription.id}}_{{medicine.item.name}}" type="text" value="{{medicine.item.name}} x {{medicine.quantity}}" readonly>
+                <input class="stock-detail" id="{{prescription.id}}_{{medicine.item.name}}" type="text" value="{{medicine.item.name}} x {{medicine.quantity}}" style="background-color: white; color: black" readonly>
                 {% endfor %}
             </span>
-            <button class="stock-detail" onclick="placeOrder({{prescription.id}})">Place Order To Cart</button>
+            <button class="stock-detail" onclick="checkout({{prescription.id}})">Checkout Prescription</button>
         </div>
         {% endfor %}
     </div>
@@ -28,8 +28,13 @@
 
 {%block script%}
 <script>
-    function placeOrder(prescriptionId) {
-        console.log("place order to cart");
+    function checkout(prescriptionId) {
+        $.ajax({
+            url: "{% url 'pharma:order_prescription' %}",
+            data: {
+                'prescription_id': prescriptionId
+            }
+        });
     }
 </script>
 {%endblock%}
