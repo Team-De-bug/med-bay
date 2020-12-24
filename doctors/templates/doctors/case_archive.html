@@ -34,7 +34,7 @@
         <label class="case-full-detail-label">Prescribed Medicines:</label>
             <ol class="prescription-detail" style="margin-left: 3vw;">
                 {% for medicine in case.prescription.medicine_set.all %}
-                <li style="margin-left: 2vw;">{{medicine.item.name}} X {{medcine.quantity}}</li>
+                <li style="margin-left: 2vw;">{{medicine.item.name}} x {{medicine.quantity}}</li>
                 {% endfor %}
             </ol>
         {%endif%}
