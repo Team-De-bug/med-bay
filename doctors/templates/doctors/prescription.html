@@ -26,16 +26,14 @@
 
     function redirectToAdd(caseId) {
         
-        var url = "/doctor/add-prescription"
-        
         $.ajax({
-            url: url,
+            url: "{% url 'doctor: add_prescription' %}",
             data: {
                 'id': caseId
             },
             type: 'GET',
             success: function(){
-                document.location = url + "?id=" + caseId;
+                document.location = "{% url 'doctor: add_prescription' %}?id=" + caseId;
             }
         });
         

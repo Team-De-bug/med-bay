@@ -5,7 +5,7 @@
 <div class="shop-container-root">
     <span style="display: flex; align-content: space-between; align-items: flex-start">
         <h3 id="shop-list-title">Items In Stock</h3>
-        <button class="stock-detail" id="remove-stock-btn" onclick="document.location='/pharmacy'">Back to Pharmacy</button>
+        <button class="stock-detail" id="remove-stock-btn" onclick="document.location='{% url 'pharma: shop' %}'">Back to Pharmacy</button>
     </span>
     <div class="shop-list-container">
         {%for item in items%}
@@ -35,7 +35,7 @@
         if (confirm("Removing " + name + " From Stock")) {
         
             $.ajax({
-                url : '/pharmacy/remove_stock',
+                url : "{% url 'pharma: remove_stock' %}",
                 data : {
                     'product_id' : id
                   },

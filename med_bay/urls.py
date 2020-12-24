@@ -25,7 +25,7 @@ urlpatterns = [
     path('pharmacy/', include('pharma.urls')),
     path("login", LoginView.as_view(template_name="admins/login.html"), name="login"),
     path("logout", LogoutView.as_view(template_name="admins/logout.html"), name="logout"),
-    path("confirm", confirm_logout, name='confirm-logout'),
+    path("confirm", confirm_logout, name='confirm_logout'),
     path("", home, name="home"),
     path("redirect", redirect_login, name="red")
 ]

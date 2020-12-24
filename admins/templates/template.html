@@ -11,7 +11,7 @@
         <script>
             function checkUser(user) {
                 if (user === 'd' || user === 'a' || user === 'p') {
-                    document.location = "{% url 'confirm-logout' %}";
+                    document.location = "{% url 'confirm_logout' %}";
                 } else {
                     document.location = "{% url 'login' %}";
                 }
@@ -31,7 +31,7 @@
                     <img class="side-bar-btn-icon" src="{% static 'images/menu.svg' %}" margin="0" height="100%"/>
                 </button>
                 <div id="logo-div">
-                    <img id="logo" onclick="document.location='/staff/redirect'" src="{% static 'images/med-bay.png' %}">
+                    <img id="logo" onclick="document.location='{% url 'red' %}'" src="{% static 'images/med-bay.png' %}">
                 </div>
                 <div class="user-btns">
                     <button id="login-btn">
@@ -50,13 +50,13 @@
         <div class="root-grid" id="root-grid">
             <div class="side-bar">
                 <ul id="nav-list">
-                    <a class="nav-link" href="/staff"><li class="nav-item">Home</li></a>
+                    <a class="nav-link" href="{% url 'home' %}"><li class="nav-item">Home</li></a>
                     {% if user.staff.role == "d" %}
-                    <a class="nav-link" href="/doctor"><li class="nav-item">Doctor's Dashboard</li></a>
-                    <a class="nav-link" href="/doctor/prescription"><li class="nav-item">Recover Unsaved Prescriptions</li></a>
-                    <a class="nav-link" href="/doctor/case_archive"><li class="nav-item">Patient Archive</li></a>
+                    <a class="nav-link" href="{% url 'doctor: dashboard' %}"><li class="nav-item">Doctor's Dashboard</li></a>
+                    <a class="nav-link" href="{% url 'doctor: recover' %}"><li class="nav-item">Recover Unsaved Prescriptions</li></a>
+                    <a class="nav-link" href="{% url 'doctor: case_archive' %}"><li class="nav-item">Patient Archive</li></a>
                     {% elif user.staff.role == "p" %}
-                    <a class="nav-link" href="/pharmacy"><li class="nav-item">Pharmacy</li></a>
+                    <a class="nav-link" href="{% url 'pharma: shop' %}"><li class="nav-item">Pharmacy</li></a>
                     {%endif%}
                 </ul>
             </div>

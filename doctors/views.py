@@ -49,12 +49,12 @@ def appointment(request):
                     pres.save()
 
                     # Redirecting user to prescription page
-                    response = redirect('add-prescription')
+                    response = redirect('doctor: add_prescription')
                     response['Location'] += f'?id={case.id}'
                     return response
 
             # Redirecting user back to appointments page
-            return redirect("appointments")
+            return redirect("doctor: dashboard")
 
     # If not then just loading the page
     else:

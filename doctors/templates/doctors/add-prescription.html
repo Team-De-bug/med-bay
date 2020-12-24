@@ -28,7 +28,7 @@
         
         $.ajax({
             async: false,
-            url: "/doctor/list_medicines",
+            url: "{% url 'doctor: list_medicines' %}",
             type: 'GET',
             success: function(data){
                 medicineList = data;
@@ -103,7 +103,7 @@
         console.log(JSON.stringify(finalItems));
         
         $.ajax({
-            url: "/doctor/save_prescription",
+            url: "{% url 'doctor: save_prescription'%}",
             type: 'GET',
             data: {
                 'case_id': caseId,
@@ -111,7 +111,7 @@
             },
             success: function() {
                 alert("Prescription has been saved");
-                location="/doctor";
+                location="{% url 'doctor: dashboard' %}";
             },
             error: function() {
                 alert("Could not save prescription");

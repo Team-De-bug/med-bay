@@ -31,10 +31,10 @@ def confirm_logout(request):
 def redirect_login(request):
     user = User.objects.filter(username=request.user)[0]
     if user.staff.role == "d":
-        return redirect('appointments')
+        return redirect('doctor:dashboard')
     if user.staff.role == "a":
         return redirect('home')
     if user.staff.role == "p":
-        return redirect('shop')
+        return redirect('pharma:shop')
     else:
         raise Http404("page not found")
