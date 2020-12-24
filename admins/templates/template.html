@@ -36,9 +36,9 @@
                 <div class="user-btns">
                     <button id="login-btn">
                         {% if not request.user.is_authenticated %}
-                        <img id="login-btn-img" onclick="checkUser('{{user.staff.role}}')" title="{{user}}" src="{% static 'images/user.png' %}" height="40vh">
+                        <img id="login-btn-img" onclick="checkUser('{{user.staff.role}}')" title="You are {{user}}" src="{% static 'images/user.png' %}" height="40vh">
                         {% else %}
-                        <img id="login-btn-img" onclick="checkUser('{{user.staff.role}}')" title="{{user}}" src="{% static 'images/user_loggedin.png' %}" height="40vh">
+                        <img id="login-btn-img" onclick="checkUser('{{user.staff.role}}')" title="You are {{user}}" src="{% static 'images/user_loggedin.png' %}" height="40vh">
                         {%endif%}
                     </button>
                 </div>
