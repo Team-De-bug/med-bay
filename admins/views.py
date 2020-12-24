@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
 from django.contrib.auth import views as auth_views
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from .utils import validate_access
 from .forms import AuthForm
 from .models import Staff
 import json
@@ -19,9 +19,7 @@ def home(request):
 def attendance(request):
 
     # Checking if the user is an Admin member
-    user = User.objects.get(username=request.user)
-    if user.staff.role != 'a':
-        raise PermissionDenied("Only for Admin members")
+    validate_access(request, 'a')
 
     # Getting the list of doctors
     doctors = Staff.objects.filter(role='d')
@@ -77,7 +75,7 @@ def confirm_logout(request):
 # login redirect
 @login_required()
 def redirect_login(request):
-    user = User.objects.filter(username=request.user)[0]
+    user = User.objects.get(username=request.user)
     if user.staff.role == "d":
         return redirect('doctor:dashboard')
     if user.staff.role == "a":

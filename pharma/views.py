@@ -1,36 +1,40 @@
-from django.shortcuts import render, redirect
-from django.utils import timezone
-from django.http import HttpResponse
-from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from .models import Stock, Order, Bill, BillUnit
+from django.shortcuts import render, redirect
+from admins.utils import validate_access
 from .forms import StockForm, BillForm
+from django.http import HttpResponse
+from django.utils import timezone
 
 
 # Create your views here.
 @login_required
 def shop(request):
-    user = User.objects.filter(username=request.user).first()
-    if user.staff.role != "p":
-        raise PermissionDenied()
 
+    # Checking if user is allowed visit the site
+    validate_access(request, 'p')
+
+    # Getting the list of stocks
     items = Stock.objects.filter(deleted=False)
     items = list(items)
     for item in items:
+
+        # Removing out of stock items
         if item.quantity < 1:
             items.remove(item)
+
     return render(request, "pharma/shop.html", context={'items': items})
 
 
 # Placing order when order button is pressed
 @login_required()
 def place(request):
+
+    user = validate_access(request, 'p')
     if request.method == "GET":
         ID = request.GET['product_id']
         qty = int(request.GET['product_amount'])
         item = Stock.objects.filter(id=ID)[0]
-        user = User.objects.filter(username=request.user)[0]
         orders = user.staff.order_set.all()
 
         # Checking if item already in cart
@@ -58,11 +62,10 @@ def place(request):
 
 @login_required()
 def remove(request):
-
+    user = validate_access(request, 'p')
     if request.method == "GET":
         ID = int(request.GET['product_id'])
         reduce = int(request.GET['remove_amount'])
-        user = User.objects.filter(username=request.user)[0]
         item = Stock.objects.filter(id=ID)[0]
         order = user.staff.order_set.filter(item__id=item.id)[0]
 
@@ -82,12 +85,13 @@ def remove(request):
 
 @login_required()
 def add_one(request):
+
+    user = validate_access(request, "p")
     if request.method == "GET":
         ID = int(request.GET['product_id'])
         increase = 1
-        user = User.objects.filter(username=request.user)[0]
-        item = Stock.objects.filter(id=ID)[0]
-        order = user.staff.order_set.filter(item__id=item.id)[0]
+        item = Stock.objects.get(id=ID)
+        order = user.staff.order_set.get(item__id=item.id)
         order.quantity += increase
         item.quantity -= increase
         order.save()
@@ -97,6 +101,8 @@ def add_one(request):
 
 @login_required()
 def cart(request):
+
+    user = validate_access(request, 'd')
     if request.method == "POST":
         cq = int(request.POST['qty'])
         order = Order.objects.filter(id=request.POST['order_id'])[0]
@@ -111,15 +117,12 @@ def cart(request):
             item.save()
         
         else:
-            user = User.objects.filter(username=request.user)[0]
             print(user)
-            cart = user.staff
-            cart = cart[0].order_set.all()
+            cart = user.staff.order_set.all()
             print(cart)
             
             return render(request, "pharma/cart.html", {'cart': cart})
 
-    user = User.objects.filter(username=request.user)[0]
     cart = user.staff
     orders = cart.order_set.all()
     print(cart)
@@ -141,7 +144,7 @@ def get_total(cart):
 def bill_info(request):
 
     # Getting the orders
-    user = User.objects.get(username=request.user)
+    user = validate_access(request, 'p')
     orders = user.staff.order_set.all()
     print(orders)
     print(request.GET)
@@ -174,7 +177,7 @@ def bill_info(request):
 def bill(request):
     
     # Getting the orders
-    user = User.objects.get(username=request.user)
+    user = validate_access(request, 'p')
     orders = user.staff.order_set.all()
     print(orders)
     print(request.GET)
@@ -208,6 +211,7 @@ def bill(request):
 
 @login_required()
 def add_stock(request):
+    validate_access(request, 'p')
     if request.method == "POST":
         form = StockForm(request.POST)
 
@@ -228,9 +232,7 @@ def add_stock(request):
 def remove_stock(request):
 
     # making sure the user is a pharmacist
-    user = User.objects.filter(username=request.user).first()
-    if user.staff.role != "p":
-        raise PermissionDenied()
+    validate_access(request, "p")
 
     # Deleting the product if product_id is sent
     if 'product_id' in request.GET:

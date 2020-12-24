@@ -1,8 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from pharma.models import Prescription, Stock, Medicine
-from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from admins.utils import validate_access
 from django.http import HttpResponse
 from .forms import CaseProcessing
 from patients.models import Cases
@@ -14,11 +13,7 @@ import json
 def appointment(request):
 
     # Getting the user from the request
-    user = User.objects.filter(username=request.user)[0]
-
-    # Making sure if the user is a doctor
-    if user.staff.role != "d":
-        raise PermissionDenied
+    user = validate_access(request, 'd')
 
     # Getting the list of patients who are to be attended
     cases = user.staff.doctor.cases_set.filter(status="t")
@@ -66,12 +61,7 @@ def appointment(request):
 @login_required()
 def case_archive(request):
     
-    # Getting the user from the request
-    user = User.objects.filter(username=request.user)[0]
-
-    # Making sure if the user is a doctor
-    if user.staff.role != "d":
-        raise PermissionDenied
+    user = validate_access(request, 'd')
 
     # Getting the cases under the doctor
     cases = user.staff.doctor.cases_set.filter(status='d')
@@ -91,11 +81,7 @@ def case_archive(request):
 def prescription(request):
     
     # Getting the user from the request
-    user = User.objects.filter(username=request.user)[0]
-
-    # Making sure if the user is a doctor
-    if user.staff.role != "d":
-        raise PermissionDenied
+    user = validate_access(request, 'd')
 
     # Getting the list of cases
     cases = Cases.objects.filter(doctor=user.staff.doctor)
@@ -114,11 +100,7 @@ def prescription(request):
 def add_prescription(request):
     
     # Getting the user from the request
-    user = User.objects.filter(username=request.user)[0]
-
-    # Making sure if the user is a doctor
-    if user.staff.role != "d":
-        raise PermissionDenied
+    validate_access(request, 'd')
 
     # Getting the case from case id
     case = Cases.objects.get(id=int(request.GET["id"]))
@@ -142,11 +124,7 @@ def list_medicines(request):
 def save_prescription(request):
 
     # Getting the user from the request
-    user = User.objects.filter(username=request.user)[0]
-
-    # Making sure if the user is a doctor
-    if user.staff.role != "d":
-        raise PermissionDenied
+    validate_access(request, 'd')
 
     # Getting the medicines and the related case
     case = Cases.objects.get(id=int(request.GET['case_id']))
