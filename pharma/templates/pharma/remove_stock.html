@@ -32,21 +32,24 @@
       console.log("item id: " + id);
         var name = $('#' + id + '_name').val();
         
-        $.ajax({
-            url : '/pharmacy/remove_stock',
-            data : {
-                'product_id' : id
-              },
-            type : 'GET',
-            success : function() {
-                alert("Removed " + name + " From Stock");
-                location.reload();
-            },
-            error : function(error) {
-                alert("Error " + error + " : Unable To Remove From Stock");
-                location.reload();
-            }
-        });
+        if (confirm("Removing " + name + " From Stock")) {
+        
+            $.ajax({
+                url : '/pharmacy/remove_stock',
+                data : {
+                    'product_id' : id
+                  },
+                type : 'GET',
+                success : function() {
+                    alert("Removed " + name + " From Stock");
+                    location.reload();
+                },
+                error : function(error) {
+                    alert("Error " + error + " : Unable To Remove From Stock");
+                    location.reload();
+                }
+            });
+        }
     }
 </script>
 {%endblock%}
