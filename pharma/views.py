@@ -139,6 +139,18 @@ def get_total(cart):
 # Getting the name and phone number for bill
 @login_required()
 def bill_info(request):
+
+    # Getting the orders
+    user = User.objects.get(username=request.user)
+    orders = user.staff.order_set.all()
+    print(orders)
+    print(request.GET)
+
+    # Redirecting back to home if there are no orders
+    if not orders:
+        return redirect("shop")
+
+    # Checking if the form data is recieved
     if request.method == "POST":
         form = BillForm(request.POST)
 
@@ -167,6 +179,10 @@ def bill(request):
     print(orders)
     print(request.GET)
 
+    # Redirecting back to home if there are no orders
+    if not orders:
+        return redirect("shop")
+
     # Generating the bill objects
     bill = Bill(name=request.GET["name"], contact_num=request.GET["phone"], date=timezone.now())
     bill.save()
@@ -190,7 +206,6 @@ def bill(request):
     return render(request, 'pharma/bill.html', context={'bill': bill, 'bill_unit': bill_units, 'total':total})
 
 
-
 @login_required()
 def add_stock(request):
     if request.method == "POST":
@@ -203,6 +218,8 @@ def add_stock(request):
 
             stock = Stock.objects.create(name=name, desc="med", price=price, quantity=quantity)
             stock.save()
+
+            return redirect("shop")
 
     return render(request, 'pharma/add_stock.html')
 
