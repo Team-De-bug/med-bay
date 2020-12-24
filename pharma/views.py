@@ -252,4 +252,5 @@ def remove_stock(request):
 @login_required()
 def bill_archive(request):
     validate_access(request, 'p')
-    return render(request, 'pharma/bill_archive.html')
+    bills = Bill.objects.all()
+    return render(request, 'pharma/bill_archive.html', context={"bills": bills})
