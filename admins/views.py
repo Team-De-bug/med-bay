@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .forms import AuthForm
 from .models import Staff
+import json
 
 
 # Edit the function below.
@@ -27,6 +28,17 @@ def attendance(request):
 
     # Checking if update is available
     if "update" in request.GET:
+
+        # Getting the attendance from the request
+        data = json.loads(request.GET["attendance"])
+
+        # Updating the doctor attendance
+        for doc in data:
+            doctor = doctors.get(id=int(doc))
+            doctor.availability = data[doc]
+            doctor.save()
+
+        # Returning the success message
         return HttpResponse("Success!")
 
     return render(request, "admins/attendance.html", context={'doctors': doctors})
