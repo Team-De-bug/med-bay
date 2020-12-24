@@ -62,6 +62,7 @@
                     {% elif user.staff.role == "p" %}
                     <a class="nav-link" href="{% url 'pharma:shop' %}"><li class="nav-item">Pharmacy</li></a>
                     <a class="nav-link" href="{% url 'pharma:bill_archive' %}"><li class="nav-item">Bill Archive</li></a>
+                    <a class="nav-link" href="{% url 'pharma:prescription_order' %}"><li class="nav-item">Prescription Orders</li></a>
                     {%endif%}
                 </ul>
             </div>

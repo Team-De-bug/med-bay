@@ -1,0 +1,35 @@
+{%extends "template.html"%}
+
+{%block body%}
+<div class="shop-container-root">
+        <h3 id="shop-list-title">Prescription Orders</h3><br>
+    <div class="shop-list-container">
+        <!-- prescription loop (for prescription in prescriptions) -->
+        <div id="{{prescription.id}}" class="stock-item-container">
+            <label class="stock-detail-label">Prescription ID: {{prescription.id}}</label><br>
+            <label class="stock-detail-label">Patient:</label>
+            <input class="stock-detail" id="{{prescription.id}}_patient" type="text" value="{{prescription.patient.name}}" readonly><br>
+            <label class="stock-detail-label">Authorising Doctor:</label>
+            <input class="stock-detail" id="{{prescription.id}}_doctor" type="text" value="{{prescription.doctor.name}}" readonly><br>
+            <label class="stock-detail-label">Case No.:</label>
+            <input class="stock-detail" id="{{prescription.id}}_case" type="text" value="{{prescription.case.id}}" readonly><br>
+            <label class="stock-detail-label">Medicines Prescribed:</label>
+            <span class="stock-detail">
+                <!-- medicine loop (for medicine in prescription.medicines) -->
+                <input class="stock-detail" id="{{prescription.id}}_{{medicine.name}}" type="text" value="{{medicine.name}} x {{medicine.quantity}}" readonly>
+                <!-- endfor-->
+            </span>
+            <button class="stock-detail" onclick="placeOrder({{prescription.id}})">Place Order To Cart</button>
+        </div>
+        <!-- endfor -->
+    </div>
+</div>
+{%endblock%}
+
+{%block script%}
+<script>
+    function placeOrder(prescriptionId) {
+        console.log("place order to cart");
+    }
+</script>
+{%endblock%}
