@@ -4,7 +4,7 @@
 <div class="shop-container-root">
     <span style="display: flex; align-content: space-between; align-items: flex-start">
         <h3 id="shop-list-title">Add New Stock</h3>
-        <button class="stock-detail" id="remove-stock-btn" onclick="document.location='{% url 'pharma: shop' %}'">Back to Pharmacy</button>
+        <button class="stock-detail" id="remove-stock-btn" onclick="document.location='{% url 'pharma:shop' %}'">Back to Pharmacy</button>
     </span>
     <form method="POST" class="stock-item-container">
         {% csrf_token %}

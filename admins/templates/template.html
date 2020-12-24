@@ -52,11 +52,11 @@
                 <ul id="nav-list">
                     <a class="nav-link" href="{% url 'home' %}"><li class="nav-item">Home</li></a>
                     {% if user.staff.role == "d" %}
-                    <a class="nav-link" href="{% url 'doctor: dashboard' %}"><li class="nav-item">Doctor's Dashboard</li></a>
-                    <a class="nav-link" href="{% url 'doctor: recover' %}"><li class="nav-item">Recover Unsaved Prescriptions</li></a>
-                    <a class="nav-link" href="{% url 'doctor: case_archive' %}"><li class="nav-item">Patient Archive</li></a>
+                    <a class="nav-link" href="{% url 'doctor:dashboard' %}"><li class="nav-item">Doctor's Dashboard</li></a>
+                    <a class="nav-link" href="{% url 'doctor:recover' %}"><li class="nav-item">Recover Unsaved Prescriptions</li></a>
+                    <a class="nav-link" href="{% url 'doctor:case_archive' %}"><li class="nav-item">Patient Archive</li></a>
                     {% elif user.staff.role == "p" %}
-                    <a class="nav-link" href="{% url 'pharma: shop' %}"><li class="nav-item">Pharmacy</li></a>
+                    <a class="nav-link" href="{% url 'pharma:shop' %}"><li class="nav-item">Pharmacy</li></a>
                     {%endif%}
                 </ul>
             </div>

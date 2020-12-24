@@ -4,7 +4,7 @@
 <div class="shop-container-root">
     <span style="display: flex; align-content: space-between; align-items: flex-start">
         <h3 id="shop-list-title">Items In Cart</h3><br>
-        <button class="stock-detail" id="remove-stock-btn" onclick="document.location='{% url 'pharma: shop' %}'">Back to Pharmacy</button>
+        <button class="stock-detail" id="remove-stock-btn" onclick="document.location='{% url 'pharma:shop' %}'">Back to Pharmacy</button>
     </span>
     <div class="shop-list-container">
         {% for order in cart %}
@@ -27,7 +27,7 @@
         
         <span>
             <h3 id="cart-total" style="color: black; margin: 2vh 2vw -2vh 2vw">Grand Total: &#8377;{{total}}</h3>
-            <button class="stock-detail" id="proceed-checkout-btn" onclick="document.location='{% url 'pharma: bill_info' %}'" style="margin: 2vh 2vw -2vh 2vw; font-size: 3vh">Proceed to checkout</button>
+            <button class="stock-detail" id="proceed-checkout-btn" onclick="document.location='{% url 'pharma:bill_info' %}'" style="margin: 2vh 2vw -2vh 2vw; font-size: 3vh">Proceed to checkout</button>
         </span>
     </div>
 </div>
@@ -43,7 +43,7 @@ function removeFromCart(id, amount) {
     console.log(name);
     
     $.ajax({
-        url : "{% url 'pharma: remove' %}",
+        url : "{% url 'pharma:remove' %}",
         data : {
             'product_id' : id,
             'remove_amount': amount
@@ -69,7 +69,7 @@ function plusone(id) {
     amount += 1;
     
     $.ajax({
-        url : "{% url 'pharma: add'%}",
+        url : "{% url 'pharma:add'%}",
         data : {
             'product_id' : id
         },

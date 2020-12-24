@@ -5,8 +5,8 @@
 <div class="shop-container-root">
     <span style="display: flex; align-content: space-between; align-items: flex-start">
         <h3 id="shop-list-title">Items In Stock</h3>
-        <button class="stock-detail" id="cart-btn" onclick="document.location={% url 'pharma: cart' %}">Cart</button><pre>  </pre>
-        <button class="stock-detail" id="remove-stock-btn" onclick="document.location={% url 'pharma: remove_stock'%}">Remove Stocks</button>
+        <button class="stock-detail" id="cart-btn" onclick="document.location='{% url 'pharma:cart' %}'">Cart</button><pre>  </pre>
+        <button class="stock-detail" id="remove-stock-btn" onclick="document.location='{% url 'pharma:remove_stock' %}'">Remove Stocks</button>
     </span>
     <div class="shop-list-container">
         {%for item in items%}
@@ -23,7 +23,7 @@
             </span>
         </div>
         {%endfor%}
-        <div id="add-stock" class="stock-item-container" style="align-content: center; justify-content: center; cursor: pointer" onclick="document.location='{% url 'pharma: add_stock' %}'">
+        <div id="add-stock" class="stock-item-container" style="align-content: center; justify-content: center; cursor: pointer" onclick="document.location='{% url 'pharma:add_stock' %}'">
             <label style="font-size: 10vh;">+</label>
         </div>
     </div>
@@ -53,7 +53,7 @@
         
         console.log("item amount: " + amount);
         $.ajax({
-            url : "{% url 'pharma: place' %}",
+            url : "{% url 'pharma:place' %}",
             data : {
                 'product_id' : id,
                 'product_amount': amount
