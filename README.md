@@ -1,2 +1,4 @@
 # med-bay
-LCTN, hospital management system
+A "simple" hospital management system
+
+Developed for LCTN contest
