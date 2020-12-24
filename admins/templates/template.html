@@ -61,6 +61,7 @@
                     <a class="nav-link" href="{% url 'doctor:case_archive' %}"><li class="nav-item">Patient Archive</li></a>
                     {% elif user.staff.role == "p" %}
                     <a class="nav-link" href="{% url 'pharma:shop' %}"><li class="nav-item">Pharmacy</li></a>
+                    <a class="nav-link" href="{% url 'pharma:bill_archive' %}"><li class="nav-item">Bill Archive</li></a>
                     {%endif%}
                 </ul>
             </div>
