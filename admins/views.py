@@ -11,6 +11,11 @@ def home(request):
     return render(request, "admins/home.html")
 
 
+# staff attendance
+def attendance(request):
+    return render(request, "admins/attendance.html")
+
+
 # login page
 class LoginView(auth_views.LoginView):
     form_class = AuthForm
@@ -19,6 +24,7 @@ class LoginView(auth_views.LoginView):
 # Confirm Logout page
 def confirm_logout(request):
     return render(request, "admins/confirm_logout.html")
+
 
 # login redirect
 @login_required()

@@ -15,13 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth.views import LogoutView
+from admins.views import LoginView, confirm_logout, home, redirect_login
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('staff/', include('admins.urls')),
     path('doctor/', include('doctors.urls')),
-    path('admin/', admin.site.urls),
-    path('pharmacy/', include('pharma.urls'))
+    path('pharmacy/', include('pharma.urls')),
+    path("login", LoginView.as_view(template_name="admins/login.html"), name="login"),
+    path("logout", LogoutView.as_view(template_name="admins/logout.html"), name="logout"),
+    path("confirm", confirm_logout, name='confirm-logout'),
+    path("", home, name="home"),
+    path("redirect", redirect_login, name="red")
 ]
 
-handler404 = 'med_bay.views.error_404_handler'
-handler403 = 'med_bay.views.error_403_handler'
+
+handler404 = 'med_bay.error_views.error_404_handler'
+handler403 = 'med_bay.error_views.error_403_handler'
