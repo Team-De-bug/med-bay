@@ -1,0 +1,66 @@
+{%extends "template.html"%}
+
+{%block body%}
+<table class="attendance-table">
+    <tr>
+        <th style="width: 2vw; height: 7vh">S.No.</th>
+        <th>Name</th>
+        <th style="width: 1vw">Attendance</th>
+    </tr>
+    {% for doctor in doctors %}
+    <tr>
+        <th>{{forloop.counter}}.</th>
+        <td style="background-color: #215880; color: white;">{{doctor.user.username}}</td>
+        <td style="padding: 0;" class="checkbox-container">
+            <span class="attendance-custom-checkbox" id="{{doctor.id}}" onclick="toggleAttendance({{doctor.id}})"></span>
+        </td>
+    </tr>
+    {%endfor%}
+    <tr>
+        <td> </td>
+        <td><button id="submit-btn" onclick="submitAttendance()">Submit</button></td>
+        <td> </td>
+    </tr>
+</table>
+{%endblock%}
+
+{%block script%}
+<script>
+    function toggleAttendance(doctorID){
+        $(".attendance-custom-checkbox").each(function(index, checkbox) {
+            if (checkbox.id == parseInt(doctorID)){
+                checkbox.classList.toggle("true");
+            }
+        });
+    }
+
+    function submitAttendance(){
+        var doctorAttendance = {};
+
+        $(".attendance-custom-checkbox").each(function(index, checkbox) {
+            if (checkbox.classList.contains("true")){
+                doctorAttendance[parseInt(checkbox.id)] = true;
+                console.log(checkbox.id+" is present")
+            } else {
+                doctorAttendance[parseInt(checkbox.id)] = false;
+                console.log(checkbox.id+" is absent")
+            }
+        });
+
+        $.ajax({
+
+            url: "{% url 'admins:attendance' %}",
+            data: {
+                'update': true,
+                'attendance': JSON.stringify(doctorAttendance),
+            },
+            success: function(){
+                alert("Attendance saved");
+            },
+            error: function(){
+                alert("Unable to save attendance");
+            }
+        });
+    }
+</script>
+{%endblock%}

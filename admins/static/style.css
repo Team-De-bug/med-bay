@@ -717,7 +717,7 @@ button {
     width: 90%;
     border: none;
     border-collapse: collapse;
-    margin: 5%;
+    margin: auto;
 }
 
 .bill-header, .bill-item, .bill-item-grandtotal {
@@ -737,3 +737,60 @@ button {
 }
 /*Pharmacy Cart Bill End*/
 /*Pharmacy End*/
+
+/*Attendance Start*/
+.attendance-table {
+    margin: 5vh auto 2vh auto;
+    color: white;
+    width: 90%;
+    border-collapse: collapse;
+    font-size: 4vh;
+    border-radius: 8px;
+    background-color: #2C82C1;
+}
+
+.attendance-table th {
+    padding: 1vh 1vw 1vh 1vw;
+}
+
+.attendance-table td {
+    color: black;
+    padding: 1vh 1vw 1vh 1vw;
+}
+
+.checkbox-container {
+    cursor: pointer;
+    height: 100%;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.attendance-custom-checkbox {
+    display: block;
+    margin: 1vh auto 1vh auto;
+    height: 14vh;
+    width: 40%;
+    background-color: RGBA(0, 0, 0, 0.2);
+    border-radius: 8px;
+    transition: all, 0.25s;
+
+}
+
+.attendance-custom-checkbox:hover {
+    transform: scale(1.2, 1.2);
+    background-color: RGBA(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px RGBA(0, 0, 0, 0.5);
+}
+
+.attendance-custom-checkbox.true {
+    background: #3DC12C;
+}
+
+.attendance-custom-checkbox.true:hover {
+    background: #218025;
+}
+
+/*Attendance End*/
