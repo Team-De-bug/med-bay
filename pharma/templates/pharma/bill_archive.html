@@ -34,9 +34,11 @@
     function viewBill(billId) {
         $.ajax({
             url: "{% url 'pharma:bill_archive_viewer' %}",
-            data: billId,
+            data: {
+                'id': billId
+            },
             success: function() {
-                location="{% url 'pharma:bill_archive_viewwe' %}?id=" + billId;
+                location="{% url 'pharma:bill_archive_viewer' %}?id=" + billId;
             },
             error: function() {
                 alert("unable to view bill");
