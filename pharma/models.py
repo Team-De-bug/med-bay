@@ -10,6 +10,7 @@ class Stock(models.Model):
     desc = models.TextField()
     price = models.IntegerField()
     quantity = models.IntegerField(default=0)
+    deleted = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name}"

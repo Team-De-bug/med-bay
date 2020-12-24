@@ -14,8 +14,8 @@ def shop(request):
     user = User.objects.filter(username=request.user).first()
     if user.staff.role != "p":
         raise PermissionDenied()
-    else:
-        items = Stock.objects.all()
+
+    items = Stock.objects.filter(deleted=False)
     items = list(items)
     for item in items:
         if item.quantity < 1:
@@ -226,6 +226,21 @@ def add_stock(request):
 
 @login_required()
 def remove_stock(request):
-    items = Stock.objects.all()
-    items = list(items)
+
+    # making sure the user is a pharmacist
+    user = User.objects.filter(username=request.user).first()
+    if user.staff.role != "p":
+        raise PermissionDenied()
+
+    # Deleting the product if product_id is sent
+    if 'product_id' in request.GET:
+        print(f"deleting {request.GET['product_id']}")
+        id = int(request.GET['product_id'])
+        item = Stock.objects.get(id=id)
+        item.deleted = True
+        item.save()
+
+    # loading the list of stocks
+    items = Stock.objects.filter(deleted=False)
+
     return render(request, 'pharma/remove_stock.html', context={'items': items})
