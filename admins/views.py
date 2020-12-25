@@ -4,7 +4,9 @@ from django.contrib.auth import views as auth_views
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from patients.models import Cases, Patient
 from .utils import validate_access
+from doctors.models import Doctor
 from .models import Staff
 import json
 
@@ -59,7 +61,23 @@ def create_patient(request):
 
 
 # Create case
+@login_required()
 def create_case(request):
+    validate_access(request, 'a')
+
+    if request.method == "POST":
+        form = CaseCreationForm(request.POST)
+        form.set_choices()
+
+        # Checking if the input is valid
+        if form.is_valid():
+            data = form.cleaned_data
+            doctor = Doctor.objects.get(id=int(data['doctor']))
+            patient = Patient.objects.get(id=int(data['patient']))
+            case = Cases(doctor=doctor, patient=patient, status='t',
+                         appointed_date=data['date'], state=data['state'])
+            case.save()
+
     form = CaseCreationForm()
     form.set_choices()
     return render(request, "admins/create_case.html", context={'form': form})

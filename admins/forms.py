@@ -84,6 +84,6 @@ class CaseCreationForm(forms.Form):
                 doctor_list.append((doctor.id, doctor.user.user.username))
 
         # Setting the values for choices
-        self.fields["patient"].choices = ((patient.id, patient.name) for patient in Patient.objects.all())
+        self.fields["patient"].choices = ((patient.id, f"ID: {patient.id} | Name: {patient.name}") for patient in Patient.objects.all())
         self.fields["doctor"].choices = doctor_list
         self.fields["state"].choices = Cases.states
