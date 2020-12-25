@@ -282,7 +282,9 @@ def order_prescription(request):
         # returning a redirect if medicine is not available
         for med in pres.medicine_set.all():
             if med.quantity > med.item.quantity or med.item.deleted:
-                return HttpResponse('stock issue', status=105)
+                response = HttpResponse('stock issue')
+                response.status_code = 105
+                return response
 
         # Generating the bill if the objects are in stock
         bill = Bill(name=pres.case.patient.name, contact_num=pres.case.patient.phone,
