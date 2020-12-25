@@ -301,7 +301,7 @@ def edit_prescription(request):
             med.save()
 
         bill = utils.generate_bill(name=pres.patient.name, contact_num=pres.patient.contact_num,
-                                   date=timezone.now(), orders=epres.epmedicine_set.all())
+                                   date=timezone.now(), orders=epres.medicines.all())
         pres.bill = bill
         pres.save()
 

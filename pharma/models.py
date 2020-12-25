@@ -74,7 +74,7 @@ class EditedPrescription(models.Model):
 # Medicine in prescription
 class EPMedicine(models.Model):
 
-    prescription = models.ForeignKey(EditedPrescription, on_delete=models.CASCADE)
+    prescription = models.ForeignKey(EditedPrescription, on_delete=models.CASCADE, related_name='medicines')
     item = models.ForeignKey(Stock, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 
