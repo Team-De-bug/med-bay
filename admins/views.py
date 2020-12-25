@@ -77,6 +77,7 @@ def create_case(request):
             case = Cases(doctor=doctor, patient=patient, status='t',
                          appointed_date=data['date'], state=data['state'])
             case.save()
+            return redirect("home")
 
     form = CaseCreationForm()
     form.set_choices()
