@@ -1,10 +1,11 @@
-from .models import *
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from admins.utils import validate_access
 from .forms import StockForm, BillForm
 from django.http import HttpResponse
 from django.utils import timezone
+from .models import *
+from . import utils
 import json
 
 
@@ -127,17 +128,8 @@ def cart(request):
     cart = user.staff
     orders = cart.order_set.all()
     print(cart)
-    total = get_total(cart)
+    total = utils.get_total(orders)
     return render(request, "pharma/cart.html", {'cart': orders, 'total': total})
-
-
-# Getting cart total
-def get_total(cart):
-    total = 0
-    # looping through all the orders in the cart and summing the prices
-    for order in cart.order_set.all():
-        total += order.quantity * order.item.price
-    return total
 
 
 # Getting the name and phone number for bill
@@ -170,7 +162,7 @@ def bill_info(request):
     else:
         form = BillForm()
 
-    return render(request, "pharma/bill_info.html", context={'form':form})
+    return render(request, "pharma/bill_info.html", context={'form': form})
 
 
 # showing the bill after purchase
@@ -188,24 +180,13 @@ def bill(request):
         return redirect("pharma:shop")
 
     # Generating the bill objects
-    bill = Bill(name=request.GET["name"], contact_num=request.GET["phone"], date=timezone.now())
-    bill.save()
-    total = 0
-
-    # Creating the billunits and removing orders
-    for order in orders:
-        unit = BillUnit(name=order.item.name, quantity=order.quantity,
-                        desc=order.item.desc, price=order.item.price,
-                        bill=bill)
-        
-        total += order.item.price * order.quantity
-        
-        unit.save()
-        order.delete()
+    bill = utils.generate_bill(name=request.GET["name"], contact_num=request.GET["phone"],
+                               date=timezone.now(), orders=orders)
 
     # getting all the bill units to send in context
     bill_units = bill.billunit_set.all()
     print(bill_units, bill)
+    total = utils.get_bill_total(bill_units)
 
     return render(request, 'pharma/bill.html', context={'bill': bill, 'bill_unit': bill_units, 'total': total})
 
@@ -262,10 +243,7 @@ def bill_archive_viewer(request):
 
     bill = Bill.objects.get(id=int(request.GET['id']))
     bill_units = bill.billunit_set.all()
-    total = 0
-
-    for unit in bill_units:
-        total += unit.price * unit.quantity
+    total = utils.get_bill_total(bill_units)
 
     return render(request, 'pharma/bill.html', context={'bill': bill, 'bill_unit': bill_units, 'total': total})
 
@@ -290,16 +268,10 @@ def order_prescription(request):
             return HttpResponse(json.dumps(issue_stock), content_type='application/json', status=418)
 
         # Generating the bill if the objects are in stock
-        bill = Bill(name=pres.case.patient.name, contact_num=pres.case.patient.phone,
-                    date=timezone.now())
-        bill.save()
+        bill = utils.generate_bill(name=pres.case.patient.name, contact_num=pres.case.patient.phone,
+                                   date=timezone.now(), orders=pres.medicine_set.all())
 
-        for med in pres.medicine_set.all():
-            unit = BillUnit(bill=bill, name=med.item.name, quantity=med.quantity, price=med.item.price,
-                            desc=med.item.desc)
-            unit.save()
-
-        # updating prescription status and saving the change
+        # Updating the prescription status and saving changes
         pres.bill = bill
         pres.status = 'd'
         pres.save()
