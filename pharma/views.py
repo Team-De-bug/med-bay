@@ -101,7 +101,7 @@ def add_one(request):
 @login_required()
 def cart(request):
 
-    user = validate_access(request, 'd')
+    user = validate_access(request, 'p')
     if request.method == "POST":
         cq = int(request.POST['qty'])
         order = Order.objects.filter(id=request.POST['order_id'])[0]
@@ -272,4 +272,32 @@ def bill_archive_viewer(request):
 def order_prescription(request):
     validate_access(request, 'p')
     prescriptions = Prescription.objects.filter(status='p')
+
+    # placing order if request has id
+    if 'id' in request.GET:
+        pres = prescriptions.get(id=int(request.GET['id']))
+
+        # returning a redirect if medicine is not available
+        for med in pres.medicine_set.all():
+            if med.quantity > med.item.quantity or med.item.deleted:
+                return redirect('home', status=105)
+
+        # Generating the bill if the objects are in stock
+        bill = Bill(name=pres.case.patient.name, contact_num=pres.case.patient.phone,
+                    date=timezone.now())
+        bill.save()
+        for med in pres.medicine_set.all():
+            unit = BillUnit(bill=bill, name=med.item.name, quantity=med.quantity, price=med.item.price,
+                            desc=med.item.desc)
+            unit.save()
+
+        # updating prescription status and saving the change
+        pres.status = 'd'
+        pres.save()
+
+        # giving a redirect to view the bill
+        red = redirect("pharma:bill_archive_viewer")
+        red['location'] += f"?id={bill.id}"
+        return red
+
     return render(request, 'pharma/orders.html', context={'prescriptions': prescriptions})
