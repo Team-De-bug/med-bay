@@ -300,7 +300,12 @@ def edit_prescription(request):
             med = EPMedicine(prescription=epres, item=item, quantity=int(medicine_ids[med_id]))
             med.save()
 
-        return HttpResponse('success!')
+        bill = utils.generate_bill(name=pres.patient.name, contact_num=pres.patient.contact_num,
+                                   date=timezone.now(), orders=epres.epmedicine_set.all())
+        pres.bill = bill
+        pres.save()
+
+        return HttpResponse(json.dumps({'bill_id': bill.id}), content_type='application/json')
 
     # getting valid medicines from stock
     all_medicines = []
