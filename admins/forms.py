@@ -69,7 +69,7 @@ class CaseCreationForm(forms.Form):
     date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'],
                                widget=forms.DateTimeInput(attrs={'class': 'form-input',
                                                                  'id': 'name',
-                                                                 'placeholder': 'Name',
+                                                                 'placeholder': 'DD/MM/YYYY HH:MM',
                                                                  'autofocus': ''}))
 
     def set_choices(self):
