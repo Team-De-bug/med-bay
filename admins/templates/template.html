@@ -54,6 +54,10 @@
                     <a class="nav-link" href="{% url 'pharma:shop' %}"><li class="nav-item">Pharmacy</li></a>
                     <a class="nav-link" href="{% url 'pharma:bill_archive' %}"><li class="nav-item">Bill Archive</li></a>
                     <a class="nav-link" href="{% url 'pharma:order_prescription' %}"><li class="nav-item">Prescription Orders</li></a>
+                    {% elif user.staff.role == "a" %}
+                    <a class="nav-link" href="{% url 'admins:attendance' %}"><li class="nav-item">Doctor Attendance</li></a>
+                    <a class="nav-link" href="{% url 'admins:create_patient' %}"><li class="nav-item">Create Patient</li></a>
+                    <a class="nav-link" href="{% url 'admins:create_case' %}"><li class="nav-item">Create Case</li></a>
                     {%endif%}
                 </ul>
             </div>
