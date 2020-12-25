@@ -302,6 +302,12 @@ def edit_prescription(request):
 
         return HttpResponse('success!')
 
+    # getting valid medicines from stock
+    all_medicines = []
+    for medicine in Stock.objects.filter(deleted=False):
+        if medicine.quantity > 0: all_medicines.append(medicine)
+
     medicines = json.loads(request.GET['medicines'])
     return render(request, 'pharma/edit_prescription.html', context={'prescription': pres,
-                                                                     'missing_stock': medicines})
+                                                                     'missing_stock': medicines,
+                                                                     'all_medicines': all_medicines})
