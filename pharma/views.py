@@ -314,11 +314,12 @@ def order_prescription(request):
 def edit_prescription(request):
     validate_access(request, 'p')
 
-    if 'id' in request.GET:
-        pres = Prescription.objects.get(id=int(request.GET["id"]))
+    pres = Prescription.objects.get(id=int(request.GET["id"]))
 
-        # if the list was edited
-        if 'save' in request.GET:
-            pass
+    # if the list was edited
+    if 'save' in request.GET:
+        pass
 
-    return render(request, 'pharma/edit_prescriptions.html', context={'perscription': pres})
+    medicines = json.loads(request.GET['medicines'])
+    return render(request, 'pharma/edit_prescriptions.html', context={'prescription': pres,
+                                                                      'missing_stock': medicines})
