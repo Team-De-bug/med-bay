@@ -57,11 +57,20 @@ class PatientForm(forms.ModelForm):
 # Case Creation form
 class CaseCreationForm(forms.Form):
 
-    patient = forms.ChoiceField(widget=forms.Select(attrs={}))
-    doctor = forms.ChoiceField(widget=forms.Select(attrs={}))
-    state = forms.ChoiceField(widget=forms.Select(attrs={}))
+    patient = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-input-dropdown',
+                                                           'id': 'patient',
+                                                           'autofocus': ''}))
+    doctor = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-input-dropdown',
+                                                          'id': 'docotr',
+                                                          'autofocus': ''}))
+    state = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-input-dropdown',
+                                                         'id': 'docotr',
+                                                         'autofocus': ''}))
     date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'],
-                               widget=forms.DateTimeInput(attrs={}))
+                               widget=forms.DateTimeInput(attrs={'class': 'form-input',
+                                                                 'id': 'name',
+                                                                 'placeholder': 'Name',
+                                                                 'autofocus': ''}))
 
     def set_choices(self):
 
