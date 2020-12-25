@@ -16,10 +16,23 @@ class Stock(models.Model):
         return f"{self.name}"
 
 
+# Bill
+class Bill(models.Model):
+
+    name = models.CharField(max_length=50)
+    contact_num = models.CharField(max_length=10)
+    date = models.DateTimeField()
+
+    def __str__(self):
+        return f'bill-id: {self.id}| date: {self.date}'
+
+
 # Prescription
 class Prescription(models.Model):
 
     status_list = (("c", "Created"), ('p', 'Prescribed'), ('d', 'Delivered'))
+
+    bill = models.OneToOneField(Bill, on_delete=models.SET_NULL, null=True)
     case = models.OneToOneField(Cases, on_delete=models.SET_NULL, null=True)
     status = models.CharField(default='c', max_length=2, choices=status_list)
 
@@ -49,15 +62,24 @@ class Medicine(models.Model):
         return f'{self.prescription.id},{self.item.name}, {self.quantity}'
 
 
-# Bill
-class Bill(models.Model):
+class EditedPrescription(models.Model):
 
-    name = models.CharField(max_length=50)
-    contact_num = models.CharField(max_length=10)
-    date = models.DateTimeField()
+    pres = models.OneToOneField(Prescription, on_delete=models.CASCADE)
+    user = models.ForeignKey(Staff, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return f'bill-id: {self.id}| date: {self.date}'
+        return f"pres: {self.pres.id} edited by {self.user.user.username}"
+
+
+# Medicine in prescription
+class EPMedicine(models.Model):
+
+    prescription = models.ForeignKey(EditedPrescription, on_delete=models.CASCADE)
+    item = models.ForeignKey(Stock, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f'{self.prescription.id},{self.item.name}, {self.quantity}'
 
 
 # part of the bill

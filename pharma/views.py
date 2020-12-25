@@ -303,3 +303,13 @@ def order_prescription(request):
         return HttpResponse(json.dumps({'id': bill.id}), content_type='application/json')
 
     return render(request, 'pharma/orders.html', context={'prescriptions': prescriptions})
+
+
+@login_required()
+def edit_prescription(request):
+    validate_access(request, 'p')
+
+    if 'id' in request.GET:
+        pres = Prescription.objects.get(id=int(request.GET["id"]))
+
+    return render(request, 'pharma/edit_prescriptions.html', context={'perscription': pres})
