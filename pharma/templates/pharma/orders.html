@@ -39,8 +39,13 @@
                 location="{% url 'pharma:bill_archive_viewer' %}?id="+response['id'];
             },
             statusCode: {
-                418: function(responseObject, textStatus, jqXHR) {
-                    location="{% url 'home'%}";
+                418: function(response) {
+                    console.log(response['responseJSON']);
+                    var medicines = response['responseJSON'];
+                    for (var medicine in medicines) {
+                        alert(medicines[medicine] + " Is Out Of Stock");
+                    }
+                    location="{% url 'pharma:edit_prescription'%}?id="+prescriptionId+"&medicines="+JSON.stringify(medicines);
                 }
             }
         });

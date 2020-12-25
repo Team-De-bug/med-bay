@@ -292,7 +292,7 @@ def edit_prescription(request):
     if 'save' in request.GET:
         medicine_ids = json.loads(request.GET['medicines'])
         items = Stock.objects.filter(deleted=False)
-        epres = EditedPrescription(user=user, pres=pres)
+        epres = EditedPrescription(user=user.staff, pres=pres)
         epres.save()
 
         for med_id in medicine_ids:
@@ -300,7 +300,7 @@ def edit_prescription(request):
             med = EPMedicine(prescription=epres, item=item, quantity=int(medicine_ids[med_id]))
             med.save()
 
-        bill = utils.generate_bill(name=pres.patient.name, contact_num=pres.patient.contact_num,
+        bill = utils.generate_bill(name=pres.case.patient.name, contact_num=pres.case.patient.phone,
                                    date=timezone.now(), orders=epres.medicines.all())
         pres.bill = bill
         pres.status ='d'

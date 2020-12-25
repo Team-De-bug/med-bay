@@ -2,18 +2,26 @@
 
 {%block body%}
 <div class="prescription-container-root">
-    <h3 id="prescription-list-title">Prescription {{case.prescription.id}}</h3><br>
+    <label id="missing-prescrription-label"></label>
+    <h3 id="prescription-list-title">Prescription {{prescription.id}}</h3><br>
     <div class="prescription-container">
         <label class="prescription-patient-label" class="patient-detail-label">Name: </label>
-        <input class="prescription-detail" id="{{case.id}}_name" type="text" value="{{case.patient.name}}" readonly><br>
+        <input class="prescription-detail" id="{{prescription.case.id}}_name" type="text" value="{{prescription.case.patient.name}}" readonly><br>
         <div>
             <label class="prescriptions-label">Medicines:</label>
             <div class="prescriptions-list" style="flex-direction: column;">
+                {% for medicineP in prescription.medicine_set.all %}
+                {% if medicineP.item in all_medicines %}
+                <div class="prescription-full medicine-single"><select id="medicine-list"><option>{{medicineP.item.name}}</option></select>
+                    <input class="prescription-detail" id="medicine-quantity" type="number" value="{{medicineP.quantity}}" step="1" min="1" max="20" onkeydown="return false" readonly>
+                </div>
+                {%endif%}
+                {%endfor%}
                 <div class="prescription-full" onclick="addMedicine()" id="addMedicineBtn">
                     <label onclick="">Add Medicine</label>
                 </div>
             </div>
-            <button class="prescription-detail" onclick="savePrescription({{case.id}})">Save</button>
+            <button class="prescription-detail" onclick="savePrescription({{prescription.id}})">Save</button>
         </div>
     </div>
 </div>
@@ -21,11 +29,11 @@
 
 {%block script%}
 <script>
-    
+
     function getMedicines() {
-        
+
         var medicineList;
-        
+
         $.ajax({
             async: false,
             url: "{% url 'doctor:list_medicines' %}",
@@ -34,40 +42,40 @@
                 medicineList = data;
             }
         });
-        
+
         return medicineList;
     }
-                    
+
     function addMedicine() {
-        
+
         var medicineId = 0;
 
         var medicines = getMedicines();
-        
+
         var medicineContainer = $("<div></div>").addClass("prescription-full");
-        
+
         medicineContainer.addClass("medicine-single");
-        
+
         medicineContainer.attr("id", medicineId);
 
         var selector = $("<select></select>").attr("id", "medicine-list");
-        
+
         var quantity = $("<input>").addClass("prescription-detail");
-        
+
         quantity.attr({type:"number", value:"1", step:"1", min:"1", max:"20", onKeyDown:"return false", id:"medicine-quantity"});
-        
+
         var removeBtn = $("<button>X</button>").addClass("prescription-detail");
 
         removeBtn.attr({onclick:"removeMedicine("+medicineId+")"});
 
         medicineContainer.append(selector, " ", quantity, " ", removeBtn);
-            
+
         for(var medicine in medicines) {
             var option = $("<option></option>");
             option.text(medicines[medicine]);
             selector.append(option);
         }
-        
+
         $("#addMedicineBtn").before(medicineContainer);
 
         medicineId++;
@@ -76,37 +84,35 @@
     function removeMedicine(medicineId) {
         $("#"+medicineId).remove();
     }
-    
-    function savePrescription(caseId) {
+
+    function savePrescription(prescriptionId) {
         var medicines = getMedicines();
         var selectedItems = [];
         var finalItems = {};
         var index = 0;
-        
-        var medicineContainers = $(".medicine-single");
-        
-        console.log(medicineContainers);
 
-        
+        var medicineContainers = $(".medicine-single");
+
+
         for (i = 0; i < medicineContainers.length; i++) {
             var medicineContainer = medicineContainers[i];
             var inputs = medicineContainer.childNodes;
             var itemSelector = inputs[0].value;
             var itemQuantity = inputs[2].value;
             var itemId = 0;
-            var values = [];            
+            var values = [];
             for (var medicine in medicines) {
                 if (itemSelector === medicines[medicine]) {
                     itemId = medicine;
                 }
             }
-            
+
             values = [itemId, itemQuantity];
-            
+
             selectedItems[index] = values;
             index++;
         }
-        
+
         for (var item of selectedItems) {
             if (item[0] in finalItems) {
                 finalItems[item[0]] = parseInt(item[1]) + parseInt(finalItems[item[0]]);
@@ -115,26 +121,26 @@
                 finalItems[item[0]] = item[1];
             }
         }
-        
+
         console.log(JSON.stringify(finalItems));
-        
+
         $.ajax({
-            url: "{% url 'doctor:save_prescription'%}",
+            url: "{% url 'pharma:edit_prescription'%}",
             type: 'GET',
             data: {
-                'case_id': caseId,
-                'medicines': JSON.stringify(finalItems)
+                'id': prescriptionId,
+                'medicines': JSON.stringify(finalItems),
+                'save': true
             },
-            success: function() {
+            success: function(response) {
                 alert("Prescription has been saved");
-                location="{% url 'doctor:dashboard' %}";
+                location="{% url 'pharma:bill_archive_viewer' %}?id="+response['bill_id'];
             },
             error: function() {
                 alert("Could not save prescription");
-                location.reload();
             }
         });
     }
-    
+
 </script>
 {%endblock%}

@@ -112,9 +112,13 @@ def add_prescription(request):
 # List available medicines
 @login_required()
 def list_medicines(request):
-    stocks = Stock.objects.all()
+
+    all_medicines = []
+    for medicine in Stock.objects.filter(deleted=False):
+        if medicine.quantity > 0: all_medicines.append(medicine)
+
     medicines = {}
-    for stock in stocks:
+    for stock in all_medicines:
         medicines[stock.id] = stock.name
     return HttpResponse(json.dumps(medicines), content_type="application/json")
 
