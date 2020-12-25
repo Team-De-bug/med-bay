@@ -303,6 +303,7 @@ def edit_prescription(request):
         bill = utils.generate_bill(name=pres.patient.name, contact_num=pres.patient.contact_num,
                                    date=timezone.now(), orders=epres.medicines.all())
         pres.bill = bill
+        pres.status ='d'
         pres.save()
 
         return HttpResponse(json.dumps({'bill_id': bill.id}), content_type='application/json')
