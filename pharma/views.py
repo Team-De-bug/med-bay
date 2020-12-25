@@ -280,22 +280,27 @@ def order_prescription(request):
         pres = prescriptions.get(id=int(request.GET['id']))
 
         # returning a redirect if medicine is not available
+        issue_stock = {}
         for med in pres.medicine_set.all():
             if med.quantity > med.item.quantity or med.item.deleted:
-                response = HttpResponse('stock issue')
-                response.status_code = 418
-                return response
+                issue_stock[med.item.id] = med.item.name
+
+        # if There are missing stock or out of stock medicines
+        if issue_stock:
+            return HttpResponse(json.dumps(issue_stock), content_type='application/json', status=418)
 
         # Generating the bill if the objects are in stock
         bill = Bill(name=pres.case.patient.name, contact_num=pres.case.patient.phone,
                     date=timezone.now())
         bill.save()
+
         for med in pres.medicine_set.all():
             unit = BillUnit(bill=bill, name=med.item.name, quantity=med.quantity, price=med.item.price,
                             desc=med.item.desc)
             unit.save()
 
         # updating prescription status and saving the change
+        pres.bill = bill
         pres.status = 'd'
         pres.save()
 
@@ -311,5 +316,9 @@ def edit_prescription(request):
 
     if 'id' in request.GET:
         pres = Prescription.objects.get(id=int(request.GET["id"]))
+
+        # if the list was edited
+        if 'save' in request.GET:
+            pass
 
     return render(request, 'pharma/edit_prescriptions.html', context={'perscription': pres})
