@@ -1,4 +1,4 @@
-from .models import Stock, Order, Bill, BillUnit, Prescription
+from .models import *
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from admins.utils import validate_access
@@ -312,14 +312,24 @@ def order_prescription(request):
 
 @login_required()
 def edit_prescription(request):
-    validate_access(request, 'p')
+    user = validate_access(request, 'p')
 
     pres = Prescription.objects.get(id=int(request.GET["id"]))
 
     # if the list was edited
     if 'save' in request.GET:
-        pass
+        medicine_ids = json.loads(request.GET['medicines'])
+        items = Stock.objects.filter(deleted=False)
+        epres = EditedPrescription(user=user, pres=pres)
+        epres.save()
+
+        for med_id in medicine_ids:
+            item = items.get(id=med_id)
+            med = EPMedicine(prescription=epres, item=item, quantity=int(medicine_ids[med_id]))
+            med.save()
+
+        return HttpResponse('success!')
 
     medicines = json.loads(request.GET['medicines'])
-    return render(request, 'pharma/edit_prescriptions.html', context={'prescription': pres,
-                                                                      'missing_stock': medicines})
+    return render(request, 'pharma/edit_prescription.html', context={'prescription': pres,
+                                                                     'missing_stock': medicines})
