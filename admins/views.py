@@ -1,9 +1,9 @@
+from .forms import AuthForm, PatientForm, CaseCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from .forms import AuthForm, PatientForm
 from .utils import validate_access
 from .models import Staff
 import json
@@ -56,6 +56,13 @@ def create_patient(request):
 
     form = PatientForm()
     return render(request, "admins/create_patient.html", context={'form': form})
+
+
+# Create case
+def create_case(request):
+    form = CaseCreationForm()
+    form.set_choices()
+    return render(request, "admins/create_case.html", context={'form': form})
 
 
 """ <===========================|******| Base Routes |******|===========================> """

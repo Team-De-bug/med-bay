@@ -23,6 +23,7 @@ class Patient(models.Model):
 
 # Created when a visit is done
 class Cases(models.Model):
+
     # Choices list
     states = (("e", "Emergency"), ("n", "Normal"), ("c", "Checkup"))
     status_options = (("t", "ToDo"), ("i", "in progress"), ("d", "done"))
@@ -30,7 +31,7 @@ class Cases(models.Model):
     # Fields
     doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True)
     patient = models.ForeignKey(Patient, on_delete=models.SET_NULL, null=True)
-    desc = models.TextField()
+    desc = models.TextField(null=True)
     appointed_date = models.DateTimeField("appointment date")
     state = models.CharField(max_length=3, choices=states)
     status = models.CharField(max_length=3, choices=status_options)

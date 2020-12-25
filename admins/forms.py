@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
 from django import forms
-from patients.models import Patient
+from patients.models import Patient, Cases
+from doctors.models import Doctor
 
 
 # Overriding the default authentication form
@@ -51,3 +52,29 @@ class PatientForm(forms.ModelForm):
                                               'placeholder': '1234567890',
                                               'autofocus': ''})
         }
+
+
+# Case Creation form
+class CaseCreationForm(forms.Form):
+
+    patient = forms.ChoiceField(widget=forms.Select(attrs={}))
+    doctor = forms.ChoiceField(widget=forms.Select(attrs={}))
+    state = forms.ChoiceField(widget=forms.Select(attrs={}))
+    date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'],
+                               widget=forms.DateTimeInput(attrs={}))
+
+    def set_choices(self):
+
+        # Getting the list of available doctors that day
+        doctors = Doctor.objects.filter(availability=True)
+        doctor_list = []
+
+        # Checking if the doctors are free
+        for doctor in doctors:
+            if doctor.cases_set.filter(status='t').count() < 10:
+                doctor_list.append((doctor.id, doctor.user.user.username))
+
+        # Setting the values for choices
+        self.fields["patient"].choices = ((patient.id, patient.name) for patient in Patient.objects.all())
+        self.fields["doctor"].choices = doctor_list
+        self.fields["state"].choices = Cases.states
