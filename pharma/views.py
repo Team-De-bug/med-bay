@@ -5,6 +5,8 @@ from admins.utils import validate_access
 from .forms import StockForm, BillForm
 from django.http import HttpResponse
 from django.utils import timezone
+import json
+
 
 # Create your views here.
 @login_required
@@ -280,7 +282,7 @@ def order_prescription(request):
         # returning a redirect if medicine is not available
         for med in pres.medicine_set.all():
             if med.quantity > med.item.quantity or med.item.deleted:
-                return redirect('home', status=105)
+                return HttpResponse('stock issue', status=105)
 
         # Generating the bill if the objects are in stock
         bill = Bill(name=pres.case.patient.name, contact_num=pres.case.patient.phone,
@@ -296,8 +298,6 @@ def order_prescription(request):
         pres.save()
 
         # giving a redirect to view the bill
-        red = redirect("pharma:bill_archive_viewer")
-        red['location'] += f"?id={bill.id}"
-        return red
+        return HttpResponse(json.dumps({'id': bill.id}), content_type='application/json')
 
     return render(request, 'pharma/orders.html', context={'prescriptions': prescriptions})
