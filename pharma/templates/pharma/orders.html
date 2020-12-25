@@ -33,6 +33,15 @@
             url: "{% url 'pharma:order_prescription' %}",
             data: {
                 'id': prescriptionId
+            },
+            success: function(response) {
+                console.log(response);
+                location="{% url 'pharma:bill_archive_viewer' %}?id="+response['id'];
+            },
+            statusCode: {
+                418: function(responseObject, textStatus, jqXHR) {
+                    location="{% url 'home'%}";
+                }
             }
         });
     }

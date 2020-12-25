@@ -1,0 +1,21 @@
+{% extends 'template.html' %}
+
+{% block body %}
+<div id="form-window">
+    <div id="form-title">
+        <label id="form-label">Create Case</label>
+    </div>
+    <form id="form" method="post">
+        {% csrf_token %}
+        <label>Select Patient:</label><br>
+        {{form.patient}}
+        <label>Asign to Doctor:</label><br>
+        {{form.doctor}}
+        <label>Appointment Date and Time:</label><br>
+        {{form.date}}
+        <label>Priority:</label><br>
+        {{form.state}}
+        <input type="submit" id="submit-btn" value="Submit">
+    </form>
+</div>
+{% endblock %}

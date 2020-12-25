@@ -283,7 +283,7 @@ def order_prescription(request):
         for med in pres.medicine_set.all():
             if med.quantity > med.item.quantity or med.item.deleted:
                 response = HttpResponse('stock issue')
-                response.status_code = 105
+                response.status_code = 418
                 return response
 
         # Generating the bill if the objects are in stock

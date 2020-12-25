@@ -1,6 +1,26 @@
 {%extends "template.html"%}
 
 {%block body%}
+<table style="color: black; margin: 3vh 2vw 3vh 2vw">
+    <tr>
+        <td><b>Buyer Name:</b></td>
+
+        <td>{{bill.name}}</td>
+    </tr>
+
+    <tr>
+        <td><b>Buyer Phone:</b></td>
+
+        <td>{{bill.contact_num}}</td>
+    </tr>
+
+    <tr>
+        <td><b>Billing Date:</b></td>
+
+        <td>{{bill.date}}</td>
+    </tr>
+</table>
+
 <table class="bill-table">
     <tr>
         <th class="bill-header">S.No.</th>
