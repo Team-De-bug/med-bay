@@ -32,7 +32,7 @@
         $.ajax({
             url: "{% url 'pharma:order_prescription' %}",
             data: {
-                'prescription_id': prescriptionId
+                'id': prescriptionId
             }
         });
     }
