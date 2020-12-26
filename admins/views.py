@@ -138,6 +138,7 @@ def edit_case(request):
     form = CaseEditForm(initial={'patient': case.patient.id, 'doctor': case.doctor.id,
                                  'state': case.state, 'date': date})
     form.set_choices()
+    form.set_patient([case.patient])
     return render(request, "admins/create_case.html", context={'form': form})
 
 

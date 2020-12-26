@@ -94,3 +94,6 @@ class CaseEditForm(CaseCreationForm):
                                                            'id': 'patient',
                                                            'autofocus': '',
                                                            'readonly': ""}))
+
+    def set_patient(self, patients):
+        self.fields["patient"].choices = [(patient.id, f"ID: {patient.id} | Name: {patient.name}") for patient in patients]
