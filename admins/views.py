@@ -58,7 +58,7 @@ def create_patient(request):
             return redirect("home")
 
     form = PatientForm()
-    return render(request, "admins/create_patient.html", context={'form': form})
+    return render(request, "admins/create_patient.html", context={'form': form, 'title': "Edit"})
 
 
 # Patient Creation Page
@@ -81,7 +81,7 @@ def edit_patient(request):
                              'gender': gender, 'blood_type': patient.blood_type,
                              "email": patient.email})
 
-    return render(request, "admins/create_patient.html", context={'form': form})
+    return render(request, "admins/create_patient.html", context={'form': form, 'title': "Edit"})
 
 
 # Create case
@@ -105,7 +105,7 @@ def create_case(request):
 
     form = CaseCreationForm()
     form.set_choices()
-    return render(request, "admins/create_case.html", context={'form': form})
+    return render(request, "admins/create_case.html", context={'form': form, 'title': "Edit"})
 
 
 # Create case
@@ -138,7 +138,7 @@ def edit_case(request):
     form = CaseEditForm(initial={'patient': case.patient.id, 'doctor': case.doctor.id,
                                  'state': case.state, 'date': date})
     form.set_choices()
-    return render(request, "admins/create_case.html", context={'form': form})
+    return render(request, "admins/create_case.html", context={'form': form, 'title': "Edit"})
 
 
 """ <===========================|******| Base Routes |******|===========================> """
