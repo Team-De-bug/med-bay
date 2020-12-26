@@ -6,38 +6,23 @@
 }
 /* #endregion */
 
-body {
-    margin: 0;
-    height: 100%;
-    color: white;
-    font-family: 'Rubik';
-    background-color: white;
-    overflow-x: hidden;
-}
-
-button {
-    border-style: none;
-    padding: 0px;
-    margin: 0px;
-    color: white;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: center;
-}
-
 /* #region Titles and Item Specific*/
 #list-title {
     color: black;
     margin: 2vh 2vw -2vh 2vw;
 }
 
+.detail-label {
+    cursor: pointer;
+    width: 95%;
+}
+
 .item-detail {
+    color: white;
     background-color: RGBA(0, 0, 0, 0.2);
     border-style: none;
     padding: 1vh 1vw 1vh 1vw;
     margin: 1vh 0 1vh 0;
-    color: white;
-    font-family: 'Rubik';
     border-radius: 8px;
     transition: all 0.25s;
 }
@@ -107,7 +92,43 @@ button {
 }
 /* #endregion */
 
+/* #region Buttons*/
+.close-full-btn {
+    font-weight: bold;
+    width: 2vw;
+    height: 2vw;
+    background-color: RGBA(0, 0, 0, 0.2);
+    align-self: flex-end;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.close-full-btn:hover {
+    background-color: RGBA(0, 0, 0, 0.5);
+}
+/* #endregion */
+
 /* #region Template*/
+
+body {
+    margin: 0;
+    height: 100%;
+    color: white;
+    font-family: 'Rubik';
+    background-color: white;
+    overflow-x: hidden;
+}
+
+button {
+    border-style: none;
+    padding: 0px;
+    margin: 0px;
+    color: white;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
 #loadLogo {
     display: flex;
     flex-wrap: wrap;
@@ -321,6 +342,7 @@ button {
 /*#endregion Interactive Objects*/
 
 /*#endregion Decorative Objects*/
+
 /*#endregion Template End*/
 
 /* #region Form Start*/
@@ -429,11 +451,6 @@ button {
 
 /* #region Patient List Start*/
 
-.patient-detail-label {
-    cursor: pointer;
-    width: 95%;
-}
-
 .patient-black-out {
     position: fixed;
     left: 0;
@@ -457,19 +474,6 @@ button {
     margin: 1.5vh auto 1.5vh auto;
 }
 
-.close-patient-full-btn {
-    width: 2vw;
-    background-color: RGBA(0, 0, 0, 0.2);
-    height: 2vw;
-    align-self: flex-end;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.close-patient-full-btn:hover {
-    background-color: RGBA(0, 0, 0, 0.5);
-}
-
 .save-diagnosis-btn {
     color: white;
     background-color: RGBA(0, 0, 0, 0.2);
@@ -491,11 +495,6 @@ button {
 /* #endregion Patient List End*/
 
 /* #region Prescription List Start*/
-
-.prescription-patient-label {
-    cursor: pointer;
-    width: 95%;
-}
 
 .prescriptions-list {
     width: inherit;
@@ -529,23 +528,7 @@ button {
     box-shadow: 0 0 10px RGBA(0, 0, 0, 0.75);
 }
 
-#patient-black-out {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 100vh;
-    width: 100vw;
-    flex-direction: column;
-    background-color: RGBA(0, 0, 0, 0.4);
-    backdrop-filter: blur(2px);
-    z-index: 9999;
-    transition: all 0.1s;
-    overflow: scroll;
-}
-
 .case-full-container {
-    display: none;
     margin: 3vh auto 2vh auto;
 }
 
@@ -563,28 +546,7 @@ button {
     transform: inherit;
 }
 
-.close-prescription-full-btn {
-    font-weight: bold;
-    width: 2vw;
-    height: 2vw;
-    background-color: RGBA(0, 0, 0, 0.2);
-    align-self: flex-end;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.prescription-assigned-table th, td {
-    border-collapse: collapse;   
-    border: 2px solid transparent;
-}
-
-.prescription-assigned-table th{
-    background-color: white;
-    padding: 1vh 1vw 1vh 1vw;
-    border-radius: 8px;
-}
-
-.prescription-full {
+.add-medicine {
     background-color: #FFFFFF;
     color: black;
     margin: 0.5%;
@@ -593,7 +555,7 @@ button {
     transition: all 0.25s;
 }
 
-.prescription-full:hover {
+.add-medicine:hover {
     transform: scale(1.025, 1.025);
     box-shadow: 0 0 10px RGBA(0, 0, 0, 0.75);
 }
@@ -614,7 +576,6 @@ button {
     border-style: none;
     margin: 0;
     color: white;
-    font-family: 'Rubik';
     border-radius: 8px;
     transition: all 0.25s;
 }
@@ -623,8 +584,9 @@ button {
     cursor: pointer;
 }
 
-#cart-btn,#remove-stock-btn, #proceed-checkout-btn, #bill-archive-btn {
+#cart-btn, #remove-stock-btn, #proceed-checkout-btn, #bill-archive-btn {
     background-color: #E00043;
+    cursor: pointer;
 }
 
 /* #region Pharmacy Cart Bill*/

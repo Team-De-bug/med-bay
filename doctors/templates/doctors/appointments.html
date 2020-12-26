@@ -1,11 +1,11 @@
 {%extends "template.html" %}
 
 {%block body %}
-{% for case in cases %}
 <!--Full Detail Div-->
-<div id="{{case.id}}" class="patient-black-out">
-    <div class="patient-full-container full-container">
-        <button class="close-patient-full-btn" onclick="closePatientFull()">X</button>
+<div class="patient-black-out">
+{% for case in cases %}
+    <div id="{{case.id}}" class="patient-full-container full-container">
+        <button class="close-full-btn" onclick="closeCaseFull()">X</button>
         <label class="patient-full-detail-label">Name: </label>
         <input class="item-detail" id="name" type="text" value="{{case.patient.name}}" onclick="copyDetail('name')" readonly><br>
         <label class="patient-full-detail-label">Age: </label>
@@ -30,8 +30,8 @@
             <input class="save-diagnosis-btn" type="submit" value="Save">
         </form>
     </div>
-</div>
 {% endfor %}
+</div>
 
 <!--Summary Detail Div-->
 <div class="root-container">
@@ -39,14 +39,14 @@
     <h4 id="list-title">Appointed Patients</h4><br>
     <div class="list-container">
         {% for case in cases %}
-        <div class="container" onclick="showPatientFull({{case.id}})" style="cursor: pointer">
-            <label class="item-detail-label patient-detail-label" onclick="showPatientFull({{case.id}})">Name: </label>
+        <div class="container" onclick="showCaseFull({{case.id}})" style="cursor: pointer">
+            <label class="item-detail-label patient-detail-label" onclick="showCaseFull({{case.id}})">Name: </label>
             <input class="item-detail" id="name" type="text" value="{{case.patient.name}}" readonly><br>
-            <label class="item-detail-label" onclick="showPatientFull({{case.id}})">Age: </label>
+            <label class="item-detail-label" onclick="showCaseFull({{case.id}})">Age: </label>
             <input class="item-detail" id="age" type="text" value="{{case.patient.age}}" pattern="[0-9]+" readonly><br>
-            <label class="item-detail-label" onclick="showPatientFull({{case.id}})">Gender: </label>
+            <label class="item-detail-label" onclick="showCaseFull({{case.id}})">Gender: </label>
             <input class="item-detail" id="gender" type="text" value="{{case.patient.gender | upper}}" size="1" readonly><br>
-            <label class="item-detail-label" onclick="showPatientFull({{case.id}})">Appointment Date: </label>
+            <label class="item-detail-label" onclick="showCaseFull({{case.id}})">Appointment Date: </label>
             <input class="item-detail" id="date" type="text" value="{{case.appointed_date.date}}" onclick="showPatientFull({{case.id}})" readonly>
         </div>
         {% endfor %}
@@ -57,15 +57,18 @@
 {%block script%}
 <script>
 $(document).ready(function(){
-    $('save-diagnosis-btn').click(function(){
-        var btnID = this.id;
-        console.log(btnID);
-        $('doctor-patient-form').each(function(i, form) {
-            if (form.id == btnID) {
-                console.log(form.id);
-            }
-        });
-    });
-});
+    $(".patient-black-out").hide();
+    $(".patient-full-container").hide();
+});  
+
+function showCaseFull(caseId) {
+    $(".patient-black-out").show();
+    $("#"+caseId).show();
+}
+
+function closeCaseFull() {
+    $(".patient-black-out").hide();
+    $(".patient-full-container").hide();
+}
 </script>
 {%endblock%}
