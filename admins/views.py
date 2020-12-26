@@ -60,6 +60,29 @@ def create_patient(request):
     return render(request, "admins/create_patient.html", context={'form': form})
 
 
+# Patient Creation Page
+@login_required()
+def edit_patient(request):
+    validate_access(request, 'a')
+    # Getting the required patient object
+    patient = Patient.objects.get(id=int(request.GET["id"]))
+
+    # If form data provided
+    if request.method == "POST":
+        form = PatientForm(request.POST, instance=patient)
+        if form.is_valid():
+            form.save()
+            return redirect("home")
+
+    # Populating the fields with default values
+    gender = patient.gender.upper()
+    form = PatientForm(data={'name': patient.name, 'age': patient.age, "phone": patient.phone,
+                             'gender': gender, 'blood_type': patient.blood_type,
+                             "email": patient.email})
+
+    return render(request, "admins/create_patient.html", context={'form': form})
+
+
 # Create case
 @login_required()
 def create_case(request):
