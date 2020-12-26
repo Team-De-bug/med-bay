@@ -1,25 +1,25 @@
 {%extends "template.html"%}
 
 {%block body%}
-<div class="shop-container-root">
-        <h3 id="shop-list-title">Prescription Orders</h3><br>
-    <div class="shop-list-container">
+<div class="root-container">
+        <h3 id="list-title">Prescription Orders</h3><br>
+    <div class="list-container">
         {% for prescription in prescriptions %}
-        <div id="{{prescription.id}}" class="stock-item-container">
-            <label class="stock-detail-label">Prescription ID: {{prescription.id}}</label><br>
-            <label class="stock-detail-label">Patient:</label>
-            <input class="stock-detail" id="{{prescription.id}}_patient" type="text" value="{{prescription.case.patient.name}}" readonly><br>
-            <label class="stock-detail-label">Authorising Doctor:</label>
-            <input class="stock-detail" id="{{prescription.id}}_doctor" type="text" value="{{prescription.case.doctor.user.user.username}}" readonly><br>
-            <label class="stock-detail-label">Case No.:</label>
-            <input class="stock-detail" id="{{prescription.id}}_case" type="text" value="{{prescription.case.id}}" readonly><br>
-            <label class="stock-detail-label">Medicines Prescribed:</label>
-            <span class="stock-detail" style="overflow: scroll; height: 8vh">
+        <div id="{{prescription.id}}" class="container" style="width: 20vw;">
+            <label class="item-detail-label">Prescription ID: {{prescription.id}}</label><br>
+            <label class="item-detail-label">Patient:</label>
+            <input class="item-detail" id="{{prescription.id}}_patient" type="text" value="{{prescription.case.patient.name}}" readonly><br>
+            <label class="item-detail-label">Authorising Doctor:</label>
+            <input class="item-detail" id="{{prescription.id}}_doctor" type="text" value="{{prescription.case.doctor.user.user.username}}" readonly><br>
+            <label class="item-detail-label">Case No.:</label>
+            <input class="item-detail" id="{{prescription.id}}_case" type="text" value="{{prescription.case.id}}" readonly><br>
+            <label class="item-detail-label">Medicines Prescribed:</label>
+            <span class="item-detail" style="overflow: scroll; height: 8vh">
                 {% for medicine in prescription.medicine_set.all %}
-                <input class="stock-detail" id="{{prescription.id}}_{{medicine.item.name}}" type="text" value="{{medicine.item.name}} x {{medicine.quantity}}" style="background-color: white; color: black" readonly>
+                <input class="item-detail" id="{{prescription.id}}_{{medicine.item.name}}" type="text" value="{{medicine.item.name}} x {{medicine.quantity}}" style="background-color: white; color: black" readonly>
                 {% endfor %}
             </span>
-            <button class="stock-detail" onclick="checkout({{prescription.id}})">Checkout Prescription</button>
+            <button class="item-detail" onclick="checkout({{prescription.id}})">Checkout Prescription</button>
         </div>
         {% endfor %}
     </div>

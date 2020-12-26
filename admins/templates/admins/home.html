@@ -1,10 +1,47 @@
 {%extends "template.html"%}
+{% load static %}
 
 {%block body%}
-<div class="error-root">
-    <h1>WIP</h1>
-    <h1>¯\_(ツ)_/¯</h1>
-    <h2>Page is a work in progress</h2>
-    <label>Sorry, but this page is still in the making</label>
+<div class="home-root">
+	<h1>Welcome</h1>
+	{% if not request.user.is_authenticated %}
+	<h3>Login</h3>
+	{% else %}
+	<h3>You are logged in as</h3>
+	{%endif%}
+	<div style="background-color: #E00043; border-radius: 8px; width: 20%; padding: 2vh 2vw 2vh 2vw; margin: auto;">
+		{% if not request.user.is_authenticated %}
+		<img src="{% static 'images/user.png' %}" alt="user icon"><br>
+		<button style="background-color: rgba(0, 0, 0, 0.2); padding: 1vh 1vw 1vh 1vw; font-size: 3vh; border-radius: 8px;" onclick="document.location='{% url 'login' %}'">Log In</button>
+		{% else %}
+		<img src="{% static 'images/user_loggedin.png' %}" alt="user icon"><br>
+		<span style="color: white; font-size: large;">
+			<label>{{user}}</label> <label id="role" style="display: inline;"></label><br><br>
+			<span id="account-role" style="display: none;">{{user.staff.role}}</span>
+		</span>
+		<button class="login-logout-btn" style="background-color: rgba(0, 0, 0, 0.2); padding: 1vh 1vw 1vh 1vw; font-size: 3vh; border-radius: 8px;" onclick="document.location='{% url 'logout' %}'">Log Out</button>
+		{%endif%}
+	</div>
 </div>
+{%endblock%}
+
+{%block script%}
+<script>
+$(document).ready(function(){
+    var meta = $('#account-role');
+    
+    role = meta.text();
+    console.log(role);
+    
+    if (role === "d") {
+        role = "(Doctor)";
+    } else if (role === "p") {
+        role = "(Pharmacy Manager)";
+    } else if (role === "a") {
+        role = "(Admin)";
+    }
+    
+    $('#role').text(role);
+});
+</script>
 {%endblock%}

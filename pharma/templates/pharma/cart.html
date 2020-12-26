@@ -1,33 +1,33 @@
 {%extends "template.html" %}
 
 {%block body%}
-<div class="shop-container-root">
+<div class="root-container">
     <span style="display: flex; align-content: space-between; align-items: flex-start">
-        <h3 id="shop-list-title">Items In Cart</h3><br>
-        <button class="stock-detail" id="remove-stock-btn" onclick="document.location='{% url 'pharma:shop' %}'">Back to Pharmacy</button>
+        <h3 id="list-title">Items In Cart</h3><br>
+        <button class="item-detail" id="remove-stock-btn" onclick="document.location='{% url 'pharma:shop' %}'">Back to Pharmacy</button>
     </span>
-    <div class="shop-list-container">
+    <div class="list-container">
         {% for order in cart %}
-        <div id="{{order.id}}" class="stock-item-container">
-            <label class="stock-detail-label">Item: </label>
-            <input class="stock-detail" id="{{order.item.id}}_name" type="text" value="{{order.item.name}}" readonly><br>
-            <label class="stock-detail-label">Amount:</label>
-            <input class="stock-detail" id="{{order.item.id}}_amount" type="number" value="{{order.quantity}}" readonly>
-            <label class="stock-detail-label">Total: </label>
-            <span class="stock-detail" tabindex="0"><span class="stock-price">&#8377;</span> <input tabindex="-1" class="stock-price" id="age" type="text" value="{% widthratio order.quantity 1 order.item.price %}" pattern="[0-9]+" readonly>
+        <div id="{{order.id}}" class="container" style="width: 20vw;">
+            <label class="item-detail-label">Item: </label>
+            <input class="item-detail" id="{{order.item.id}}_name" type="text" value="{{order.item.name}}" readonly><br>
+            <label class="item-detail-label">Amount:</label>
+            <input class="item-detail" id="{{order.item.id}}_amount" type="number" value="{{order.quantity}}" readonly>
+            <label class="item-detail-label">Total: </label>
+            <span class="item-detail" tabindex="0"><span class="stock-price">&#8377;</span> <input tabindex="-1" class="stock-price" id="age" type="text" value="{% widthratio order.quantity 1 order.item.price %}" pattern="[0-9]+" readonly>
             </span><br>
             <span>
                 <br>
-                <input class="stock-detail" id="remove-from-cart" onclick="removeFromCart({{order.item.id}}, {{order.quantity}})" type="button" value="Remove All">
-                <input class="stock-detail" id="remove-from-cart" onclick="removeFromCart({{order.item.id}}, 1)" type="button" value="-">
-                <input class="stock-detail" id="remove-from-cart" onclick="plusone({{order.item.id}})" type="button" value="+">
+                <input class="item-detail" id="remove-from-cart" onclick="removeFromCart({{order.item.id}}, {{order.quantity}})" type="button" value="Remove All">
+                <input class="item-detail" id="remove-from-cart" onclick="removeFromCart({{order.item.id}}, 1)" type="button" value="-">
+                <input class="item-detail" id="remove-from-cart" onclick="plusone({{order.item.id}})" type="button" value="+">
             </span>
         </div>
         {% endfor %}
         
         <span>
             <h3 id="cart-total" style="color: black; margin: 2vh 2vw -2vh 2vw">Grand Total: &#8377;{{total}}</h3>
-            <button class="stock-detail" id="proceed-checkout-btn" onclick="document.location='{% url 'pharma:bill_info' %}'" style="margin: 2vh 2vw -2vh 2vw; font-size: 3vh">Proceed to checkout</button>
+            <button class="item-detail" id="proceed-checkout-btn" onclick="document.location='{% url 'pharma:bill_info' %}'" style="margin: 2vh 2vw -2vh 2vw; font-size: 3vh">Proceed to checkout</button>
         </span>
     </div>
 </div>

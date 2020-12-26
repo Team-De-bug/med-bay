@@ -1,21 +1,21 @@
 {%extends "template.html"%}
 
 {%block body%}
-<div class="prescription-container-root">
-    <h3 id="prescription-list-title">Patient Prescription</h3><br>
+<div class="root-container">
+    <h3 id="list-title">Patient Prescription</h3><br>
     {% for pres in prescriptions %}
-    <div class="prescription-container">
+    <div class="container">
         <label class="patient-detail-label">Patient Name:</label>
-        <input class="prescription-detail" id="{{pres.case.id}}_name" type="text" value="{{pres.case.patient.name}}" readonly><br>
-        <label class="prescription-detail-label">Case ID:</label>
-        <input class="prescription-detail" id="{{pres.case.id}}_id" type="text" value="{{pres.case.id}}" readonly><br>
-        <label class="prescription-detail-label">Date:</label>
-        <input class="prescription-detail" id="{{pres.case.id}}_id" type="text" value="{{pres.case.appointed_date.date}}" readonly><br>
-        <label class="prescription-detail-label">Time:</label>
-        <input class="prescription-detail" id="{{pres.case.id}}_id" type="text" value="{{pres.case.appointed_date.time}}" readonly><br>
+        <input class="item-detail" id="{{pres.case.id}}_name" type="text" value="{{pres.case.patient.name}}" readonly><br>
+        <label class="item-detail-label">Case ID:</label>
+        <input class="item-detail" id="{{pres.case.id}}_id" type="text" value="{{pres.case.id}}" readonly><br>
+        <label class="item-detail-label">Date:</label>
+        <input class="item-detail" id="{{pres.case.id}}_id" type="text" value="{{pres.case.appointed_date.date}}" readonly><br>
+        <label class="item-detail-label">Time:</label>
+        <input class="item-detail" id="{{pres.case.id}}_id" type="text" value="{{pres.case.appointed_date.time}}" readonly><br>
         <label class="patient-detail-label">Diagnosis:</label>
-        <textarea class="prescription-detail" readonly style="resize: vertical">{{pres.case.desc}}</textarea>
-        <button class="prescription-detail" onclick="redirectToAdd({{pres.case.id}})">Edit Prescription</button>
+        <textarea class="item-detail" readonly style="resize: vertical">{{pres.case.desc}}</textarea>
+        <button class="item-detail" onclick="redirectToAdd({{pres.case.id}})">Edit Prescription</button>
     </div>
     {% endfor %}
 </div>

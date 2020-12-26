@@ -1,11 +1,11 @@
 {%extends "template.html"%}
 
 {%block body%}
-<div class="prescription-container-root">
-    <h3 id="prescription-list-title">Prescription {{case.prescription.id}}</h3><br>
-    <div class="prescription-container">
+<div class="root-container">
+    <h3 id="list-title">Prescription {{case.prescription.id}}</h3><br>
+    <div class="container">
         <label class="prescription-patient-label" class="patient-detail-label">Name: </label>
-        <input class="prescription-detail" id="{{case.id}}_name" type="text" value="{{case.patient.name}}" readonly><br>
+        <input class="item-detail" id="{{case.id}}_name" type="text" value="{{case.patient.name}}" readonly><br>
         <div>
             <label class="prescriptions-label">Medicines:</label>
             <div class="prescriptions-list" style="flex-direction: column;">
@@ -13,7 +13,7 @@
                     <label onclick="">Add Medicine</label>
                 </div>
             </div>
-            <button class="prescription-detail" onclick="savePrescription({{case.id}})">Save</button>
+            <button class="item-detail" onclick="savePrescription({{case.id}})">Save</button>
         </div>
     </div>
 </div>
@@ -52,11 +52,11 @@
 
         var selector = $("<select></select>").attr("id", "medicine-list");
         
-        var quantity = $("<input>").addClass("prescription-detail");
+        var quantity = $("<input>").addClass("item-detail");
         
         quantity.attr({type:"number", value:"1", step:"1", min:"1", max:"20", onKeyDown:"return false", id:"medicine-quantity"});
         
-        var removeBtn = $("<button>X</button>").addClass("prescription-detail");
+        var removeBtn = $("<button>X</button>").addClass("item-detail");
 
         removeBtn.attr({onclick:"removeMedicine("+medicineId+")"});
 

@@ -4,28 +4,28 @@
 {% for case in cases %}
 <!--Full Detail Div-->
 <div id="{{case.id}}" class="patient-black-out">
-    <div class="patient-full-container">
+    <div class="patient-full-container full-container">
         <button class="close-patient-full-btn" onclick="closePatientFull()">X</button>
         <label class="patient-full-detail-label">Name: </label>
-        <input class="patient-detail" id="name" type="text" value="{{case.patient.name}}" onclick="copyDetail('name')" readonly><br>
+        <input class="item-detail" id="name" type="text" value="{{case.patient.name}}" onclick="copyDetail('name')" readonly><br>
         <label class="patient-full-detail-label">Age: </label>
-        <input class="patient-detail" id="age" type="text" value="{{case.patient.age}}" pattern="[0-9]+" onclick="copyDetail('age')" readonly><br>
+        <input class="item-detail" id="age" type="text" value="{{case.patient.age}}" pattern="[0-9]+" onclick="copyDetail('age')" readonly><br>
         <label class="patient-full-detail-label">Gender: </label>
-        <input class="patient-detail" id="gender" type="text" value="{{case.patient.gender | upper}}" size="1" onclick="copyDetail('gender')" readonly><br>
+        <input class="item-detail" id="gender" type="text" value="{{case.patient.gender | upper}}" size="1" onclick="copyDetail('gender')" readonly><br>
         <label class="patient-full-detail-label">Appointment Date and Time: </label>
         <span>
-        <input class="patient-detail" id="date" type="text" value="{{case.appointed_date.date}}" readonly>
-        <input class="patient-detail" id="time" type="text" value="{{case.appointed_date.time}}" readonly><br>
+        <input class="item-detail" id="date" type="text" value="{{case.appointed_date.date}}" readonly>
+        <input class="item-detail" id="time" type="text" value="{{case.appointed_date.time}}" readonly><br>
         </span>
         <form method="post" id="{{case.id}}" class="doctor-patient-form" style="display: flex; flex-direction: column;">
             {% csrf_token %}
             {#{form.id}#}
             <input type="number" name="id" value="{{case.id}}" required="" id="id_id" style="display: none">
             <label class="patient-full-detail-label">Authorise Prescription:</label>
-            <!--<input class="patient-detail" id="has-prescription" name="has-prescription" type="checkbox"> -->
+            <!--<input class="item-detail" id="has-prescription" name="has-prescription" type="checkbox"> -->
             {{form.has_pres}}
             <label class="patient-full-detail-label">Diagnosis: </label>
-            <!--<textarea class="patient-detail" id="diagnosis" cols="16" rows="5" name="diagnosis" placeholder="Your Diagnosis"></textarea>-->
+            <!--<textarea class="item-detail" id="diagnosis" cols="16" rows="5" name="diagnosis" placeholder="Your Diagnosis"></textarea>-->
             {{form.desc}}
             <input class="save-diagnosis-btn" type="submit" value="Save">
         </form>
@@ -34,20 +34,20 @@
 {% endfor %}
 
 <!--Summary Detail Div-->
-<div class="patient-container-root">
-    <h3 id="patient-list-title">Doctor's Dashboard</h3><br>
-    <h4 id="patient-list-title">Appointed Patients</h4><br>
-    <div class="patient-list-container">
+<div class="root-container">
+    <h3 id="list-title">Doctor's Dashboard</h3><br>
+    <h4 id="list-title">Appointed Patients</h4><br>
+    <div class="list-container">
         {% for case in cases %}
-        <div class="patient-container" onclick="showPatientFull({{case.id}})">
-            <label class="patient-detail-label" class="patient-detail-label" onclick="showPatientFull({{case.id}})">Name: </label>
-            <input class="patient-detail" id="name" type="text" value="{{case.patient.name}}" readonly><br>
-            <label class="patient-detail-label" onclick="showPatientFull({{case.id}})">Age: </label>
-            <input class="patient-detail" id="age" type="text" value="{{case.patient.age}}" pattern="[0-9]+" readonly><br>
-            <label class="patient-detail-label" onclick="showPatientFull({{case.id}})">Gender: </label>
-            <input class="patient-detail" id="gender" type="text" value="{{case.patient.gender | upper}}" size="1" readonly><br>
-            <label class="patient-detail-label" onclick="showPatientFull({{case.id}})">Appointment Date: </label>
-            <input class="patient-detail" id="date" type="text" value="{{case.appointed_date.date}}" onclick="showPatientFull({{case.id}})" readonly>
+        <div class="container" onclick="showPatientFull({{case.id}})" style="cursor: pointer">
+            <label class="item-detail-label patient-detail-label" onclick="showPatientFull({{case.id}})">Name: </label>
+            <input class="item-detail" id="name" type="text" value="{{case.patient.name}}" readonly><br>
+            <label class="item-detail-label" onclick="showPatientFull({{case.id}})">Age: </label>
+            <input class="item-detail" id="age" type="text" value="{{case.patient.age}}" pattern="[0-9]+" readonly><br>
+            <label class="item-detail-label" onclick="showPatientFull({{case.id}})">Gender: </label>
+            <input class="item-detail" id="gender" type="text" value="{{case.patient.gender | upper}}" size="1" readonly><br>
+            <label class="item-detail-label" onclick="showPatientFull({{case.id}})">Appointment Date: </label>
+            <input class="item-detail" id="date" type="text" value="{{case.appointed_date.date}}" onclick="showPatientFull({{case.id}})" readonly>
         </div>
         {% endfor %}
     </div>

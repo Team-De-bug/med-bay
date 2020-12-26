@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
-/*Variables Start*/
+/* #region Variables*/
 :root {
     --header-height: 7vh;
 }
-/*Variables End*/
+/* #endregion */
 
 body {
     margin: 0;
@@ -25,7 +25,89 @@ button {
     justify-content: center;
 }
 
-/*Template Start*/
+/* #region Titles and Item Specific*/
+#list-title {
+    color: black;
+    margin: 2vh 2vw -2vh 2vw;
+}
+
+.item-detail {
+    background-color: RGBA(0, 0, 0, 0.2);
+    border-style: none;
+    padding: 1vh 1vw 1vh 1vw;
+    margin: 1vh 0 1vh 0;
+    color: white;
+    font-family: 'Rubik';
+    border-radius: 8px;
+    transition: all 0.25s;
+}
+
+.item-detail[type="checkbox"] {
+    align-self: flex-start;
+    transform: scale(1.4, 1.4)
+}
+
+.item-detail[type="checkbox"]:hover {
+    transform: scale(1.5, 1.5);
+}
+
+.item-detail > textarea {
+    cursor: text;
+    resize: vertical;
+}
+
+.item-detail:hover {
+    cursor: pointer;
+    transform: scale(1.01, 1.01);
+    box-shadow: 0 0 5px RGBA(0, 0, 0, 0.75);
+}
+
+/* #endregion */
+
+/* #region Containers*/
+
+.root-container {
+    margin: auto;
+    width: 95%;
+    height: 100%;
+}
+
+.list-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container {
+    display: grid;
+    background-color: #E00043;
+    border-radius: 8px;
+    padding: 2vh 1vw 2vh 1vw;
+    grid-gap: 0px;
+    margin: 2vh 1.5vw 2vh 1.5vw;
+    transition: all 0.3s;
+}
+
+.container:hover {
+    transform: scale(1.025, 1.025);
+    box-shadow: 0 0 20px #888888;
+    background-color: #F00048;
+}
+
+.full-container {
+    flex-direction: column; 
+    background-color: #E00043;
+    border-radius: 8px;
+    padding: 2vh 1vw 2vh 1vw;
+    width: 80%;
+    grid-gap: 0px;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px 2px RGBA(0, 0, 0, 0.7);
+    z-index: 999;
+    transform: inherit;
+}
+/* #endregion */
+
+/* #region Template*/
 #loadLogo {
     display: flex;
     flex-wrap: wrap;
@@ -133,9 +215,9 @@ button {
     grid-template-columns: auto auto;
 }
 
-/*Decorative Objects*/
+/* #region Decorative Objects*/
 
-/*Menu Bar Logo*/
+/* #region Menu Bar Logo*/
 #logo-div {
     height: var(--header-height);
 }
@@ -155,10 +237,11 @@ button {
     cursor: pointer;
     border-top-width: 0;
 }
+/* #endregion */
 
-/*Interactive Objects*/
+/* #region Interactive Objects*/
 
-/*Side Bar Button*/
+/* #region Side Bar Button*/
 .side-bar-btn {
     height: var(--header-height);
     width: var(--header-height);
@@ -196,7 +279,9 @@ button {
     cursor: pointer;
 }
 
-/*Side Bar*/
+/* #endregion */
+
+/* #region Side Bar*/
 #nav-list {
     list-style-type: none;
     margin: 0;
@@ -231,13 +316,14 @@ button {
     color: white;
     text-decoration: none;
 }
-/*Side Bar*/
+/*#endregion Side Bar*/
 
-/*Interactive Objects*/
+/*#endregion Interactive Objects*/
 
-/*Template End*/
+/*#endregion Decorative Objects*/
+/*#endregion Template End*/
 
-/*Form Start*/
+/* #region Form Start*/
 #form-window {
     display: flex;
     flex-direction: column;
@@ -339,78 +425,13 @@ button {
     margin: auto;
     padding: 1%;
 }
-/*Form End*/
+/* #endregion Form End*/
 
-/*Patient List Start*/
-.patient-container-root {
-    margin: auto;
-    width: 95%;
-    height: 100%;
-}
-
-#patient-list-title {
-    color: black;
-    margin: 2vh 2vw -2vh 2vw;
-}
-
-.patient-list-container {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.patient-container {
-    display: grid;
-    background-color: #E00043;
-    border-radius: 8px;
-    padding: 2vh 1vw 2vh 1vw;
-    grid-gap: 0px;
-    margin: 2vh 1.5vw 2vh 1.5vw;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.patient-container:hover {
-    transform: scale(1.025, 1.025);
-    box-shadow: 0 0 20px #888888;
-    background-color: #F00048;
-}
+/* #region Patient List Start*/
 
 .patient-detail-label {
     cursor: pointer;
     width: 95%;
-}
-
-.patient-detail {
-    background-color: RGBA(0, 0, 0, 0.2);
-    border-style: none;
-    padding: 1vh 1vw 1vh 1vw;
-    margin: 1vh 0 1vh 0;
-    color: white;
-    font-family: 'Rubik';
-    border-radius: 8px;
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-    transition: all 0.25s;
-}
-
-.patient-detail[type="checkbox"] {
-    align-self: flex-start;
-    transform: scale(1.4, 1.4)
-}
-
-.patient-detail[type="checkbox"]:hover {
-    transform: scale(1.5, 1.5);
-}
-
-.patient-detail > textarea {
-    cursor: text;
-    resize: vertical;
-}
-
-.patient-detail:hover {
-    cursor: pointer;
-    transform: scale(1.01, 1.01);
-    box-shadow: 0 0 5px RGBA(0, 0, 0, 0.75);
 }
 
 .patient-black-out {
@@ -433,17 +454,7 @@ button {
 
 .patient-full-container {
     display: flex;
-    flex-direction: column; 
-    background-color: #E00043;
-    border-radius: 8px;
-    padding: 2vh 1vw 2vh 1vw;
-    width: 80%;
-    grid-gap: 0px;
     margin: 1.5vh auto 1.5vh auto;
-    transition: all 0.3s;
-    box-shadow: 0 0 50px 2px #000000;
-    z-index: 999;
-    transform: inherit;
 }
 
 .close-patient-full-btn {
@@ -456,7 +467,7 @@ button {
 }
 
 .close-patient-full-btn:hover {
-    
+    background-color: RGBA(0, 0, 0, 0.5);
 }
 
 .save-diagnosis-btn {
@@ -477,61 +488,13 @@ button {
     transform: scale(1.01, 1.01);
     box-shadow: 0 0 5px RGBA(0, 0, 0, 0.75);
 }
-/*Patient List End*/
+/* #endregion Patient List End*/
 
-/*Prescription List Start*/
-.prescription-container-root {
-    margin: auto;
-    width: 95%;
-    height: 100%;
-}
-
-#prescription-list-title {
-    color: black;
-    margin: 2vh 2vw -2vh 2vw;
-}
-
-.prescription-list-container {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.prescription-container {
-    display: grid;
-    background-color: #E00043;
-    border-radius: 8px;
-    padding: 2vh 1vw 2vh 1vw;
-    grid-gap: 0px;
-    margin: 2vh 1.5vw 2vh 1.5vw;
-    transition: all 0.3s;
-}
-
-.prescription-container:hover {
-    transform: scale(1.025, 1.025);
-    box-shadow: 0 0 20px #888888;
-    background-color: #F00048;
-}
+/* #region Prescription List Start*/
 
 .prescription-patient-label {
     cursor: pointer;
     width: 95%;
-}
-
-.prescription-detail {
-    background-color: RGBA(0, 0, 0, 0.2);
-    border-style: none;
-    padding: 1vh 1vw 1vh 1vw;
-    margin: 1vh 0 1vh 0;
-    color: white;
-    font-family: 'Rubik';
-    border-radius: 8px;
-    transition: all 0.25s;
-}
-
-.prescription-detail:hover {
-    cursor: default;
-    transform: scale(1.01, 1.01);
-    box-shadow: 0 0 5px RGBA(0, 0, 0, 0.75);
 }
 
 .prescriptions-list {
@@ -583,17 +546,7 @@ button {
 
 .case-full-container {
     display: none;
-    flex-direction: column; 
-    background-color: #E00043;
-    border-radius: 8px;
-    padding: 2vh 1vw 2vh 1vw;
-    width: 80%;
-    grid-gap: 0px;
     margin: 3vh auto 2vh auto;
-    transition: all 0.3s;
-    box-shadow: 0 0 20px 2px RGBA(0, 0, 0, 0.7);
-    z-index: 999;
-    transform: inherit;
 }
 
 .prescription-full-header {
@@ -644,68 +597,17 @@ button {
     transform: scale(1.025, 1.025);
     box-shadow: 0 0 10px RGBA(0, 0, 0, 0.75);
 }
-/*Prescription List end*/
+/* #endregion Prescription List end*/
 
-/*Error Start*/
+/* #region Error Start*/
 .error-root {
     color: black;
     margin: auto;
     text-align: center;
 }
-/*Error End*/
+/* #endregion Error End*/
 
-/*Pharmacy Start*/
-.shop-container-root {
-    margin: auto;
-    width: 95%;
-    height: 100%;
-}
-
-#shop-list-title {
-    color: black;
-    margin: 2vh 2vw -2vh 2vw;
-}
-
-.shop-list-container {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.stock-item-container {
-    display: grid;
-    background-color: #E00043;
-    border-radius: 8px;
-    padding: 2vh 1vw 2vh 1vw;
-    grid-gap: 0px;
-    margin: 2vh 1.5vw 2vh 1.5vw;
-    width: 20vw;
-    transition: all 0.3s;
-}
-
-.stock-item-container:hover {
-    transform: scale(1.025, 1.025);
-    box-shadow: 0 0 20px #888888;
-    background-color: #F00048;
-}
-
-.stock-detail {
-    background-color: RGBA(0, 0, 0, 0.2);
-    border-style: none;
-    padding: 1vh 1vw 1vh 1vw;
-    margin: 1vh 0 1vh 0;
-    color: white;
-    font-family: 'Rubik';
-    border-radius: 8px;
-    transition: all 0.25s;
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-    
-}
-
-.stock-detail:hover {
-    transform: scale(1.01, 1.01);
-    box-shadow: 0 0 5px RGBA(0, 0, 0, 0.75);
-}
+/* #region Pharmacy Start*/
 
 .stock-price {
     background-color: RGBA(0, 0, 0, 0);
@@ -725,7 +627,7 @@ button {
     background-color: #E00043;
 }
 
-/*Pharmacy Cart Bill*/
+/* #region Pharmacy Cart Bill*/
 
 .bill-table {
     width: 90%;
@@ -749,10 +651,10 @@ button {
     border-bottom: none;
     border-top: 3px solid #6C6C6C;
 }
-/*Pharmacy Cart Bill End*/
-/*Pharmacy End*/
+/* #endregion Pharmacy Cart Bill End*/
+/* #endregion Pharmacy End*/
 
-/*Attendance Start*/
+/* #region Attendance Start*/
 .attendance-table {
     margin: 5vh auto 2vh auto;
     color: white;
@@ -807,4 +709,16 @@ button {
     background: #218025;
 }
 
-/*Attendance End*/
+/* #endregion Attendance End*/
+
+/* #region Home Start*/
+
+.home-root {
+    display: block;
+    color: black;
+    width: 100%;
+    text-align: center;
+    height: 100%;
+}
+
+/* #endregion Home End*/

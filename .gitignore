@@ -7,3 +7,4 @@ __pycache__
 /.idea/inspectionProfiles/profiles_settings.xml
 /.idea/vcs.xml
 scripts/run.sh
+.vscode/med-bay snippets.code-snippets
