@@ -7,14 +7,8 @@ from django.contrib.auth.models import User
 from patients.models import Cases, Patient
 from .utils import validate_access
 from doctors.models import Doctor
-from datetime import datetime
 from .models import Staff
 import json
-
-
-# Edit the function below.
-def home(request):
-    return render(request, "admins/home.html")
 
 
 # staff attendance
@@ -142,6 +136,22 @@ def edit_case(request):
     return render(request, "admins/create_case.html", context={'form': form, 'title': "Edit"})
 
 
+# list patients
+@login_required()
+def list_patients(request):
+    validate_access(request, 'a')
+    patients = Patient.objects.all()
+    return render(request, "admins/list_patients.html", context={'patients': patients})
+
+
+# list cases
+@login_required()
+def list_cases(request):
+    validate_access(request, 'a')
+    cases = Cases.objects.filter(status='t')
+    return render(request, "admin/list_cases.html", context={'cases': cases})
+
+
 """ <===========================|******| Base Routes |******|===========================> """
 
 
@@ -167,3 +177,8 @@ def redirect_login(request):
         return redirect('pharma:shop')
     else:
         raise Http404("page not found")
+
+
+# Edit the function below.
+def home(request):
+    return render(request, "admins/home.html")
