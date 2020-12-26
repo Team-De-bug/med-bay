@@ -2,22 +2,22 @@
 {%load static%}
 
 {%block body%}
-<div class="shop-container-root">
+<div class="root-container">
     <span style="display: flex; align-content: space-between; align-items: flex-start">
-        <h3 id="shop-list-title">Remove Items In Stock</h3>
-        <button class="stock-detail" id="remove-stock-btn" onclick="document.location='{% url 'pharma:shop' %}'">Back to Pharmacy</button>
+        <h3 id="list-title">Remove Items In Stock</h3>
+        <button class="item-detail" id="remove-stock-btn" onclick="document.location='{% url 'pharma:shop' %}'">Back to Pharmacy</button>
     </span>
-    <div class="shop-list-container">
+    <div class="list-container">
         {%for item in items%}
-        <div id="{{item.id}}" class="stock-item-container">
+        <div id="{{item.id}}" class="container" style="width: 20vw;">
             <span style="display: flex; flex-direction: row; justify-content: flex-end; align-content: center">
-                <button class="stock-detail" onclick="removeStock({{item.id}})">X</button>
+                <button class="item-detail" onclick="removeStock({{item.id}})">X</button>
             </span>
-            <label class="stock-detail-label">Item: </label>
-            <input class="stock-detail" id="{{item.id}}_name" type="text" value="{{item.name}}" readonly><br>
-            <label class="stock-detail-label">Price: </label>
-            <span class="stock-detail" tabindex="0"><span class="stock-price">&#8377;</span> <input tabindex="-1" class="stock-price" id="age" type="text" value="{{item.price}}" pattern="[0-9]+" readonly></span><br>
-            <label class="stock-detail-label">Quantity:</label>
+            <label class="item-detail-label">Item: </label>
+            <input class="item-detail" id="{{item.id}}_name" type="text" value="{{item.name}}" readonly><br>
+            <label class="item-detail-label">Price: </label>
+            <span class="item-detail" tabindex="0"><span class="stock-price">&#8377;</span> <input tabindex="-1" class="stock-price" id="age" type="text" value="{{item.price}}" pattern="[0-9]+" readonly></span><br>
+            <label class="item-detail-label">Quantity:</label>
             <label>{{item.quantity}}</label><br>
         </div>
         {%endfor%}

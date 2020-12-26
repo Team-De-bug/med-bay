@@ -1,23 +1,23 @@
 {%extends "template.html"%}
 
 {%block body%}
-<div class="shop-container-root">
+<div class="root-container">
     <span style="display: flex; align-content: space-between; align-items: flex-start">
-        <h3 id="shop-list-title">Add New Stock</h3>
-        <button class="stock-detail" id="remove-stock-btn" onclick="document.location='{% url 'pharma:shop' %}'">Back to Pharmacy</button>
+        <h3 id="list-title">Add New Stock</h3>
+        <button class="item-detail" id="remove-stock-btn" onclick="document.location='{% url 'pharma:shop' %}'">Back to Pharmacy</button>
     </span>
-    <form method="POST" class="stock-item-container">
+    <form method="POST" class="container" style="width: 20vw;">
         {% csrf_token %}
-        <label class="stock-detail-label">Item Name: </label>
-        <input class="stock-detail" id="name" type="text" name="name" placeholder="Medicine"><br>
-        <label class="stock-detail-label">Price: </label>
+        <label class="item-detail-label">Item Name: </label>
+        <input class="item-detail" id="name" type="text" name="name" placeholder="Medicine"><br>
+        <label class="item-detail-label">Price: </label>
         <span>
             <span class="stock-price">&#8377;</span>
-            <input class="stock-detail" id="age" type="number" pattern="[0-9]+" name="price" placeholder="100">
+            <input class="item-detail" id="age" type="number" pattern="[0-9]+" name="price" placeholder="100">
         </span><br>
-        <label class="stock-detail-label">Total Quantity:</label>
-        <input class="stock-detail" id="amount" type="number" step="1" name="quantity" placeholder="100"><br>
-        <input class="stock-detail" id="edit" type="submit" value="Add">
+        <label class="item-detail-label">Total Quantity:</label>
+        <input class="item-detail" id="amount" type="number" step="1" name="quantity" placeholder="100"><br>
+        <input class="item-detail" id="edit" type="submit" value="Add">
     </form>
 </div>
 {%endblock%}

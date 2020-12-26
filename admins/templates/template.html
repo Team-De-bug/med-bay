@@ -19,21 +19,21 @@
     </head>
 
     <body onload="showLogo()">
-        <div id="loadLogo"><img id="loadLogoImg" src="{%static 'images/med-bay.png'%}"></div>
+        <div id="loadLogo"><img id="loadLogoImg" src="{%static 'images/med-bay.png'%}" alt="med-bay logo"></div>
         <div class="floating-bar" id="floating-bar">
             <div class="menu-bar">
                 <button class="side-bar-btn" value="click" onclick="closeSidebar()">
-                    <img class="side-bar-btn-icon" src="{% static 'images/menu.svg' %}" margin="0" height="100%"/>
+                    <img class="side-bar-btn-icon" src="{% static 'images/menu.svg' %}" margin="0" height="100%" alt="menu">
                 </button>
                 <div id="logo-div">
-                    <img id="logo" onclick="document.location='{% url 'red' %}'" src="{% static 'images/med-bay.png' %}">
+                    <img id="logo" onclick="document.location='{% url 'red' %}'" src="{% static 'images/med-bay.png' %}" alt="med-bay logo">
                 </div>
                 <div class="user-btns">
                     <button id="login-btn">
                         {% if not request.user.is_authenticated %}
-                        <img id="login-btn-img" onclick="location='{% url 'login' %}'" title="You are {{user}}" src="{% static 'images/user.png' %}" height="40vh">
+                        <img id="login-btn-img" onclick="location='{% url 'login' %}'" title="You are {{user}}" src="{% static 'images/user.png' %}" height="40vh" alt="user icon">
                         {% else %}
-                        <img id="login-btn-img" onclick="location='{% url 'confirm_logout' %}'" title="You are {{user}}" src="{% static 'images/user_loggedin.png' %}" height="40vh">
+                        <img id="login-btn-img" onclick="location='{% url 'confirm_logout' %}'" title="You are {{user}}" src="{% static 'images/user_loggedin.png' %}" height="40vh" alt="logged in user icon">
                         {%endif%}
                     </button>
                 </div>
