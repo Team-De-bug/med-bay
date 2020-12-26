@@ -87,3 +87,10 @@ class CaseCreationForm(forms.Form):
         self.fields["patient"].choices = ((patient.id, f"ID: {patient.id} | Name: {patient.name}") for patient in Patient.objects.all())
         self.fields["doctor"].choices = doctor_list
         self.fields["state"].choices = Cases.states
+
+
+class CaseEditForm(CaseCreationForm):
+    patient = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-input-dropdown',
+                                                           'id': 'patient',
+                                                           'autofocus': '',
+                                                           'readonly': ""}))
