@@ -149,6 +149,12 @@ def list_patients(request):
 def list_cases(request):
     validate_access(request, 'a')
     cases = Cases.objects.filter(status='t')
+
+    # Checking if the case is to be deleted
+    if 'delete_id' in request.GET:
+        case = cases.get(id=int(request.GET['delete_id']))
+        case.delete()
+
     return render(request, "admin/list_cases.html", context={'cases': cases})
 
 
