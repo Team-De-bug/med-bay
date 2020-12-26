@@ -1,10 +1,30 @@
-{% extends 'template.html' %}
+{%extends "template.html"%}
 
 {% block body %}
-<div>
+<div class="root-container">
+    <h3 id="list-title">Patients List</h3><br>
+    <div class="list-container">
+    {% for patient in patients %}
+        <div id="{{patient.id}}" class="container" style="width: 20vw;">
+            <label class="patient-detail-label">Patient Name:</label>
+            <input class="item-detail" value="{{patient.name}}" readonly>
+            <label class="patient-detail-label">Age:</label>
+            <input class="item-detail" value="{{patient.age}}" readonly>
+            <label class="patient-detail-label">Gender:</label>
+            <input class="item-detail" value="{{patient.gender|upper}}" readonly>
+            <input class="item-detail" value="{{patient.email}}" readonly>
+            <input class="item-detail" value="{{patient.phone}}" readonly>
+            <button class="item-detail" onclick="editPatient({{patient.id}})">Edit Patient</button>
+        </div>
+    {%endfor%}
+    </div>
 </div>
 {%endblock%}
 
 {% block script %}
-
+<script>
+function editPatient(patientId) {
+    location = "{% url 'admins:edit_patient' %}?id="+patientId;
+}
+</script>
 {%endblock%}

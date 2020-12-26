@@ -155,7 +155,7 @@ def list_cases(request):
         case = cases.get(id=int(request.GET['delete_id']))
         case.delete()
 
-    return render(request, "admin/list_cases.html", context={'cases': cases})
+    return render(request, "admins/list_cases.html", context={'cases': cases})
 
 
 """ <===========================|******| Base Routes |******|===========================> """

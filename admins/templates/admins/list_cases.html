@@ -1,0 +1,57 @@
+{%extends "template.html"%}
+
+{% block body %}
+<div class="root-container">
+    <h3 id="list-title">Cases List</h3><br>
+    <div class="list-container">
+    {% for case in cases %}
+        <div id="{{case.id}}" class="container" style="width: 20vw;">
+            <h4>Case #{{case.id}}</h4>
+            <label class="patient-detail-label">Patient:</label>
+            <input class="item-detail" value="{{case.patient.name}}" readonly>
+            <label class="patient-detail-label">Doctor:</label>
+            <input class="item-detail" value="{{case.doctor.user.user.username}}" readonly>
+            <label class="patient-detail-label">Appointment Date:</label>
+            <input class="item-detail" value="{{case.appointed_date}}" readonly>
+            <label class="item-detail-label">Priority:</label>
+            {% if case.state == "n" %}
+            <input class="item-detail" value="Normal" readonly>
+            {% elif case.state == "c" %}
+            <input class="item-detail" value="Check Up" readonly>
+            {% elif case.state == "e" %}
+            <input class="item-detail" value="Emergency" readonly>
+            {%endif%}
+            <span>
+            <button class="item-detail" onclick="editCase({{case.id}})" style="width: 45%; margin-right: 2.5%">Edit Case</button><button class="item-detail" onclick="deleteCase({{case.id}})" style="width: 45%; margin-left: 2.5%">Delete Case</button>
+            </span>
+        </div>
+    {%endfor%}
+    </div>
+</div>
+{%endblock%}
+
+{% block script %}
+<script>
+    function editCase(caseId) {
+        location = "{% url 'admins:edit_case' %}?id="+caseId;
+    }
+
+    function deleteCase(caseId) {
+
+        confirm("Are You Sure You Want To Delete Case No."+caseId+"?");
+        $.ajax({
+            url: "{% url 'admins:list_cases' %}",
+            data: {
+                'delete_id': caseId
+            },
+            success: function(){
+                alert("Case No." + caseId + " Has Been Deleted");
+                location.reload();
+            },
+            error: function(error){
+                alert("Could Not Delete Case");
+            }
+        });
+    }
+</script>
+{%endblock%}
