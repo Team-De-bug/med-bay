@@ -1,12 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
 
-/* #region Variables*/
+/* #region Variables */
 :root {
     --header-height: 7vh;
+    --base-red: #E00043;
+    --darker-red: #B40036;
+    --dark-blue: #215880;
 }
-/* #endregion */
+/* #endregion Variables */
 
-/* #region Titles and Item Specific*/
+/* #region Titles and Item Specific */
 #list-title {
     color: black;
     margin: 2vh 2vw -2vh 2vw;
@@ -47,9 +50,9 @@
     box-shadow: 0 0 5px RGBA(0, 0, 0, 0.75);
 }
 
-/* #endregion */
+/* #endregion Titles and Item Specific */
 
-/* #region Containers*/
+/* #region Containers */
 
 .root-container {
     margin: auto;
@@ -64,7 +67,7 @@
 
 .container {
     display: grid;
-    background-color: #E00043;
+    background-color: var(--base-red);
     border-radius: 8px;
     padding: 2vh 1vw 2vh 1vw;
     grid-gap: 0px;
@@ -80,7 +83,7 @@
 
 .full-container {
     flex-direction: column; 
-    background-color: #E00043;
+    background-color: var(--base-red);
     border-radius: 8px;
     padding: 2vh 1vw 2vh 1vw;
     width: 80%;
@@ -90,9 +93,9 @@
     z-index: 999;
     transform: inherit;
 }
-/* #endregion */
+/* #endregion Containers */
 
-/* #region Buttons*/
+/* #region Buttons */
 .close-full-btn {
     font-weight: bold;
     width: 2vw;
@@ -106,9 +109,9 @@
 .close-full-btn:hover {
     background-color: RGBA(0, 0, 0, 0.5);
 }
-/* #endregion */
+/* #endregion Buttons */
 
-/* #region Template*/
+/* #region Template */
 
 body {
     margin: 0;
@@ -140,7 +143,7 @@ button {
     left: 0;
     right: 0;
     top: 0;
-    background-color: #E00043;
+    background-color: var(--base-red);
     transition: all 0.5s;
     z-index: 99999;
 }
@@ -203,7 +206,7 @@ button {
 .menu-bar { 
     display: inline-flex;
     height: var(--header-height);
-    background-color: #E00043;
+    background-color: var(--base-red);
     grid-area: menu-bar;
     justify-content: space-between;
 }
@@ -222,7 +225,7 @@ button {
     grid-area: footer;
     border-width: 0.5vh 0px 0px 0px;
     border-style: solid;
-    border-color: #E00043;
+    border-color: var(--base-red);
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
@@ -236,9 +239,9 @@ button {
     grid-template-columns: auto auto;
 }
 
-/* #region Decorative Objects*/
+/* #region Decorative Objects */
 
-/* #region Menu Bar Logo*/
+/* #region Menu Bar Logo */
 #logo-div {
     height: var(--header-height);
 }
@@ -247,8 +250,8 @@ button {
     padding-top: 4vh;
     height: 6vh;
     border-radius: 0 0 8px 8px;
-    background-color: #B40036;
-    border: solid 4px #B40036;
+    background-color: var(--darker-red);
+    border: solid 4px var(--darker-red);
     border-top-width: 0;
     transition: padding-top, 0.25s;
 }
@@ -258,22 +261,24 @@ button {
     cursor: pointer;
     border-top-width: 0;
 }
-/* #endregion */
+/* #endregion  Menu Bar Logo */
 
-/* #region Interactive Objects*/
+/*#endregion Decorative Objects */
 
-/* #region Side Bar Button*/
+/* #region Interactive Objects */
+
+/* #region Side Bar Button */
 .side-bar-btn {
     height: var(--header-height);
     width: var(--header-height);
-    background-color: #E00043;
+    background-color: var(--base-red);
     border-style: none;
     padding: 0px;
     margin: 0px;
 }
 
 .side-bar-btn:hover {
-    background-color: #B40036;
+    background-color: var(--darker-red);
 }
 
 .side-bar-btn:active {
@@ -296,13 +301,13 @@ button {
 
 #login-btn-img:hover {
     padding-top: 4vh;
-    background-color: #B40036;
+    background-color: var(--darker-red);
     cursor: pointer;
 }
 
-/* #endregion */
+/* #endregion Side Bar Button */
 
-/* #region Side Bar*/
+/* #region Side Bar */
 #nav-list {
     list-style-type: none;
     margin: 0;
@@ -337,15 +342,13 @@ button {
     color: white;
     text-decoration: none;
 }
-/*#endregion Side Bar*/
+/*#endregion Side Bar */
 
-/*#endregion Interactive Objects*/
+/*#endregion Interactive Objects */
 
-/*#endregion Decorative Objects*/
+/*#endregion Template */
 
-/*#endregion Template End*/
-
-/* #region Form Start*/
+/* #region Form */
 #form-window {
     display: flex;
     flex-direction: column;
@@ -357,7 +360,7 @@ button {
 }
 
 #form-title {
-    background-color: #215880;
+    background-color: var(--dark-blue);
     width: 100%;
     height: 2em;
     display: flex;
@@ -383,7 +386,7 @@ button {
 #submit-btn {
     width: 50%;
     height: 6vh;
-    background-color: #215880;
+    background-color: var(--dark-blue);
     border-style: none;
     border-radius: 16px;
     margin-top: 1vh;
@@ -405,7 +408,7 @@ button {
 }
 
 .form-input {
-    background-color: #215880;
+    background-color: var(--dark-blue);
     border-style: none;
     border-radius: 16px;
     width: 50%;
@@ -429,7 +432,7 @@ button {
 }
 
 .form-input-dropdown {
-    background-color: #215880;
+    background-color: var(--dark-blue);
     border-style: none;
     border-radius: 16px;
     width: 50%;
@@ -447,9 +450,9 @@ button {
     margin: auto;
     padding: 1%;
 }
-/* #endregion Form End*/
+/* #endregion Form */
 
-/* #region Patient List Start*/
+/* #region Patient List */
 
 .patient-black-out {
     position: fixed;
@@ -492,9 +495,9 @@ button {
     transform: scale(1.01, 1.01);
     box-shadow: 0 0 5px RGBA(0, 0, 0, 0.75);
 }
-/* #endregion Patient List End*/
+/* #endregion Patient List */
 
-/* #region Prescription List Start*/
+/* #region Prescription List */
 
 .prescriptions-list {
     width: inherit;
@@ -514,7 +517,7 @@ button {
 .case {
     width: 100%;
     height: 6vh;
-    background-color: #FFFFFF;
+    background-color: white;
     color: black;
     margin: 2%;
     border-radius: 4px;
@@ -534,7 +537,7 @@ button {
 
 .prescription-full-header {
     flex-direction: column; 
-    background-color: #E00043;
+    background-color: var(--base-red);
     border-radius: 8px;
     padding: 2vh 1vw 2vh 1vw;
     width: 80%;
@@ -547,7 +550,7 @@ button {
 }
 
 .add-medicine {
-    background-color: #FFFFFF;
+    background-color: white;
     color: black;
     margin: 0.5%;
     border-radius: 4px;
@@ -559,17 +562,17 @@ button {
     transform: scale(1.025, 1.025);
     box-shadow: 0 0 10px RGBA(0, 0, 0, 0.75);
 }
-/* #endregion Prescription List end*/
+/* #endregion Prescription List */
 
-/* #region Error Start*/
+/* #region Error */
 .error-root {
     color: black;
     margin: auto;
     text-align: center;
 }
-/* #endregion Error End*/
+/* #endregion Error */
 
-/* #region Pharmacy Start*/
+/* #region Pharmacy */
 
 .stock-price {
     background-color: RGBA(0, 0, 0, 0);
@@ -585,11 +588,11 @@ button {
 }
 
 #cart-btn, #remove-stock-btn, #proceed-checkout-btn, #bill-archive-btn {
-    background-color: #E00043;
+    background-color: var(--base-red);
     cursor: pointer;
 }
 
-/* #region Pharmacy Cart Bill*/
+/* #region Pharmacy Cart Bill */
 
 .bill-table {
     width: 90%;
@@ -613,10 +616,10 @@ button {
     border-bottom: none;
     border-top: 3px solid #6C6C6C;
 }
-/* #endregion Pharmacy Cart Bill End*/
-/* #endregion Pharmacy End*/
+/* #endregion Pharmacy Cart Bill */
+/* #endregion Pharmacy */
 
-/* #region Attendance Start*/
+/* #region Attendance Start */
 .attendance-table {
     margin: 5vh auto 2vh auto;
     color: white;
@@ -671,9 +674,9 @@ button {
     background: #218025;
 }
 
-/* #endregion Attendance End*/
+/* #endregion Attendance */
 
-/* #region Home Start*/
+/* #region Home */
 
 .home-root {
     display: block;
@@ -683,4 +686,4 @@ button {
     height: 100%;
 }
 
-/* #endregion Home End*/
+/* #endregion Home */
