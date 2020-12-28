@@ -52,7 +52,7 @@ def create_patient(request):
             return redirect("home")
 
     form = PatientForm()
-    return render(request, "admins/create_patient.html", context={'form': form, 'title': "Edit"})
+    return render(request, "admins/create_patient.html", context={'form': form, 'title': "Create"})
 
 
 # Patient Creation Page
@@ -99,7 +99,7 @@ def create_case(request):
 
     form = CaseCreationForm()
     form.set_choices()
-    return render(request, "admins/create_case.html", context={'form': form, 'title': "Edit"})
+    return render(request, "admins/create_case.html", context={'form': form, 'title': "Create"})
 
 
 # Create case

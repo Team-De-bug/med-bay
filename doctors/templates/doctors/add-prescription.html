@@ -4,12 +4,12 @@
 <div class="root-container">
     <h3 id="list-title">Prescription {{case.prescription.id}}</h3><br>
     <div class="container">
-        <label class="prescription-patient-label" class="patient-detail-label">Name: </label>
+        <label class="detail-label" class="patient-detail-label">Name: </label>
         <input class="item-detail" id="{{case.id}}_name" type="text" value="{{case.patient.name}}" readonly><br>
         <div>
             <label class="prescriptions-label">Medicines:</label>
             <div class="prescriptions-list" style="flex-direction: column;">
-                <div class="prescription-full" onclick="addMedicine()" id="addMedicineBtn">
+                <div class="add-medicine" onclick="addMedicine()" id="addMedicineBtn">
                     <label onclick="">Add Medicine</label>
                 </div>
             </div>
@@ -44,7 +44,7 @@
 
         var medicines = getMedicines();
         
-        var medicineContainer = $("<div></div>").addClass("prescription-full");
+        var medicineContainer = $("<div></div>").addClass("add-medicine");
         
         medicineContainer.addClass("medicine-single");
         

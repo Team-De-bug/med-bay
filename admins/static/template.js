@@ -60,24 +60,3 @@ function copyDetail(detailId) {
     document.execCommand("copy");
     showMessage("Copied Pateint Detail: " + copyID.value);
 }
-
-function showPatientFull(patientId) {
-    
-    var patients = document.getElementsByClassName("patient-black-out");
-    
-    for (i = 0; i < patients.length; i++) {
-        if (patients.item(i).id == patientId) {
-            patients.item(i).style.display="flex";
-        }
-    }
-    
-}
-
-function closePatientFull() {
-    var patients = document.getElementsByClassName("patient-black-out");
-    
-    for (i = 0; i < patients.length; i++) {
-            patients.item(i).style.display = "none";
-
-    }
-}

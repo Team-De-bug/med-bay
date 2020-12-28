@@ -2,15 +2,17 @@
 
 {% block body %}
 
-<div id="patient-black-out">
+<div class="patient-black-out">
     {% for patient, cases in patients.items %}
-    <div class="prescription-full-header" id="{{patient.id}}" tabindex="1">
-        <button class="close-prescription-full-btn" tabindex="1" onclick="closeCaseFull()">X</button>
-        <label class="case-full-detail-label">Name:</label>
-        <input class="item-detail" tabindex="-1" id="{{patient.id}}_name" type="text" value="{{patient.name}}" readonly>
-        <label class="case-full-detail-label">Age:</label>
-        <input class="item-detail" tabindex="-1" id="{{patient.id}}_age" type="text" value="{{patient.age}}" readonly>
-        <label class="case-full-detail-label">Gender:</label>
+    <div class="prescription-full-header" id="patient_{{patient.id}}" tabindex="1">
+        <span style="display: flex; flex-direction: column">
+            <button class="close-full-btn" tabindex="1" onclick="closeCaseFull()">X</button><br>
+        </span>
+        <label class="case-full-detail-label">Name:</label><br>
+        <input class="item-detail" tabindex="-1" id="{{patient.id}}_name" type="text" value="{{patient.name}}" readonly><br>
+        <label class="case-full-detail-label">Age:</label><br>
+        <input class="item-detail" tabindex="-1" id="{{patient.id}}_age" type="text" value="{{patient.age}}" readonly><br>
+        <label class="case-full-detail-label">Gender:</label><br>
         <input class="item-detail" tabindex="-1" id="{{patient.id}}_gender" type="text" value="{{patient.gender | upper}}" readonly>
     </div>
     {% endfor %} 
@@ -18,8 +20,8 @@
     
     {% for patient, cases in patients.items %}
     {% for case in cases %}
-    <div id="{{case.id}}" class="case-full-container full-container" tabindex="1">
-        <label class="case-full-detail-label">Case #{{forloop.counter}}</label>
+    <div id="case_{{case.id}}" class="case-full-container full-container" tabindex="1">
+        <label class="case-full-detail-label">Case #{{forloop.counter}}</label><br>
         <span>
             <label class="case-full-detail-label">Case ID:</label>
             <input class="item-detail" tabindex="-1" id="{{patient.id}}_{{case.id}}" type="text" value="{{case.id}}" readonly><br>
@@ -29,8 +31,8 @@
             <input class="item-detail" tabindex="-1" id="{{case.id}}_time" type="text" value="{{case.appointed_date.time}}" readonly><br>
                 <label class="case-full-detail-label">Diagnosis:</label><br>
                 <textarea class="item-detail" tabindex="-1" id="{{patient.id}}_diagnosis" style="margin-left: 3vw; resize: vertical" cols="87%" rows="6" readonly>{{case.desc}}</textarea>
-        </span>
-        {% if case.prescription.medicine_set %}
+        </span><br>
+        {% if case.prescription.medicine_set.all %}
         <label class="case-full-detail-label">Prescribed Medicines:</label>
             <ol class="item-detail" style="margin-left: 3vw;">
                 {% for medicine in case.prescription.medicine_set.all %}
@@ -50,13 +52,13 @@
     <div class="list-container">
         {% for patient, cases in patients.items %}
         <div class="container">
-            <label class="prescription-patient-label" class="patient-detail-label">Name: </label>
+            <label class="detail-label" class="patient-detail-label">Name: </label>
             <input class="item-detail" id="{{patient.id}}_name" type="text" value="{{patient.name}}" readonly><br>
-            <label class="prescription-patient-label" class="patient-detail-label">Age: </label>
+            <label class="detail-label" class="patient-detail-label">Age: </label>
             <input class="item-detail" id="{{patient.id}}_age" type="text" value="{{patient.age}}" readonly><br>
-            <label class="prescription-patient-label" class="patient-detail-label">Gender: </label>
+            <label class="detail-label" class="patient-detail-label">Gender: </label>
             <input class="item-detail" id="{{patient.id}}_gender" type="text" value="{{patient.gender | upper}}" readonly><br>
-            <label class="prescription-patient-label" class="patient-detail-label">No. Cases: </label>
+            <label class="detail-label" class="patient-detail-label">No. Cases: </label>
             <input class="item-detail" id="{{patient.id}}_cases" type="text" value="{{cases.count}}" readonly><br>
             <div>
                 <label class="prescriptions-label">Cases:</label>
@@ -78,31 +80,26 @@
 <script>
     
 $(document).ready(function(){
-    $("#patient-black-out").hide();
+    $(".patient-black-out").hide();
     $(".prescription-full-header").hide();
+    $(".case-full-container").hide();
 });    
     
 function showCaseFull(caseID, patientID) {
     
-    $("#patient-black-out").show();
+    console.log(caseID+" "+patientID);
+
+    $(".patient-black-out").show();
     
-    $(".prescription-full-header").each(function(index, patient){
-       if (patient.id == patientID) {
-           patient.style.display = "flex";
-       } 
-    });
+    $("#patient_"+patientID).show();
     
-    $(".case-full-container").each(function(index, item){
-       if (item.id == caseID) {
-           item.style.display = "flex";
-       }
-    });
+    $("#case_"+caseID).show();
     
 }
 
 function closeCaseFull() {
     
-    $("#patient-black-out").hide();
+    $(".patient-black-out").hide();
     
     $(".prescription-full-header").each(function(index, patient){
        patient.style.display = "none";

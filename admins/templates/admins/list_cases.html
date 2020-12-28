@@ -26,6 +26,9 @@
             </span>
         </div>
     {%endfor%}
+        <div class="container" style="width: 20vw;" onclick="location='{% url 'admins:create_case' %}'">
+            <h1 style="margin: auto">+</h1>
+        </div>
     </div>
 </div>
 {%endblock%}
@@ -38,20 +41,21 @@
 
     function deleteCase(caseId) {
 
-        confirm("Are You Sure You Want To Delete Case No."+caseId+"?");
-        $.ajax({
-            url: "{% url 'admins:list_cases' %}",
-            data: {
-                'delete_id': caseId
-            },
-            success: function(){
-                alert("Case No." + caseId + " Has Been Deleted");
-                location.reload();
-            },
-            error: function(error){
-                alert("Could Not Delete Case");
-            }
-        });
+        if(confirm("Are You Sure You Want To Delete Case No."+caseId+"?")) {
+            $.ajax({
+                url: "{% url 'admins:list_cases' %}",
+                data: {
+                    'delete_id': caseId
+                },
+                success: function(){
+                    alert("Case No." + caseId + " Has Been Deleted");
+                    location.reload();
+                },
+                error: function(error){
+                    alert("Could Not Delete Case");
+                }
+            });
+        }
     }
 </script>
 {%endblock%}
