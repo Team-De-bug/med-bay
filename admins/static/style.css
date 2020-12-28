@@ -9,6 +9,8 @@
 }
 /* #endregion Variables */
 
+/* #region Common Styling */
+
 /* #region Titles and Item Specific */
 #list-title {
     color: black;
@@ -452,6 +454,10 @@ button {
 }
 /* #endregion Form */
 
+/* #endregion Common Styling */
+
+/* #region Page Specific */
+
 /* #region Patient List */
 
 .patient-black-out {
@@ -687,3 +693,5 @@ button {
 }
 
 /* #endregion Home */
+
+/* #endregion Page Specific */
