@@ -177,10 +177,12 @@ def redirect_login(request):
     user = User.objects.get(username=request.user)
     if user.staff.role == "d":
         return redirect('doctor:dashboard')
-    if user.staff.role == "a":
+    elif user.staff.role == "a":
         return redirect('home')
-    if user.staff.role == "p":
+    elif user.staff.role == "p":
         return redirect('pharma:shop')
+    elif user.staff.role == 'ac':
+        return redirect('accounts:home')
     else:
         raise Http404("page not found")
 
