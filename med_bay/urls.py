@@ -23,6 +23,7 @@ urlpatterns = [
     path('staff/', include('admins.urls')),
     path('doctor/', include('doctors.urls')),
     path('pharmacy/', include('pharma.urls')),
+    path('accounts/', include('accounts.urls')),
     path("login", LoginView.as_view(template_name="admins/login.html"), name="login"),
     path("logout", LogoutView.as_view(template_name="admins/logout.html"), name="logout"),
     path("confirm", confirm_logout, name='confirm_logout'),
