@@ -79,7 +79,7 @@
 
 .container:hover {
     transform: scale(1.025, 1.025);
-    box-shadow: 0 0 20px #888888;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     background-color: #F00048;
 }
 
@@ -112,6 +112,22 @@
     background-color: RGBA(0, 0, 0, 0.5);
 }
 /* #endregion Buttons */
+
+/* #region Graph */
+.bar-graph-container {
+    display: grid;
+    width: 25vw;
+    
+}
+
+.bar-graph-slice {
+    display: flex;
+    font-size: 1.5vh;
+    height: 4vh;
+    align-items: center;
+    justify-content: center;
+}
+/* #endregion Graph */
 
 /* #region Template */
 
