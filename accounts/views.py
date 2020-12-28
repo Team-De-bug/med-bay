@@ -1,6 +1,6 @@
-from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from admins.utils import validate_access
+from django.shortcuts import render
 
 
 # Create your views here.
