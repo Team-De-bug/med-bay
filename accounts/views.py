@@ -8,3 +8,9 @@ from django.shortcuts import render
 def home(request):
     validate_access(request, 'ac')
     return render(request, 'accounts/home.html')
+
+
+@login_required()
+def entries(request):
+    validate_access(request, 'ac')
+    return render(request, 'accounts/entries.html')
