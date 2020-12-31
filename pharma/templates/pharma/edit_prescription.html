@@ -3,7 +3,7 @@
 {%block body%}
 <div class="root-container">
     <label id="missing-prescrription-label"></label>
-    <h3 id="list-title">Prescription {{prescription.id}}</h3><br>
+    <h3 class="list-title">Prescription {{prescription.id}}</h3><br>
     <div class="container">
         <label class="detail-label" class="patient-detail-label">Name: </label>
         <input class="item-detail" id="{{prescription.case.id}}_name" type="text" value="{{prescription.case.patient.name}}" readonly><br>

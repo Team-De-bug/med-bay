@@ -35,8 +35,8 @@
 
 <!--Summary Detail Div-->
 <div class="root-container">
-    <h3 id="list-title">Doctor's Dashboard</h3><br>
-    <h4 id="list-title">Appointed Patients</h4><br>
+    <h3 class="list-title">Doctor's Dashboard</h3><br>
+    <h4 class="list-title">Appointed Patients</h4><br>
     <div class="list-container">
         {% for case in cases %}
         <div class="container" onclick="showCaseFull({{case.id}})" style="cursor: pointer">
