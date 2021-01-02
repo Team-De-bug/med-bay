@@ -37,7 +37,7 @@
             </tr>
             <tr style="height: 7vh; border-width: 0; background: #194463;" class="accounts-table-entry">
                 <th colspan="6">
-                    <button onclick="saveEntries()" class="accounts-input save-entries">Save</button>
+                    <button onclick="saveEntries()" class="accounts-table-entry-add">Save</button>
                 </th>
             </tr>
         </table>
@@ -130,7 +130,9 @@ function saveEntries() {
         $.ajax({
             url: "{% url 'accounts:entries'%}",
             type: 'GET',
-            data: JSON.stringify(finalEntries),
+            data: {
+                'entries': JSON.stringify(finalEntries)
+            },
             success: function () {
                 alert("Entries Saved");
                 location.reload();
