@@ -1,0 +1,69 @@
+{% extends  'template.html' %}
+{% block body %}
+<div class="root-container">
+    <h3 class="list-title">Chart of Accounts</h3><br><br>
+        <table id="accounts-table" style=" width: 100%; border-collapse: collapse; margin: 0 0 2vh 0;">
+            <tr>
+                <th class="accounts-table-heading" sortable="true">S.No</th>
+                <th class="accounts-table-heading" sortable="true">Date</th>
+                <th class="accounts-table-heading" sortable="true">Name</th>
+                <th class="accounts-table-heading" sortable="true">Type</th>
+                <th class="accounts-table-heading" sortable="true">Currency</th>
+                <th class="accounts-table-heading" sortable="true">Amount</th> 
+            </tr>
+            <tr class="accounts-table-entry-row">
+                <td class="accounts-table-entry">1.</td>
+                <td class="accounts-table-entry">12/13/2020</td>
+                <td class="accounts-table-entry">Restocking Crocin Tablets</t>
+                <td class="accounts-table-entry">Pharmacy Stock</td>
+                <td class="accounts-table-entry">INR (&#8377;)</td>
+                <td class="accounts-table-entry">&#8377; 2000</th>
+            </tr>
+            <tr style="height: 7vh; border-width: 0; background: #194463;" class="accounts-table-entry">
+                <td colspan="6" style="padding: 1vh 1vw 1vh 1vw;">
+                    <div class="accounts-table-entry-add" onclick="addEntry()">+</div>
+                </td>
+            </tr>
+        </table>
+</div>
+{%endblock%}
+
+{% block script %}
+<script>
+function addEntry () {
+
+    var lastEntry = $("#accounts-table tr").eq(-2).children("td");
+    var idText = parseInt(lastEntry[0].innerText);
+    
+    idText++;
+
+    //inputs
+    var dateInput = $("<input>").attr({type: "date"});
+    dateInput.addClass("accounts-input");
+    var nameInput = $("<input>").attr({type: "text"});
+    nameInput.addClass("accounts-input");
+    var typeInput = $("<select></select>");
+    typeInput.addClass("accounts-input");
+    var currencyInput = $("<select></select>");
+    currencyInput.addClass("accounts-input");
+    var amountInput = $("<input>").attr({type: "number"});
+    amountInput.addClass("accounts-input");
+
+    var row = $("<tr></tr>").addClass("accounts-table-entry-row");
+    var id = $("<td>" + idText + ".</td>").addClass("accounts-table-entry");
+    var date = $("<td></td>").addClass("accounts-table-entry");
+    date.append(dateInput);
+    var name = $("<td></td>").addClass("accounts-table-entry");
+    name.append(nameInput);
+    var type = $("<td></td>").addClass("accounts-table-entry");
+    type.append(typeInput);
+    var currency = $("<td></td>").addClass("accounts-table-entry");
+    currency.append(currencyInput);
+    var amount = $("<td></td>").addClass("accounts-table-entry");
+    amount.append(amountInput);
+
+    row.append(id, date, name, type, currency, amount);
+    $("#accounts-table tr").eq(-1).before(row);
+}
+</script>
+{%endblock%}

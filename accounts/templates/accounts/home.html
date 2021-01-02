@@ -1,18 +1,22 @@
 {% extends  'template.html' %}
 {% block body %}
 <div class="root-container">
-    <h3 class="list-title">Patient Archive</h3><br>
     <div class="list-container">
         <div class="container" style="font-size: 2.5vh;">
             <span>
                 <b>Profit and Loss</b><br>
-                <span style="font-size: 4vh;">+ &#8377;<label id="profit-label"></label></span><br>
-                <span style="font-size: 4vh;">- &#8377;<label id="loss-label"></label></span>
+                <span style="font-size: 4vh;">Net Profit: &#8377;<label id="expense-label">80000</label></span>
             </span>
             <div>
-                <div id="profit-and-loss" class="bar-graph-container">
-                    <span id="slice-1" title="100000" class="bar-graph-slice tooltip" data-text="&#8377; 100000">20%</span>
-                    <span id="slice-2" title="20000" class="bar-graph-slice tooltip" data-text="&#8377; 20000">30%</span>
+                <span style="font-size: 4vh;">+ &#8377;<label id="profit-label"></label></span><br>
+                <div id="income" class="bar-graph-container">
+                    <span id="slice-1" title="100000" class="bar-graph-slice tooltip" data-text="&#8377; 100000">&#8377; 100000</span>
+                    <span></span>
+                </div>
+                <span style="font-size: 4vh;">- &#8377;<label id="loss-label"></label></span>
+                <div id="expense" class="bar-graph-container">
+                    <span id="slice-2" title="20000" class="bar-graph-slice tooltip" data-text="&#8377; 20000">&#8377; 20000</span>
+                    <span></span>
                 </div>
             </div> 
         </div>
@@ -20,15 +24,57 @@
             <span>
                 <b>Expenses</b><br>
                 <span style="font-size: 4vh;">&#8377;<label id="expense-label"></label></span>
+                <div id="expenses" class="bar-graph-container">
+                    <span id="slice-1" class="bar-graph-slice tooltip" data-text="&#8377; 2000">30%</span>
+                    <span id="slice-2" class="bar-graph-slice tooltip" data-text="&#8377; 3000">20%</span>
+                    <span id="slice-3" class="bar-graph-slice tooltip" data-text="&#8377; 1000">15%</span>
+                    <span id="slice-4" class="bar-graph-slice tooltip" data-text="&#8377; 2000">25%</span>
+                    <span id="slice-5" class="bar-graph-slice tooltip" data-text="&#8377; 2000">10%</span>
+                </div>
             </span>
             <div>
-                <div id="expenses" class="bar-graph-container">
-                    <span id="slice-1" class="bar-graph-slice tooltip" data-text="&#8377; 2000">20%</span>
-                    <span id="slice-2" class="bar-graph-slice tooltip" data-text="&#8377; 3000">30%</span>
-                    <span id="slice-3" class="bar-graph-slice tooltip" data-text="&#8377; 1000">10%</span>
-                    <span id="slice-4" class="bar-graph-slice tooltip" data-text="&#8377; 2000">20%</span>
-                    <span id="slice-5" class="bar-graph-slice tooltip" data-text="&#8377; 2000">20%</span>
-                </div>
+                <table>
+                    <tr>
+                        <th>
+                            <div style="background-color: #5FBFF9; height: 2vh; width: 2vh; border: 2px black solid; font-size: 0"> </div>
+                        </th>
+                        <td>
+                            Pharmacy Stocks
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div style="background-color: #3B3B58; height: 2vh; width: 2vh; border: 2px black solid; font-size: 0"> </div>
+                        </th>
+                        <td>
+                            Staff Salary
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div style="background-color: #478978; height: 2vh; width: 2vh; border: 2px black solid; font-size: 0"> </div>
+                        </th>
+                        <td>
+                            Medical Equipment
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div style="background-color: #F9DB6D; height: 2vh; width: 2vh; border: 2px black solid; font-size: 0"> </div>
+                        </th>
+                        <td>
+                            Lab Tools
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div style="background-color: #88B7B5; height: 2vh; width: 2vh; border: 2px black solid; font-size: 0"> </div>
+                        </th>
+                        <td>
+                            Other Resources
+                        </td>
+                    </tr>
+                </table>
             </div> 
         </div>
     </div>
@@ -52,17 +98,18 @@ $(document).ready(function (){
     profitAndLossGraph();
 
     function profitAndLossGraph() {
-        var profit = 100000;
-        var loss = 20000;
+        var income = 100000;
+        var expense = 20000;
         var barSliceWidth = ""
-        var total = profit + loss;
+        var total = income + expense;
 
-        var profitSliceWidth = (profit/total)*100;
-        var lossSliceWidth = (loss/total)*100;
-        barSliceWidth = profitSliceWidth + "% " + lossSliceWidth + "%";
+        var incomeSliceWidth = (income/total)*100;
+        var expenseSliceWidth = (expense/total)*100;
+        incomeBarSliceWidth = incomeSliceWidth + "% " + expenseSliceWidth + "%";
+        lossBarSliceWidth = incomeSliceWidth + "% " + expenseSliceWidth + "%";
 
-        var barGraph = $("#profit-and-loss");
-        barGraph.css('gridTemplateColumns', barSliceWidth);
+        var barGraph = $("#income");
+        barGraph.css('gridTemplateColumns', incomeBarSliceWidth);
 
         barGraph.children().first().css({
             'borderRadius': "8px 0 0 8px",
@@ -70,12 +117,25 @@ $(document).ready(function (){
         });
         barGraph.children().last().css({
             'borderRadius': "0 8px 8px 0",
+            'backgroundColor': 'rgba(118,240,91,0.5)'
+        });
+
+        var barGraph = $("#expense");
+        barGraph.css('gridTemplateColumns', lossBarSliceWidth);
+
+        barGraph.children().first().css({
+            'borderRadius': "8px 0 0 8px",
             'backgroundColor': '#ff4040'
+        });
+
+        barGraph.children().last().css({
+            'borderRadius': "0 8px 8px 0",
+            'backgroundColor': 'rgba(255,64,64,0.5)',
         });
     }
 
     function expensesGraph() {
-        var expenses = [2000, 3000, 1000, 2000, 2000];
+        var expenses = [3000, 2000, 1500, 2500, 1000];
         var colours = ["#5FBFF9", "#3B3B58", "#478978", "#F9DB6D", "#88B7B5"]
         var barSliceWidth = "";
         var totalExpense = 0;

@@ -8,3 +8,4 @@ __pycache__
 /.idea/vcs.xml
 scripts/run.sh
 .vscode/med-bay snippets.code-snippets
+admins/static/style.css

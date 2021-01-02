@@ -156,10 +156,12 @@
 
 .bar-graph-slice {
     display: flex;
-    font-size: 1.5vh;
+    font-size: 2vh;
     height: 4vh;
     align-items: center;
     justify-content: center;
+    font-weight: bold;
+    color:RGBA(0, 0, 0, 0.75)
 }
 /* #endregion Graph */
 
@@ -743,5 +745,54 @@ button {
 }
 
 /* #endregion Home */
+
+/* #region Accounts */
+
+.accounts-table-heading {
+    height: 7vh;
+    background-color: #2C82C1;
+}
+
+.accounts-table-entry {
+    padding: 1vh;
+    background-color: #215880;
+}
+
+.accounts-table-entry-row {
+    background-color: #215880;
+    border: 3px solid #194463;
+    border-width: 3px 0 0 0;
+    height: 7vh
+}
+
+.accounts-table-entry-add {
+    background: white;
+    color: black;
+    border-radius: 8px;
+    height: 5vh;
+    box-shadow: 0 0 10px RGBA(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.1s;
+}
+
+.accounts-table-entry-add:hover {
+    transform: scale(1.01, 1.1);
+}
+
+.accounts-input {
+    width: 90%;
+    height: 5vh;
+    border-radius: 8px;
+    border-style: none;
+    background-color: rgba(0, 0, 0, 0.25);
+    color: white;
+    font-family: 'Rubik';
+    font-size: 2vh;
+    text-align: center;
+}
+
+/* #endregion Accounts */
 
 /* #endregion Page Specific */
