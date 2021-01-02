@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from admins.utils import validate_access
 from django.shortcuts import render
+from .models import Entries
 
 
 # Create your views here.
@@ -13,4 +14,5 @@ def home(request):
 @login_required()
 def entries(request):
     validate_access(request, 'ac')
-    return render(request, 'accounts/entries.html')
+    entries = Entries.objects.all()
+    return render(request, 'accounts/entries.html', context={"entries": entries})
