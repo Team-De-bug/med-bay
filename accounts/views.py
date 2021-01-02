@@ -14,5 +14,11 @@ def home(request):
 @login_required()
 def entries(request):
     validate_access(request, 'ac')
+
     entries = Entries.objects.all()
-    return render(request, 'accounts/entries.html', context={"entries": entries})
+    cats = []
+    for cat in entries.values('cat').distinct():
+        cats.append(cat['cat'])
+    print(cats)
+
+    return render(request, 'accounts/entries.html', context={"entries": entries, "cats": cats})
