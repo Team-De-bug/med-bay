@@ -504,6 +504,34 @@ button {
     margin: auto;
     padding: 1%;
 }
+
+.dropdown-option {
+    background-color: var(--base-red);
+    color: white;
+    font-size: 3vh;
+    border-radius: 8px;
+}
+
+.dropdown-option:hover {
+    background-color: var(--darker-red);
+}
+
+.dropdown-option:focus {
+    background-color: var(--darker-red);
+}
+
+.dropdown-option:active {
+    background-color: var(--darker-red);
+}
+
+.dropdown-option:focus-visible {
+    background-color: var(--darker-red);
+}
+
+.dropdown-option:focus-within {
+    background-color: var(--darker-red);
+}
+
 /* #endregion Form */
 
 /* #endregion Common Styling */
@@ -755,7 +783,7 @@ button {
 
 .accounts-table-entry {
     padding: 1vh;
-    background-color: #215880;
+    /* background-color: #215880; */
 }
 
 .accounts-table-entry-row {
@@ -791,6 +819,27 @@ button {
     font-family: 'Rubik';
     font-size: 2vh;
     text-align: center;
+}
+
+.income {
+    background-color: #41D281;
+    border-color: #33a866;
+}
+
+.expense {
+    background-color: var(--base-red);
+    border-color: var(--darker-red);
+}
+
+.save-entries {
+    transition: all 0.2s;
+    background: white;
+    color: black;
+}
+
+.save-entries:hover {
+    transform: scale(1.01, 1.01);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.75);
 }
 
 /* #endregion Accounts */

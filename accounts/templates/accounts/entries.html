@@ -7,22 +7,38 @@
                 <th class="accounts-table-heading" sortable="true">S.No</th>
                 <th class="accounts-table-heading" sortable="true">Date</th>
                 <th class="accounts-table-heading" sortable="true">Name</th>
+                <th class="accounts-table-heading" sortable="true">Category</th>
                 <th class="accounts-table-heading" sortable="true">Type</th>
-                <th class="accounts-table-heading" sortable="true">Currency</th>
                 <th class="accounts-table-heading" sortable="true">Amount</th> 
             </tr>
-            <tr class="accounts-table-entry-row">
-                <td class="accounts-table-entry">1.</td>
-                <td class="accounts-table-entry">12/13/2020</td>
-                <td class="accounts-table-entry">Restocking Crocin Tablets</t>
-                <td class="accounts-table-entry">Pharmacy Stock</td>
-                <td class="accounts-table-entry">INR (&#8377;)</td>
-                <td class="accounts-table-entry">&#8377; 2000</th>
+            {% for entry in entries %}
+
+            {% if entry.type %}
+            <tr class="accounts-table-entry-row income">
+            {% else %}
+            <tr class="accounts-table-entry-row expense">
+            {% endif %}
+                <td class="accounts-table-entry">{{entry.id}}.</td>
+                <td class="accounts-table-entry">{{entry.date}}</td>
+                <td class="accounts-table-entry">{{entry.desc}}</t>
+                <td class="accounts-table-entry">{{entry.cat}}</td>
+                {% if entry.type %}
+                <td class="accounts-table-entry">Income</td>
+                {% else %}
+                <td class="accounts-table-entry">Expense</td>
+                {%endif%}
+                <td class="accounts-table-entry">&#8377; {{entry.price}}</th>
             </tr>
+            {%endfor%}
             <tr style="height: 7vh; border-width: 0; background: #194463;" class="accounts-table-entry">
                 <td colspan="6" style="padding: 1vh 1vw 1vh 1vw;">
                     <div class="accounts-table-entry-add" onclick="addEntry()">+</div>
                 </td>
+            </tr>
+            <tr style="height: 7vh; border-width: 0; background: #194463;" class="accounts-table-entry">
+                <th colspan="6">
+                    <button onclick="saveEntries()" class="accounts-input save-entries">Save</button>
+                </th>
             </tr>
         </table>
 </div>
@@ -32,24 +48,38 @@
 <script>
 function addEntry () {
 
-    var lastEntry = $("#accounts-table tr").eq(-2).children("td");
+    var lastEntry = $("#accounts-table tr").eq(-3).children("td");
     var idText = parseInt(lastEntry[0].innerText);
     
     idText++;
 
     //inputs
-    var dateInput = $("<input>").attr({type: "date"});
+    var dateInput = $("<input>").attr("type", "date");
+    dateInput.attr(id, idText+"_date");
     dateInput.addClass("accounts-input");
-    var nameInput = $("<input>").attr({type: "text"});
+    var nameInput = $("<input>").attr("type", "text");
+    nameInput.attr(id, idText+"_name");
     nameInput.addClass("accounts-input");
     var typeInput = $("<select></select>");
+    typeInput.attr(id, idText+"_type");
     typeInput.addClass("accounts-input");
-    var currencyInput = $("<select></select>");
-    currencyInput.addClass("accounts-input");
-    var amountInput = $("<input>").attr({type: "number"});
+    {% for cat in cats %}
+        var cat = $("<option>{{cat}}</option>").addClass("dropdown-option");
+        typeInput.append(cat);
+    {% endfor %}
+    var incomeInput = $("<select></select>");
+    incomeInput.attr(id, idText+"_income/expense");
+    incomeInput.addClass("accounts-input");
+    var optionIncome = $("<option>Income</option>").addClass("dropdown-option");
+    var optionExpense = $("<option>Expense</option>").addClass("dropdown-option");
+    incomeInput.append(optionIncome, optionExpense);
+    var amountInput = $("<input>").attr(type, "number");
+    amountInput.attr(id, idText+"_amount");
     amountInput.addClass("accounts-input");
 
     var row = $("<tr></tr>").addClass("accounts-table-entry-row");
+    row.attr("id", idText+"_row");
+    row.addClass("new-entry");
     var id = $("<td>" + idText + ".</td>").addClass("accounts-table-entry");
     var date = $("<td></td>").addClass("accounts-table-entry");
     date.append(dateInput);
@@ -57,13 +87,60 @@ function addEntry () {
     name.append(nameInput);
     var type = $("<td></td>").addClass("accounts-table-entry");
     type.append(typeInput);
-    var currency = $("<td></td>").addClass("accounts-table-entry");
-    currency.append(currencyInput);
+    var income = $("<td></td>").addClass("accounts-table-entry");
+    income.append(incomeInput);
     var amount = $("<td></td>").addClass("accounts-table-entry");
     amount.append(amountInput);
+    var save = $("<button>Save</button>")
 
-    row.append(id, date, name, type, currency, amount);
-    $("#accounts-table tr").eq(-1).before(row);
+    row.append(id, date, name, type, income, amount);
+    $("#accounts-table tr").eq(-2).before(row);
 }
+
+function saveEntries() {
+    var entries = document.getElementsByClassName("new-entry");
+    var finalEntries = {};
+
+    var confirmSave = false;
+
+    for (i = 0; i < entries.length; i++) {
+
+        var id = entries[i].id.replace("_row", "");
+        var date = entries[i].childNodes[1].childNodes[0].value;
+        var desc = entries[i].childNodes[2].childNodes[0].value;
+        var cat = entries[i].childNodes[3].childNodes[0].value;
+        var type = entries[i].childNodes[4].childNodes[0].value;
+        var amount = entries[i].childNodes[5].childNodes[0].value;
+
+        if (date == "" || desc == "" || cat == "" || type == "" || amount == "") {
+            alert("Please Enter A Value In All The Fields");
+            confirmSave = false;
+        } else {
+            confirmSave = true;
+        }
+
+        console.log(date, desc, cat, type, amount);
+
+        var entry = [date, desc, cat, type, amount];
+
+        finalEntries[id] = entry;
+    }
+
+    if (confirmSave) {
+        $.ajax({
+            url: "{% url 'accounts:entries'%}",
+            type: 'GET',
+            data: JSON.stringify(finalEntries),
+            success: function () {
+                alert("Entries Saved");
+                location.reload();
+            },
+            error: function () {
+                alert("Unable to Save Entries");
+            }
+        });
+    }
+}
+
 </script>
 {%endblock%}

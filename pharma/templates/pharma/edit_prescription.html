@@ -12,7 +12,10 @@
             <div class="prescriptions-list" style="flex-direction: column;">
                 {% for medicineP in prescription.medicine_set.all %}
                 {% if medicineP.item in all_medicines %}
-                <div class="prescription-full medicine-single"><select id="medicine-list"><option>{{medicineP.item.name}}</option></select>
+                <div class="add-medicine medicine-single">
+                    <select id="medicine-list">
+                        <option>{{medicineP.item.name}}</option>
+                    </select>
                     <input class="item-detail" id="medicine-quantity" type="number" value="{{medicineP.quantity}}" step="1" min="1" max="20" onkeydown="return false" readonly>
                 </div>
                 {%endif%}
@@ -29,6 +32,8 @@
 
 {%block script%}
 <script>
+
+    var medicineId = 0;
 
     function getMedicines() {
 
@@ -47,8 +52,6 @@
     }
 
     function addMedicine() {
-
-        var medicineId = 0;
 
         var medicines = getMedicines();
 

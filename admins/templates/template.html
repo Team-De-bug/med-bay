@@ -60,6 +60,9 @@
                     <a class="nav-link" href="{% url 'admins:list_cases' %}"><li class="nav-item">Cases List</li></a>
                     <a class="nav-link" href="{% url 'admins:create_patient' %}"><li class="nav-item">Create Patient</li></a>
                     <a class="nav-link" href="{% url 'admins:create_case' %}"><li class="nav-item">Create Case</li></a>
+                    {% elif user.staff.role == "ac" %}
+                    <a class="nav-link" href="{% url 'accounts:home' %}"><li class="nav-item">Dashboard</li></a>
+                    <a class="nav-link" href="{% url 'accounts:entries' %}"><li class="nav-item">Chart Of Accounts</li></a>
                     {%endif%}
                 </ul>
             </div>
