@@ -14,6 +14,7 @@ def home(request):
     # Getting the expenses
     expenses = Entries.objects.filter(type=False)
 
+    # Summing all the prices in a category
     exp_tally = {}
     for exp in expenses:
         if exp.cat not in exp_tally:
