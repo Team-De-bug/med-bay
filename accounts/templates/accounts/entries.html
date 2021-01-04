@@ -4,12 +4,12 @@
     <h3 class="list-title">Chart of Accounts</h3><br><br>
         <table id="accounts-table" style=" width: 100%; border-collapse: collapse; margin: 0 0 2vh 0;">
             <tr>
-                <th class="accounts-table-heading" sortable="true">S.No</th>
-                <th class="accounts-table-heading" sortable="true">Date</th>
-                <th class="accounts-table-heading" sortable="true">Name</th>
-                <th class="accounts-table-heading" sortable="true">Category</th>
-                <th class="accounts-table-heading" sortable="true">Type</th>
-                <th class="accounts-table-heading" sortable="true">Amount</th> 
+                <th class="accounts-table-heading">S.No</th>
+                <th class="accounts-table-heading">Date</th>
+                <th class="accounts-table-heading">Name</th>
+                <th class="accounts-table-heading">Category</th>
+                <th class="accounts-table-heading">Type</th>
+                <th class="accounts-table-heading">Amount</th> 
             </tr>
             {% for entry in entries %}
 
@@ -30,14 +30,13 @@
                 <td class="accounts-table-entry">&#8377; {{entry.price}}</th>
             </tr>
             {%endfor%}
-            <tr style="height: 7vh; border-width: 0; background: #194463;" class="accounts-table-entry">
-                <td colspan="6" style="padding: 1vh 1vw 1vh 1vw;">
-                    <div class="accounts-table-entry-add" onclick="addEntry()">+</div>
-                </td>
-            </tr>
-            <tr style="height: 7vh; border-width: 0; background: #194463;" class="accounts-table-entry">
-                <th colspan="6">
-                    <button onclick="saveEntries()" class="accounts-table-entry-add">Save</button>
+            <tr style="height: 7vh;" class="accounts-table-heading">
+                <th style="width: 8vw;" class="accounts-table-heading">
+                    <button onclick="addEntry()" class="entries-button">+</button>
+                </th>
+                <td colspan="4"></td>
+                <th style="width: 10vw;" class="accounts-table-heading">
+                    <button onclick="saveEntries()" class="entries-button">Save</button>
                 </th>
             </tr>
         </table>
@@ -48,33 +47,38 @@
 <script>
 function addEntry () {
 
-    var lastEntry = $("#accounts-table tr").eq(-3).children("td");
+    var lastEntry = $("#accounts-table tr").eq(-2).children("td");
     var idText = parseInt(lastEntry[0].innerText);
     
     idText++;
 
     //inputs
     var dateInput = $("<input>").attr("type", "date");
-    dateInput.attr(id, idText+"_date");
+    dateInput.attr("id", idText+"_date");
     dateInput.addClass("accounts-input");
     var nameInput = $("<input>").attr("type", "text");
-    nameInput.attr(id, idText+"_name");
+    nameInput.attr("id", idText+"_name");
     nameInput.addClass("accounts-input");
     var typeInput = $("<select></select>");
-    typeInput.attr(id, idText+"_type");
+    typeInput.attr({
+        "id": idText+"_type",
+        "onchange": "checkType("+idText+")"
+    });
     typeInput.addClass("accounts-input");
     {% for cat in cats %}
         var cat = $("<option>{{cat}}</option>").addClass("dropdown-option");
         typeInput.append(cat);
     {% endfor %}
+    var newCat = $("<option>Add New</option>").addClass("dropdown-option");
+    typeInput.append(newCat);
     var incomeInput = $("<select></select>");
-    incomeInput.attr(id, idText+"_income/expense");
+    incomeInput.attr("id", idText+"_income/expense");
     incomeInput.addClass("accounts-input");
     var optionIncome = $("<option>Income</option>").addClass("dropdown-option");
     var optionExpense = $("<option>Expense</option>").addClass("dropdown-option");
     incomeInput.append(optionIncome, optionExpense);
     var amountInput = $("<input>").attr(type, "number");
-    amountInput.attr(id, idText+"_amount");
+    amountInput.attr("id", idText+"_amount");
     amountInput.addClass("accounts-input");
 
     var row = $("<tr></tr>").addClass("accounts-table-entry-row");
@@ -94,7 +98,7 @@ function addEntry () {
     var save = $("<button>Save</button>")
 
     row.append(id, date, name, type, income, amount);
-    $("#accounts-table tr").eq(-2).before(row);
+    $("#accounts-table tr").eq(-1).before(row);
 }
 
 function saveEntries() {
@@ -142,6 +146,30 @@ function saveEntries() {
             }
         });
     }
+}
+
+function checkType(id) {
+    var typeInput = $('#'+id+'_type');
+    if (typeInput.val() == "Add New"){
+        $("#"+id+"_type").replaceWith('<input type="text" id="'+id+'_type" class="accounts-input" ondblclick="selectType('+id+')">');
+    }
+}
+
+function selectType(id) {
+    var typeInput = $("<select></select>");
+    typeInput.attr({
+        "id": id+"_type",
+        "onchange": "checkType("+id+")"
+    });
+    typeInput.addClass("accounts-input");
+    {% for cat in cats %}
+        var cat = $("<option>{{cat}}</option>").addClass("dropdown-option");
+        typeInput.append(cat);
+    {% endfor %}
+    var newCat = $("<option>Add New</option>").addClass("dropdown-option");
+    typeInput.append(newCat);
+
+    $("#"+id+"_type").replaceWith(typeInput);
 }
 
 </script>
