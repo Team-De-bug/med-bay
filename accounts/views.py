@@ -13,7 +13,15 @@ def home(request):
 
     # Getting the expenses
     expenses = Entries.objects.filter(type=False)
-    return render(request, 'accounts/home.html', context={"expenses": expenses})
+
+    exp_tally = {}
+    for exp in expenses:
+        if exp.cat not in exp_tally:
+            exp_tally[exp.cat] = exp.price
+        else:
+            exp_tally[exp.cat] += exp.price
+
+    return render(request, 'accounts/home.html', context={"exp_tally": exp_tally})
 
 
 @login_required()
