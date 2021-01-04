@@ -10,7 +10,10 @@ import json
 @login_required()
 def home(request):
     validate_access(request, 'ac')
-    return render(request, 'accounts/home.html')
+
+    # Getting the expenses
+    expenses = Entries.objects.filter(type=False)
+    return render(request, 'accounts/home.html', context={"expenses": expenses})
 
 
 @login_required()
