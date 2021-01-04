@@ -10,3 +10,4 @@ scripts/run.sh
 .vscode/med-bay snippets.code-snippets
 admins/static/style.css
 .vscode/tasks.json
+.idea/*
