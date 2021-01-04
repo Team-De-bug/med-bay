@@ -1,0 +1,3 @@
+Requirements for this projects -
+Main branch - Django
+Mobile_viewer - Android Studio
