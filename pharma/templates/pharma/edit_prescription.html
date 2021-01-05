@@ -12,9 +12,9 @@
             <div class="prescriptions-list" style="flex-direction: column;">
                 {% for medicineP in prescription.medicine_set.all %}
                 {% if medicineP.item in all_medicines %}
-                <div class="add-medicine medicine-single">
+                <div class="add-medicine medicine-single medicine-existing">
                     <select id="medicine-list">
-                        <option>{{medicineP.item.name}}</option>
+                        <option id="medicineP.item.id">{{medicineP.item.name}}</option>
                     </select>
                     <input class="item-detail" id="medicine-quantity" type="number" value="{{medicineP.quantity}}" step="1" min="1" max="20" onkeydown="return false" readonly>
                 </div>
@@ -96,12 +96,16 @@
 
         var medicineContainers = $(".medicine-single");
 
-
         for (i = 0; i < medicineContainers.length; i++) {
             var medicineContainer = medicineContainers[i];
             var inputs = medicineContainer.childNodes;
-            var itemSelector = inputs[0].value;
-            var itemQuantity = inputs[2].value;
+            if (medicineContainer.classList.contains("medicine-existing")) {
+                var itemSelector = inputs[1].value;
+                var itemQuantity = inputs[3].value;
+            } else {
+                var itemSelector = inputs[0].value;
+                var itemQuantity = inputs[2].value;
+            }
             var itemId = 0;
             var values = [];
             for (var medicine in medicines) {

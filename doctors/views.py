@@ -72,6 +72,9 @@ def case_archive(request):
         if case.patient not in patients:
             patients[case.patient] = case.patient.cases_set.filter(status='d')
 
+    case = Cases.objects.get(id=8)
+    for medicine in case.prescription.editedprescription.medicines.all(): print("Medicine" + medicine)
+
     print(patients)
     return render(request, 'doctors/case_archive.html', context={'patients': patients})
 

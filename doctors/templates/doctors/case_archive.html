@@ -40,6 +40,14 @@
                 {% endfor %}
             </ol>
         {%endif%}
+        {% if case.prescription.editedprescription.medicines.all %}
+        <label> Edited By {{case.prescription.editedprescription.user.user.username}}</label>
+            <ol class="item-detail" style="margin-left: 3vw;">
+                {% for medicine in case.prescription.editedprescription.medicines.all %}
+                <li style="margin-left: 2vw;">{{medicine.item.name}} x {{medicine.quantity}}</li>
+                {% endfor %}
+            </ol>
+        {%endif%}
     </div>
     {% endfor %}
     {% endfor %}
