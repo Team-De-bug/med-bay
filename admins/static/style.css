@@ -61,7 +61,7 @@
     position: absolute;
     transform: translateY(-5.8125vh) translateX(0vw);
     padding: 1vh;
-    min-width: 5vw;
+    min-width: 8vw;
     border-radius: 8px;
     background: black;
     color: white;

@@ -182,7 +182,7 @@ def redirect_login(request):
     elif user.staff.role == "p":
         return redirect('pharma:shop')
     elif user.staff.role == 'ac':
-        return redirect('accounts:home')
+        return redirect('accounts:dashboard')
     else:
         raise Http404("page not found")
 

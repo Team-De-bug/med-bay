@@ -19,14 +19,15 @@ $(document).ready(function(){
     var meta = $('#account-role');
     
     role = meta.text();
-    console.log(role);
     
     if (role === "d") {
-        role = "(Doctor)";
+        role = " (Doctor)";
     } else if (role === "p") {
-        role = "(Pharmacy Manager)";
+        role = " (Pharmacy Manager)";
+    }  else if (role === "ac") {
+        role = " (Accountant)";
     } else if (role === "a") {
-        role = "(Admin)";
+        role = " (Admin)";
     }
     
     $('#role').text(role);

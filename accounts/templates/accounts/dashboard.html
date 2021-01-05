@@ -25,55 +25,13 @@
                 <b>Expenses</b><br>
                 <span style="font-size: 4vh;">&#8377;<label id="expense-label"></label></span>
                 <div id="expenses" class="bar-graph-container">
-                    <span id="slice-1" class="bar-graph-slice tooltip" data-text="&#8377; 2000">30%</span>
-                    <span id="slice-2" class="bar-graph-slice tooltip" data-text="&#8377; 3000">20%</span>
-                    <span id="slice-3" class="bar-graph-slice tooltip" data-text="&#8377; 1000">15%</span>
-                    <span id="slice-4" class="bar-graph-slice tooltip" data-text="&#8377; 2000">25%</span>
-                    <span id="slice-5" class="bar-graph-slice tooltip" data-text="&#8377; 2000">10%</span>
+                    {% for cat, price in exp_tally.items %}
+                        <span id="slice-1" class="bar-graph-slice tooltip" data-text="&#8377; {{price}}"></span>
+                    {%endfor%}
                 </div>
             </span>
             <div>
-                <table>
-                    <tr>
-                        <th>
-                            <div style="background-color: #5FBFF9; height: 2vh; width: 2vh; border: 2px black solid; font-size: 0"> </div>
-                        </th>
-                        <td>
-                            Pharmacy Stocks
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            <div style="background-color: #3B3B58; height: 2vh; width: 2vh; border: 2px black solid; font-size: 0"> </div>
-                        </th>
-                        <td>
-                            Staff Salary
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            <div style="background-color: #478978; height: 2vh; width: 2vh; border: 2px black solid; font-size: 0"> </div>
-                        </th>
-                        <td>
-                            Medical Equipment
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            <div style="background-color: #F9DB6D; height: 2vh; width: 2vh; border: 2px black solid; font-size: 0"> </div>
-                        </th>
-                        <td>
-                            Lab Tools
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            <div style="background-color: #88B7B5; height: 2vh; width: 2vh; border: 2px black solid; font-size: 0"> </div>
-                        </th>
-                        <td>
-                            Other Resources
-                        </td>
-                    </tr>
+                <table id="category-table">
                 </table>
             </div> 
         </div>
@@ -83,14 +41,6 @@
 
 {% block script %}
 <script>
-function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
 
 $(document).ready(function (){
 
@@ -135,10 +85,45 @@ $(document).ready(function (){
     }
 
     function expensesGraph() {
-        var expenses = [3000, 2000, 1500, 2500, 1000];
+
+        var expenses = {};
+
+        {% for cat, price in exp_tally.items %}
+            expenses["{{cat}}"] = {{price}};
+        {%endfor%}
+
         var colours = ["#5FBFF9", "#3B3B58", "#478978", "#F9DB6D", "#88B7B5"]
         var barSliceWidth = "";
         var totalExpense = 0;
+
+        var categories = {};
+
+        var categoryCount = 0;
+
+        for (var category in expenses) {
+            categories[category] = colours[categoryCount];
+            categoryCount++;
+        }
+
+        for (var category in categories) {
+            console.log(category + ":" + categories[category]);
+            
+            var categoryTable = $("#category-table")
+            var categoryRow = $("<tr></tr>");
+            var categoryBox = $("<th></th>");
+            var categoryBoxColor = $("<div></div>");
+            categoryBoxColor.css({
+                                    "backgroundColor": categories[category],
+                                    "height": "2vh",
+                                    "width": "2vh",
+                                    "fontSize": 0
+                                });
+            categoryBox.append(categoryBoxColor);
+            var categoryLable = $("<td>"+ category +"</td>");
+
+            categoryRow.append(categoryBox, categoryLable);
+            categoryTable.append(categoryRow);
+        }
 
         for (var expense in expenses) {
             totalExpense += expenses[expense];

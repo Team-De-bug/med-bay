@@ -8,7 +8,7 @@ import json
 
 # Create your views here.
 @login_required()
-def home(request):
+def dashboard(request):
     validate_access(request, 'ac')
 
     # Getting the expenses
@@ -22,7 +22,7 @@ def home(request):
         else:
             exp_tally[exp.cat] += exp.price
 
-    return render(request, 'accounts/home.html', context={"exp_tally": exp_tally})
+    return render(request, 'accounts/dashboard.html', context={"exp_tally": exp_tally})
 
 
 @login_required()
