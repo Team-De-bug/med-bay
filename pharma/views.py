@@ -183,6 +183,10 @@ def bill(request):
     bill = utils.generate_bill(name=request.GET["name"], contact_num=request.GET["phone"],
                                date=timezone.now(), orders=orders)
 
+    # Clearing the cart
+    for order in orders:
+        order.delete()
+
     # getting all the bill units to send in context
     bill_units = bill.billunit_set.all()
     print(bill_units, bill)
@@ -299,9 +303,14 @@ def edit_prescription(request):
             item = items.get(id=med_id)
             med = EPMedicine(prescription=epres, item=item, quantity=int(medicine_ids[med_id]))
             med.save()
+            print(med, 'saved')
 
         bill = utils.generate_bill(name=pres.case.patient.name, contact_num=pres.case.patient.phone,
                                    date=timezone.now(), orders=epres.medicines.all())
+
+        for med in epres.medicines.all():
+            print(med)
+
         pres.bill = bill
         pres.status = 'd'
         pres.save()

@@ -28,10 +28,7 @@ def generate_bill(name, contact_num, date, orders):
         unit = BillUnit(name=order.item.name, quantity=order.quantity,
                         desc=order.item.desc, price=order.item.price,
                         bill=bill)
-
         total += order.item.price * order.quantity
-
         unit.save()
-        order.delete()
 
     return bill
