@@ -33,14 +33,16 @@ def dashboard(request):
     exp_tally = dict(values)
 
     # Summing the income and expenses
-    tally = {'income': 0, 'expense': 0}
+    income, expense = 0, 0
     for i in all:
         if i.type:
-            tally['income'] += i.price
+            income += i.price
         else:
-            tally['expense'] += i.price
+            expense += i.price
 
-    return render(request, 'accounts/dashboard.html', context={"exp_tally": exp_tally, 'tally': tally})
+    return render(request, 'accounts/dashboard.html', context={"exp_tally": exp_tally,
+                                                               "income": income,
+                                                               "expense": expense})
 
 
 @login_required()
