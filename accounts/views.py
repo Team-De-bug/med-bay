@@ -12,7 +12,8 @@ def dashboard(request):
     validate_access(request, 'ac')
 
     # Getting the expenses
-    expenses = Entries.objects.filter(type=False)
+    all = Entries.objects.all()
+    expenses = all.filter(type=False)
 
     # Summing all the prices in a category
     exp_tally = {}
@@ -22,7 +23,24 @@ def dashboard(request):
         else:
             exp_tally[exp.cat] += exp.price
 
-    return render(request, 'accounts/dashboard.html', context={"exp_tally": exp_tally})
+    # Finding the top 4 categories
+    values = exp_tally.items()
+    values = sorted(values, reverse=True, key=lambda amt: amt[1])
+    if len(values) > 5:
+        others = sum([i[1] for i in values[3:]])
+        values = values[:4]
+        values.append(('others', others))
+    exp_tally = dict(values)
+
+    # Summing the income and expenses
+    tally = {'income': 0, 'expense': 0}
+    for i in all:
+        if i.type:
+            tally['income'] += i.price
+        else:
+            tally['expense'] += i.price
+
+    return render(request, 'accounts/dashboard.html', context={"exp_tally": exp_tally, 'tally': tally})
 
 
 @login_required()
