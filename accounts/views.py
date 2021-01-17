@@ -3,6 +3,7 @@ from admins.utils import validate_access
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Entries
+from .utils import *
 import json
 
 
@@ -14,23 +15,13 @@ def dashboard(request):
     # Getting the expenses
     all = Entries.objects.all()
     expenses = all.filter(type=False)
+    incomes = all.filter(type=True)
 
     # Summing all the prices in a category
-    exp_tally = {}
-    for exp in expenses:
-        if exp.cat not in exp_tally:
-            exp_tally[exp.cat] = exp.price
-        else:
-            exp_tally[exp.cat] += exp.price
-
-    # Finding the top 4 categories
-    values = exp_tally.items()
-    values = sorted(values, reverse=True, key=lambda amt: amt[1])
-    if len(values) > 5:
-        others = sum([i[1] for i in values[3:]])
-        values = values[:4]
-        values.append(('others', others))
-    exp_tally = dict(values)
+    exp_tally = sum_and_order(expenses)
+    inc_tally = sum_and_order(incomes)
+    print(exp_tally)
+    print(inc_tally)
 
     # Summing the income and expenses
     income, expense = 0, 0
@@ -40,9 +31,8 @@ def dashboard(request):
         else:
             expense += i.price
 
-    return render(request, 'accounts/dashboard.html', context={"exp_tally": exp_tally,
-                                                               "income": income,
-                                                               "expense": expense})
+    return render(request, 'accounts/dashboard.html', context={"exp_tally": exp_tally, "inc_tally": inc_tally,
+                                                               "income": income, "expense": expense})
 
 
 @login_required()
