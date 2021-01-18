@@ -5,6 +5,7 @@ from admins.utils import validate_access
 from django.http import HttpResponse
 from .forms import CaseProcessing
 from patients.models import Cases
+from datetime import date
 import json
 
 
@@ -16,7 +17,8 @@ def appointment(request):
     user = validate_access(request, 'd')
 
     # Getting the list of patients who are to be attended
-    cases = user.staff.doctor.cases_set.filter(status="t")
+    d = date.today()
+    cases = user.staff.doctor.cases_set.filter(status="t", appointed_date__date=d)
 
     # Checking if a patient diagnosis is being sent
     if request.method == "POST":
