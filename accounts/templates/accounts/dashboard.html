@@ -2,38 +2,55 @@
 {% block body %}
 <div class="root-container">
     <div class="list-container">
-        <div class="container" style="font-size: 2.5vh;">
+        <div class="container" style="font-size: 2.5vh; width: 100%; margin-top: 5vh">
             <span>
                 <b>Profit and Loss</b><br>
-                <span style="font-size: 4vh;">Net Profit: &#8377;<label id="expense-label">80000</label></span>
+                <span style="font-size: 4vh;">Net Profit: &#8377;<label id="net-profit-label">{{netprofit}}</label></span>
             </span>
             <div>
-                <span style="font-size: 4vh;">+ &#8377;<label id="profit-label"></label></span><br>
+                <span style="font-size: 4vh;">+ &#8377;<label id="profit-label">{{income}}</label></span><br>
                 <div id="income" class="bar-graph-container">
-                    <span id="slice-1" title="100000" class="bar-graph-slice tooltip" data-text="&#8377; 100000">&#8377; 100000</span>
+                    <span id="slice-1" class="bar-graph-slice tooltip" data-text="&#8377; {{income}}"></span>
                     <span></span>
                 </div>
-                <span style="font-size: 4vh;">- &#8377;<label id="loss-label"></label></span>
+                <span style="font-size: 4vh;">- &#8377;<label id="loss-label">{{expense}}</label></span>
                 <div id="expense" class="bar-graph-container">
-                    <span id="slice-2" title="20000" class="bar-graph-slice tooltip" data-text="&#8377; 20000">&#8377; 20000</span>
+                    <span id="slice-2" class="bar-graph-slice tooltip" data-text="&#8377; {{expense}}"></span>
                     <span></span>
                 </div>
             </div> 
         </div>
-        <div class="container" style="font-size: 2.5vh;">
-            <span>
-                <b>Expenses</b><br>
-                <span style="font-size: 4vh;">&#8377;<label id="expense-label"></label></span>
-                <div id="expenses" class="bar-graph-container">
-                    {% for cat, price in exp_tally.items %}
-                        <span id="slice-1" class="bar-graph-slice tooltip" data-text="&#8377; {{price}}"></span>
-                    {%endfor%}
-                </div>
-            </span>
-            <div>
-                <table id="category-table">
-                </table>
-            </div> 
+        <div style="width: 100%; display: flex;">
+            <div class="container" style="font-size: 2.5vh; width: 100%; flex:1">
+                <span>
+                    <b>Income</b><br>
+                    <span style="font-size: 4vh;">&#8377;<label id="income-label">{{income}}</label></span>
+                    <div id="incomes" class="bar-graph-container">
+                        {% for cat, price in inc_tally.items %}
+                            <span id="slice-1" class="bar-graph-slice tooltip" data-text="&#8377; {{price}}"></span>
+                        {%endfor%}
+                    </div>
+                </span>
+                <div style="margin-top: 2.5vh">
+                    <table id="income-category-table">
+                    </table>
+                </div> 
+            </div>
+            <div class="container" style="font-size: 2.5vh; width: 100%; flex:1">
+                <span>
+                    <b>Expenses</b><br>
+                    <span style="font-size: 4vh;">&#8377;<label id="expense-label">{{expense}}</label></span>
+                    <div id="expenses" class="bar-graph-container">
+                        {% for cat, price in exp_tally.items %}
+                            <span id="slice-1" class="bar-graph-slice tooltip" data-text="&#8377; {{price}}"></span>
+                        {%endfor%}
+                    </div>
+                </span>
+                <div style="margin-top: 2.5vh">
+                    <table id="expense-category-table">
+                    </table>
+                </div> 
+            </div>
         </div>
     </div>
 </div>
@@ -42,65 +59,98 @@
 {% block script %}
 <script>
 
+var expenses = {};
+
+{% for cat, price in exp_tally.items %}
+    expenses["{{cat}}"] = {{price}};
+{% endfor %}
+
+var incomes = {};
+
+{% for cat, price in inc_tally.items %}
+    incomes["{{cat}}"] = {{price}};
+{% endfor %}
+
 $(document).ready(function (){
 
-    expensesGraph();
     profitAndLossGraph();
 
+    categoryGraph(expenses, "expense-category-table", "expenses");
+
+    categoryGraph(incomes, "income-category-table", "incomes");
+
     function profitAndLossGraph() {
-        var income = 100000;
-        var expense = 20000;
+        var income = parseInt({{income}});
+        var expense = parseInt({{expense}});
         var barSliceWidth = ""
         var total = income + expense;
 
-        var incomeSliceWidth = (income/total)*100;
-        var expenseSliceWidth = (expense/total)*100;
-        incomeBarSliceWidth = incomeSliceWidth + "% " + expenseSliceWidth + "%";
-        lossBarSliceWidth = incomeSliceWidth + "% " + expenseSliceWidth + "%";
+        function roundup(v) {
+            var result = 1;
+            for (i = 1; i < v.toString().length; i++) {
+                result = result*10;
+            }
 
-        var barGraph = $("#income");
-        barGraph.css('gridTemplateColumns', incomeBarSliceWidth);
+            return result+(v.toString()[0]*result);
+        }
 
-        barGraph.children().first().css({
+        var incomeMax = roundup(income);
+        console.log(incomeMax);
+        var expenseMax = roundup(expense);
+        console.log(expenseMax);
+
+        var incomeSliceWidth = (income/incomeMax)*100;
+        console.log(incomeSliceWidth);
+        var expenseSliceWidth = (expense/expenseMax)*100;
+        console.log(expenseSliceWidth);
+
+        var incomeRemainder = 100-incomeSliceWidth;
+        var expenseRemainder = 100-expenseSliceWidth;
+
+        incomeBarSliceWidth = incomeSliceWidth + "% " + incomeRemainder + "%";
+        //console.log(incomeSliceWidth);
+        expenseBarSliceWidth = expenseSliceWidth + "% " + expenseRemainder + "%";
+        //console.log(expenseSliceWidth);
+
+        var incomeBarGraph = $("#income");
+        incomeBarGraph.css('gridTemplateColumns', incomeBarSliceWidth);
+        //$("#profit-label").append("/"+incomeMax);
+
+        incomeBarGraph.children().first().css({
             'borderRadius': "8px 0 0 8px",
-            'backgroundColor': '#76f05b',
+            'backgroundColor': 'rgb(118,240,91)',
         });
-        barGraph.children().last().css({
+        incomeBarGraph.children().last().css({
             'borderRadius': "0 8px 8px 0",
             'backgroundColor': 'rgba(118,240,91,0.5)'
         });
 
-        var barGraph = $("#expense");
-        barGraph.css('gridTemplateColumns', lossBarSliceWidth);
+        var expenseBarGraph = $("#expense");
+        expenseBarGraph.css('gridTemplateColumns', expenseBarSliceWidth);
+        //$("#loss-label").append("/"+expenseMax);
 
-        barGraph.children().first().css({
+        expenseBarGraph.children().first().css({
             'borderRadius': "8px 0 0 8px",
-            'backgroundColor': '#ff4040'
+            'backgroundColor': 'rgb(255,64,64)'
         });
 
-        barGraph.children().last().css({
+        expenseBarGraph.children().last().css({
             'borderRadius': "0 8px 8px 0",
             'backgroundColor': 'rgba(255,64,64,0.5)',
         });
     }
 
-    function expensesGraph() {
-
-        var expenses = {};
-
-        {% for cat, price in exp_tally.items %}
-            expenses["{{cat}}"] = {{price}};
-        {%endfor%}
+    function categoryGraph(givenEntries, catTable, entryBarGraph) {
 
         var colours = ["#5FBFF9", "#3B3B58", "#478978", "#F9DB6D", "#88B7B5"]
         var barSliceWidth = "";
-        var totalExpense = 0;
+        var totalOfEntries = 0;
 
         var categories = {};
 
         var categoryCount = 0;
 
-        for (var category in expenses) {
+        for (var category in givenEntries) {
             categories[category] = colours[categoryCount];
             categoryCount++;
         }
@@ -108,7 +158,7 @@ $(document).ready(function (){
         for (var category in categories) {
             console.log(category + ":" + categories[category]);
             
-            var categoryTable = $("#category-table")
+            var categoryTable = $("#"+catTable);
             var categoryRow = $("<tr></tr>");
             var categoryBox = $("<th></th>");
             var categoryBoxColor = $("<div></div>");
@@ -125,16 +175,16 @@ $(document).ready(function (){
             categoryTable.append(categoryRow);
         }
 
-        for (var expense in expenses) {
-            totalExpense += expenses[expense];
+        for (var entry in givenEntries) {
+            totalOfEntries += givenEntries[entry];
         }
 
-        for(var slicePercent in expenses) {
-            var sliceWidth = (expenses[slicePercent]/totalExpense)*100;
+        for(var slicePercent in givenEntries) {
+            var sliceWidth = (givenEntries[slicePercent]/totalOfEntries)*100;
             barSliceWidth += sliceWidth + "% "
         }
 
-        var barGraph = $("#expenses");
+        var barGraph = $("#"+entryBarGraph);
         barGraph.css('gridTemplateColumns', barSliceWidth);
 
         barGraph.children().first().css('borderRadius', "8px 0 0 8px");
