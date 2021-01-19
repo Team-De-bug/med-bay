@@ -31,8 +31,10 @@ def dashboard(request):
         else:
             expense += i.price
 
+    netprofit = income - expense
+
     return render(request, 'accounts/dashboard.html', context={"exp_tally": exp_tally, "inc_tally": inc_tally,
-                                                               "income": income, "expense": expense})
+                                                               "income": income, "expense": expense, "netprofit": netprofit})
 
 
 @login_required()
