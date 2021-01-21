@@ -3,7 +3,7 @@
 <div class="root-container">
     <h3 class="list-title">Chart of Accounts</h3><br><br>
         <table id="accounts-table" style=" width: 100%; border-collapse: collapse; margin: 0 0 2vh 0;">
-            <tr>
+            <tr id="accounts-table-heading">
                 <th class="accounts-table-heading">S.No</th>
                 <th class="accounts-table-heading">Date</th>
                 <th class="accounts-table-heading">Name</th>
@@ -48,7 +48,11 @@
 function addEntry () {
 
     var lastEntry = $("#accounts-table tr").eq(-2).children("td");
-    var idText = parseInt(lastEntry[0].innerText);
+    if ($("#accounts-table tr").eq(-2)[0].id != "accounts-table-heading") {
+        var idText = parseInt(lastEntry[0].innerText);
+    } else {
+       var idText = 0;
+    }
     
     idText++;
 
@@ -65,6 +69,8 @@ function addEntry () {
         "onchange": "checkType("+idText+")"
     });
     typeInput.addClass("accounts-input");
+    var noneCat = $("<option>None</option>").addClass("dropdown-option");
+    typeInput.append(noneCat);
     {% for cat in cats %}
         var cat = $("<option>{{cat}}</option>").addClass("dropdown-option");
         typeInput.append(cat);
@@ -151,6 +157,7 @@ function saveEntries() {
 function checkType(id) {
     var typeInput = $('#'+id+'_type');
     if (typeInput.val() == "Add New"){
+        console.log(id)
         $("#"+id+"_type").replaceWith('<input type="text" id="'+id+'_type" class="accounts-input" ondblclick="selectType('+id+')">');
     }
 }
