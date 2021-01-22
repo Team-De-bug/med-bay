@@ -160,7 +160,5 @@ def view_history(request):
     # Getting the cases from the request object
     p_id = int(request.GET['id'])
     patient = Patient.objects.get(id=p_id)
-    cases = patient.cases_set.all()
-    print(cases)
 
-    return render(request, 'doctors/case-history.html', context={'cases': cases})
+    return render(request, 'doctors/case-history.html', context={'patient': patient})
