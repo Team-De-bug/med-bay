@@ -9,17 +9,17 @@
 	{% else %}
 	<h3>You are logged in as</h3>
 	{%endif%}
-	<div style="background-color: #E00043; border-radius: 8px; width: 20%; padding: 2vh 2vw 2vh 2vw; margin: auto;">
+	<div class="home-container">
 		{% if not request.user.is_authenticated %}
 		<img src="{% static 'images/user.png' %}" alt="user icon"><br>
-		<button style="background-color: rgba(0, 0, 0, 0.2); padding: 1vh 1vw 1vh 1vw; font-size: 3vh; border-radius: 8px;" onclick="document.location='{% url 'login' %}'">Log In</button>
+		<button class="login-logout-btn default-button" style="background-color: rgba(0, 0, 0, 0.2); padding: 1vh 1vw 1vh 1vw; font-size: 3vh; border-radius: 8px;" onclick="document.location='{% url 'login' %}'">Log In</button>
 		{% else %}
 		<img src="{% static 'images/user_loggedin.png' %}" alt="user icon"><br>
 		<span style="color: white; font-size: large;">
 			<label>{{user}}</label> <label id="role" style="display: inline;"></label><br><br>
 			<span id="account-role" style="display: none;">{{user.staff.role}}</span>
 		</span>
-		<button class="login-logout-btn" style="background-color: rgba(0, 0, 0, 0.2); padding: 1vh 1vw 1vh 1vw; font-size: 3vh; border-radius: 8px;" onclick="document.location='{% url 'logout' %}'">Log Out</button>
+		<button class="login-logout-btn default-button" style="background-color: rgba(0, 0, 0, 0.2); padding: 1vh 1vw 1vh 1vw; font-size: 3vh; border-radius: 8px;" onclick="document.location='{% url 'logout' %}'">Log Out</button>
 		{%endif%}
 	</div>
 </div>

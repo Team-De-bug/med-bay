@@ -85,9 +85,6 @@
         
         var medicineContainers = $(".medicine-single");
         
-        console.log(medicineContainers);
-
-        
         for (i = 0; i < medicineContainers.length; i++) {
             var medicineContainer = medicineContainers[i];
             var inputs = medicineContainer.childNodes;
@@ -126,11 +123,11 @@
                 'medicines': JSON.stringify(finalItems)
             },
             success: function() {
-                alert("Prescription has been saved");
+                showMessage("Prescription has been saved");
                 location="{% url 'doctor:dashboard' %}";
             },
             error: function() {
-                alert("Could not save prescription");
+                showMessage("Could not save prescription");
                 location.reload();
             }
         });

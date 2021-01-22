@@ -129,8 +129,6 @@
             }
         }
 
-        console.log(JSON.stringify(finalItems));
-
         $.ajax({
             url: "{% url 'pharma:edit_prescription'%}",
             type: 'GET',
@@ -140,11 +138,11 @@
                 'save': true
             },
             success: function(response) {
-                alert("Prescription has been saved");
+                showMessage("Prescription has been saved");
                 location="{% url 'pharma:bill_archive_viewer' %}?id="+response['bill_id'];
             },
             error: function() {
-                alert("Could not save prescription");
+                showMessage("Could not save prescription");
             }
         });
     }

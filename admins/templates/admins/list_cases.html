@@ -48,11 +48,11 @@
                     'delete_id': caseId
                 },
                 success: function(){
-                    alert("Case No." + caseId + " Has Been Deleted");
+                    showMessage("Case No." + caseId + " Has Been Deleted");
                     location.reload();
                 },
                 error: function(error){
-                    alert("Could Not Delete Case");
+                    showMessage("Could Not Delete Case");
                 }
             });
         }

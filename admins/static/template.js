@@ -34,16 +34,14 @@ function closeSidebar() {
 function showLogo() {
     
     closeSidebar();
-    
+    setTheme();
+
     if (sessionStorage.getItem('newSession') === null) {
         document.getElementById("loadLogoImg").style.opacity = "100%";
         setTimeout(function () { document.getElementById("loadLogoImg").style.opacity = "0"; }, 3000);
-        console.log("Logo gone");
         setTimeout(function () {document.getElementById("loadLogo").style.opacity = "0"; }, 5000);
-        setTimeout(function () {document.getElementById("loadLogo").style.display = "none"; }, 7000);
-        
+        setTimeout(function () {document.getElementById("loadLogo").style.display = "none"; }, 6000);
         sessionStorage.setItem('newSession', 'false');
-        
     } else {
         document.getElementById("loadLogo").style.display = "none";
     }
@@ -59,4 +57,61 @@ function copyDetail(detailId) {
     copyID.setSelectionRange(0, 99999)
     document.execCommand("copy");
     showMessage("Copied Pateint Detail: " + copyID.value);
+}
+
+function toggleTheme() {
+
+    var toggler = $('#theme-button');
+    sessionStorage.setItem('toggle', 'true');
+    if (sessionStorage.getItem('toggle') === 'true') {
+        console.log("logo true")
+
+        document.getElementById("loadLogo").style.display = "flex";
+        setTimeout(function () {document.getElementById("loadLogo").style.opacity = "100%"; }, 100);
+        setTimeout(function () { document.getElementById("loadLogoImg").style.opacity = "100%"; }, 500);
+
+        setTimeout(function () { document.getElementById("loadLogoImg").style.opacity = "0"; }, 3000);
+        setTimeout(function () {document.getElementById("loadLogo").style.opacity = "0"; }, 5000);
+        setTimeout(function () {document.getElementById("loadLogo").style.display = "none"; }, 6000);
+        sessionStorage.setItem('newSession', 'false');
+    }
+
+    setTimeout(function () {
+        if (localStorage.getItem('theme') === 'light'){
+            localStorage.setItem('theme', 'dark');
+            $("link[rel=stylesheet]").attr("href", "/static/dark_theme.css");
+            toggler.attr("src", "/static/images/light.png");
+        } else if (localStorage.getItem('theme') === 'dark') {
+            localStorage.setItem('theme', 'light');
+            toggler.attr("src", "/static/images/dark.png");
+            $("link[rel=stylesheet]").attr("href", "/static/style.css");
+        } else if (localStorage.getItem('theme') === null) {
+            localStorage.setItem('theme', 'light');
+            toggler.attr("src", "/static/images/dark.png");
+            $("link[rel=stylesheet]").attr("href", "/static/style.css");
+            console.log("set default");
+        }
+    }, 1000);
+}
+
+function setTheme() {
+
+    var toggler = $('#theme-button');
+
+    if (localStorage.getItem('theme') === 'dark'){
+        localStorage.setItem('theme', 'dark');
+        $("link[rel=stylesheet]").attr("href", "/static/dark_theme.css");
+        toggler.attr("src", "/static/images/light.png");
+        console.log("set dark");
+    } else if (localStorage.getItem('theme') === 'light') {
+        localStorage.setItem('theme', 'light');
+        toggler.attr("src", "/static/images/dark.png");
+        $("link[rel=stylesheet]").attr("href", "/static/style.css");
+        console.log("set light");
+    } else if (localStorage.getItem('theme') === null) {
+        localStorage.setItem('theme', 'light');
+        toggler.attr("src", "/static/images/dark.png");
+        $("link[rel=stylesheet]").attr("href", "/static/style.css");
+        console.log("set default");
+    }
 }

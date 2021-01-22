@@ -123,13 +123,11 @@ function saveEntries() {
         var amount = entries[i].childNodes[5].childNodes[0].value;
 
         if (date == "" || desc == "" || cat == "" || type == "" || amount == "") {
-            alert("Please Enter A Value In All The Fields");
+            showMessage("Please Enter A Value In All The Fields");
             confirmSave = false;
         } else {
             confirmSave = true;
         }
-
-        console.log(date, desc, cat, type, amount);
 
         var entry = [date, desc, cat, type, amount];
 
@@ -144,11 +142,11 @@ function saveEntries() {
                 'entries': JSON.stringify(finalEntries)
             },
             success: function () {
-                alert("Entries Saved");
+                showMessage("Entries Saved");
                 location.reload();
             },
             error: function () {
-                alert("Unable to Save Entries");
+                showMessage("Unable to Save Entries");
             }
         });
     }
@@ -157,7 +155,6 @@ function saveEntries() {
 function checkType(id) {
     var typeInput = $('#'+id+'_type');
     if (typeInput.val() == "Add New"){
-        console.log(id)
         $("#"+id+"_type").replaceWith('<input type="text" id="'+id+'_type" class="accounts-input" ondblclick="selectType('+id+')">');
     }
 }

@@ -10,7 +10,7 @@
     {% for doctor in doctors %}
     <tr>
         <th>{{forloop.counter}}.</th>
-        <td style="background-color: #215880; color: white;">{{doctor.user.username}}</td>
+        <td id="doctor-name-attendance" style="color: white;">{{doctor.user.username}}</td>
         <td style="padding: 0;" class="checkbox-container">
             <span class="attendance-custom-checkbox" id="{{doctor.id}}" onclick="toggleAttendance({{doctor.id}})"></span>
         </td>
@@ -55,11 +55,11 @@
                 'attendance': JSON.stringify(doctorAttendance),
             },
             success: function(){
-                alert("Attendance saved");
+                showMessage("Attendance saved");
                 location="{% url 'home' %}"
             },
             error: function(){
-                alert("Unable to save attendance");
+                showMessage("Unable to save attendance");
             }
         });
     }

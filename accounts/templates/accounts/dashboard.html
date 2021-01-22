@@ -95,22 +95,16 @@ $(document).ready(function (){
         }
 
         var incomeMax = roundup(income);
-        console.log(incomeMax);
         var expenseMax = roundup(expense);
-        console.log(expenseMax);
 
         var incomeSliceWidth = (income/incomeMax)*100;
-        console.log(incomeSliceWidth);
         var expenseSliceWidth = (expense/expenseMax)*100;
-        console.log(expenseSliceWidth);
 
         var incomeRemainder = 100-incomeSliceWidth;
         var expenseRemainder = 100-expenseSliceWidth;
 
         incomeBarSliceWidth = incomeSliceWidth + "% " + incomeRemainder + "%";
-        //console.log(incomeSliceWidth);
         expenseBarSliceWidth = expenseSliceWidth + "% " + expenseRemainder + "%";
-        //console.log(expenseSliceWidth);
 
         var incomeBarGraph = $("#income");
         incomeBarGraph.css('gridTemplateColumns', incomeBarSliceWidth);
@@ -156,7 +150,6 @@ $(document).ready(function (){
         }
 
         for (var category in categories) {
-            console.log(category + ":" + categories[category]);
             
             var categoryTable = $("#"+catTable);
             var categoryRow = $("<tr></tr>");

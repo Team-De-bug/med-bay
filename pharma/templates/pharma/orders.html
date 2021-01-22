@@ -43,7 +43,7 @@
                     console.log(response['responseJSON']);
                     var medicines = response['responseJSON'];
                     for (var medicine in medicines) {
-                        alert(medicines[medicine] + " Is Out Of Stock");
+                        showMessage(medicines[medicine] + " Is Out Of Stock");
                     }
                     location="{% url 'pharma:edit_prescription'%}?id="+prescriptionId+"&medicines="+JSON.stringify(medicines);
                 }

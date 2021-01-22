@@ -3,9 +3,13 @@
 /* #region Variables */
 :root {
     --header-height: 7vh;
-    --base-red: #E00043;
-    --darker-red: #B40036;
-    --dark-blue: #215880;
+    --base-red: #231b31;
+    --darker-red: #2d243b;
+    --dark-blue: #31234e;
+    --dark-blue-hover: #251a3a;
+    --dark-blue-active: #1e1530;
+    --base-blue: #3e2c61;
+    --body-background: #16121b;
 }
 /* #endregion Variables */
 
@@ -13,7 +17,7 @@
 
 /* #region Titles and Item Specific */
 .list-title {
-    color: black;
+    color: white;
     margin: 2vh 2vw -2vh 2vw;
 }
 
@@ -121,7 +125,7 @@
 .container:hover {
     transform: scale(1.025, 1.025);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    background-color: #F00048;
+    filter: brightness(130%);
 }
 
 .full-container {
@@ -181,7 +185,7 @@ body {
     height: 100%;
     color: white;
     font-family: 'Rubik';
-    background-color: white;
+    background-color: var(--body-background);
     overflow-x: hidden;
     transition: all 0.2s ease-in-out;
 }
@@ -254,7 +258,7 @@ button {
 
 .side-bar-top {
     display: flex;
-    background-color: #CC003D;
+    background-color: var(--darker-red);
     grid-area: side-bar-top;
     
     flex-wrap: wrap;
@@ -346,7 +350,7 @@ button {
 }
 
 .side-bar-btn:active {
-    background-color: #A30031
+    filter: brightness(50%);
 }
 
 .login-btn {
@@ -418,7 +422,7 @@ button {
     flex-direction: column;
     width: 50%;
     margin: 5vh auto 5vh auto;
-    background-color: #2C82C1;
+    background-color: var(--base-blue);
     padding: 0% 0% 2% 0%;
     border-radius: 16px;
 }
@@ -462,13 +466,13 @@ button {
 }
 
 #submit-btn:hover {
-    background-color: #1B4969;
+    background-color: var(--dark-blue-hover);
     width: 100%;
     cursor: pointer;
 }
 
 #submit-btn:active {
-    background-color: #153851;
+    background-color: var(--dark-blue-active);
 }
 
 .form-input {
@@ -486,12 +490,12 @@ button {
 }
 
 .form-input:hover, .form-input-dropdown:hover {
-    background-color: #153851;
+    background-color: var(--dark-blue-hover);
     width: 70%;
 }
 
 .form-input:focus, .form-input-dropdown:focus {
-    background-color: #1B4969;
+    background-color: var(--dark-blue-active);
     width: 100%;
 }
 
@@ -662,7 +666,7 @@ button {
 
 /* #region Error */
 .error-root {
-    color: black;
+    color: white;
     margin: auto;
     text-align: center;
 }
@@ -686,6 +690,12 @@ button {
 .default-button {
     background-color: var(--base-red);
     cursor: pointer;
+    transition: all 0.2s;
+}
+
+.default-button:hover {
+    transform: scale(1.1, 1.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.75);
 }
 
 /* #region Pharmacy Cart Bill */
@@ -723,7 +733,7 @@ button {
     border-collapse: collapse;
     font-size: 4vh;
     border-radius: 8px;
-    background-color: #2C82C1;
+    background-color: var(--base-blue);
 }
 
 .attendance-table th {
@@ -780,7 +790,7 @@ button {
 
 .home-root {
     display: block;
-    color: black;
+    color: white;
     width: 100%;
     text-align: center;
     height: 100%;
@@ -793,7 +803,7 @@ button {
 
 .accounts-table-heading {
     height: 7vh;
-    background-color: #2C82C1;
+    background-color: var(--base-blue);
 }
 
 .accounts-table-entry {
@@ -826,8 +836,8 @@ button {
 }
 
 .expense {
-    background-color: var(--base-red);
-    border-color: var(--darker-red);
+    background-color: #E00043;
+    border-color: #B40036;
 }
 
 .entries-button {

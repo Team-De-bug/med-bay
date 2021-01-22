@@ -4,7 +4,7 @@
     <head>
         <title>Med-Bay</title>
         <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+        <link rel="stylesheet" id="css" type="text/css" href="{% static 'dark_theme.css' %}">
         
 <!--        scripts-->
         <script type="text/javascript" src="{% static 'template.js' %}"></script>
@@ -29,11 +29,14 @@
                     <img id="logo" onclick="document.location='{% url 'red' %}'" src="{% static 'images/med-bay.png' %}" alt="med-bay logo">
                 </div>
                 <div class="user-btns">
-                    <button id="login-btn">
+                    <button class="login-btn" onclick="toggleTheme()">
+                        <img id="theme-button" class="login-btn-img" src="{% static 'images/dark.png' %}"
+                    </button>
+                    <button class="login-btn">
                         {% if not request.user.is_authenticated %}
-                        <img id="login-btn-img" onclick="location='{% url 'login' %}'" title="You are {{user}}" src="{% static 'images/user.png' %}" height="40vh" alt="user icon">
+                        <img class="login-btn-img" onclick="location='{% url 'login' %}'" title="You are {{user}}" src="{% static 'images/user.png' %}" height="40vh" alt="user icon">
                         {% else %}
-                        <img id="login-btn-img" onclick="location='{% url 'confirm_logout' %}'" title="You are {{user}}" src="{% static 'images/user_loggedin.png' %}" height="40vh" alt="logged in user icon">
+                        <img class="login-btn-img" onclick="location='{% url 'confirm_logout' %}'" title="You are {{user}}" src="{% static 'images/user_loggedin.png' %}" height="40vh" alt="logged in user icon">
                         {%endif%}
                     </button>
                 </div>
