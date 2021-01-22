@@ -1,10 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from pharma.models import Prescription, Stock, Medicine
 from django.shortcuts import render, redirect
+from patients.models import Cases, Patient
 from admins.utils import validate_access
 from django.http import HttpResponse
 from .forms import CaseProcessing
-from patients.models import Cases
 from datetime import date
 import json
 
@@ -156,4 +156,11 @@ def save_prescription(request):
 @login_required()
 def view_history(request):
     validate_access(request, 'd')
-    return render(request, 'doctors/case-history.html')
+
+    # Getting the cases from the request object
+    p_id = int(request.GET['id'])
+    patient = Patient.objects.get(id=p_id)
+    cases = patient.cases_set.all()
+    print(cases)
+
+    return render(request, 'doctors/case-history.html', context={'cases': cases})
