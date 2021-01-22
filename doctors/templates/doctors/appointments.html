@@ -27,8 +27,11 @@
             <label class="patient-full-detail-label">Diagnosis: </label>
             <!--<textarea class="item-detail" id="diagnosis" cols="16" rows="5" name="diagnosis" placeholder="Your Diagnosis"></textarea>-->
             {{form.desc}}
+            <div style="display: flex; flex-direction: row; justify-content: space-between">
+            <button class="save-diagnosis-btn" onclick="location.href='view_history?id={{case.patient.id}}'">View History</button>
             <input class="save-diagnosis-btn" type="submit" value="Save">
-        </form>
+            </div>
+        </form><br>
     </div>
 {% endfor %}
 </div>

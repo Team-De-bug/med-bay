@@ -4,6 +4,7 @@
 :root {
     --header-height: 7vh;
     --base-red: #231b31;
+    --base-red-hover: #2b1f41;
     --darker-red: #2d243b;
     --dark-blue: #31234e;
     --dark-blue-hover: #251a3a;
@@ -125,7 +126,7 @@
 .container:hover {
     transform: scale(1.025, 1.025);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    filter: brightness(130%);
+    background-color: var(--base-red-hover);
 }
 
 .full-container {

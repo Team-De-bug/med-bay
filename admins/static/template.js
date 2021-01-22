@@ -32,9 +32,8 @@ function closeSidebar() {
 }
 
 function showLogo() {
-    
+    setTheme();    
     closeSidebar();
-    setTheme();
 
     if (sessionStorage.getItem('newSession') === null) {
         document.getElementById("loadLogoImg").style.opacity = "100%";
