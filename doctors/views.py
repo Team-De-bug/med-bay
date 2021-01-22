@@ -150,3 +150,10 @@ def save_prescription(request):
 
     # returning success message
     return HttpResponse("success")
+
+
+# View patient history
+@login_required()
+def view_history(request):
+    validate_access(request, 'd')
+    return render(request, 'doctors/case-history.html')

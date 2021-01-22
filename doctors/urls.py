@@ -8,5 +8,6 @@ urlpatterns = [
     path("recover", views.prescription, name="recover"),
     path("add_prescription", views.add_prescription, name="add_prescription"),
     path("list_medicines", views.list_medicines, name="list_medicines"),
-    path("save_prescription", views.save_prescription, name="save_prescription")
+    path("save_prescription", views.save_prescription, name="save_prescription"),
+    path("view_history", views.view_history, name="view_history")
 ]
