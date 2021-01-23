@@ -31,13 +31,15 @@ function closeSidebar() {
     }
 }
 
-function showLogo() {
-    setTheme();    
+function showLogo() {    
     closeSidebar();
 
     if (sessionStorage.getItem('newSession') === null) {
+        document.getElementById("loadLogo").style.display = "flex";
         document.getElementById("loadLogoImg").style.opacity = "100%";
+        $(".root-grid").css("display", "none");
         setTimeout(function () { document.getElementById("loadLogoImg").style.opacity = "0"; }, 3000);
+        setTimeout(function() {$(".root-grid").css("display", "inline-grid"); }, 3000);
         setTimeout(function () {document.getElementById("loadLogo").style.opacity = "0"; }, 5000);
         setTimeout(function () {document.getElementById("loadLogo").style.display = "none"; }, 6000);
         sessionStorage.setItem('newSession', 'false');
@@ -58,59 +60,42 @@ function copyDetail(detailId) {
     showMessage("Copied Pateint Detail: " + copyID.value);
 }
 
+function switchTheme() {
+
+    $.ajax({
+
+        url: "/set_theme",
+
+    });
+}
+
+function getCookie(name) {
+    function escape(s) { return s.replace(/([.*+?\^$(){}|\[\]\/\\])/g, '\\$1'); }
+    var match = document.cookie.match(RegExp('(?:^|;\\s*)' + escape(name) + '=([^;]*)'));
+    return match ? match[1] : null;
+}
+
 function toggleTheme() {
 
-    var toggler = $('#theme-button');
     sessionStorage.setItem('toggle', 'true');
     if (sessionStorage.getItem('toggle') === 'true') {
         console.log("logo true")
 
+        document.getElementById("loadLogo").style.opacity = "100%";
         document.getElementById("loadLogo").style.display = "flex";
-        setTimeout(function () {document.getElementById("loadLogo").style.opacity = "100%"; }, 100);
         setTimeout(function () { document.getElementById("loadLogoImg").style.opacity = "100%"; }, 500);
-
         setTimeout(function () { document.getElementById("loadLogoImg").style.opacity = "0"; }, 3000);
+        if (getCookie("theme") === "w") {
+            console.log("change to dark");
+            setTimeout(function () { $("#loadLogo").css("backgroundColor", "#231b31"); }, 500);
+        } else if (getCookie("theme") === "d") {
+             console.log("change to light");
+            setTimeout(function () { $("#loadLogo").css("backgroundColor", "#E00043"); },500);
+        }
         setTimeout(function () {document.getElementById("loadLogo").style.opacity = "0"; }, 5000);
         setTimeout(function () {document.getElementById("loadLogo").style.display = "none"; }, 6000);
-        sessionStorage.setItem('newSession', 'false');
-    }
-
-    setTimeout(function () {
-        if (localStorage.getItem('theme') === 'light'){
-            localStorage.setItem('theme', 'dark');
-            $("link[rel=stylesheet]").attr("href", "/static/dark_theme.css");
-            toggler.attr("src", "/static/images/light.png");
-        } else if (localStorage.getItem('theme') === 'dark') {
-            localStorage.setItem('theme', 'light');
-            toggler.attr("src", "/static/images/dark.png");
-            $("link[rel=stylesheet]").attr("href", "/static/style.css");
-        } else if (localStorage.getItem('theme') === null) {
-            localStorage.setItem('theme', 'light');
-            toggler.attr("src", "/static/images/dark.png");
-            $("link[rel=stylesheet]").attr("href", "/static/style.css");
-            console.log("set default");
-        }
-    }, 1000);
-}
-
-function setTheme() {
-
-    var toggler = $('#theme-button');
-
-    if (localStorage.getItem('theme') === 'dark'){
-        localStorage.setItem('theme', 'dark');
-        $("link[rel=stylesheet]").attr("href", "/static/dark_theme.css");
-        toggler.attr("src", "/static/images/light.png");
-        console.log("set dark");
-    } else if (localStorage.getItem('theme') === 'light') {
-        localStorage.setItem('theme', 'light');
-        toggler.attr("src", "/static/images/dark.png");
-        $("link[rel=stylesheet]").attr("href", "/static/style.css");
-        console.log("set light");
-    } else if (localStorage.getItem('theme') === null) {
-        localStorage.setItem('theme', 'light');
-        toggler.attr("src", "/static/images/dark.png");
-        $("link[rel=stylesheet]").attr("href", "/static/style.css");
-        console.log("set default");
+        sessionStorage.setItem('toggle', 'false');
+        switchTheme();
+        setTimeout(function() {location.reload();}, 4900);
     }
 }
