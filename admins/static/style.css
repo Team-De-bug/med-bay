@@ -349,21 +349,21 @@ button {
     background-color: #A30031
 }
 
-.login-btn {
+.user-btn {
     height: var(--header-height);
     background-color: transparent;
     display: flex;
     flex-direction: column;
 }
 
-.login-btn-img {
+.user-btn-img {
     height: var(--header-height);
     border-radius: 0 0 8px 8px;
     background-color: transparent;
     transition: padding-top, 0.25s;
 }
 
-.login-btn-img:hover {
+.user-btn-img:hover {
     padding-top: 4vh;
     background-color: var(--darker-red);
     cursor: pointer;
