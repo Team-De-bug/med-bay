@@ -79,12 +79,11 @@ function toggleTheme() {
 
     sessionStorage.setItem('toggle', 'true');
     if (sessionStorage.getItem('toggle') === 'true') {
-        console.log("logo true")
 
-        document.getElementById("loadLogo").style.display = "flex";
-        setTimeout(function () { $("#loadLogo").css("opacity", "100%"); }, 500);
-        setTimeout(function () { $("#loadLogoImg").css("opacity", "100%"); }, 500);
-        setTimeout(function () { $("#loadLogoImg").css("opacity", "0"); }, 3000);
+        $("#loadLogo").css("opacity", "0");
+        $("#loadLogo").css("display", "flex");
+        setTimeout(function () { $("#loadLogo").css("opacity", "100%"); }, 1000);
+        setTimeout(function () { $("#loadLogoImg").css("opacity", "100%"); }, 1000);
         if (getCookie("theme") === "w") {
             console.log("change to dark");
             setTimeout(function () { $("#loadLogo").css("backgroundColor", "#231b31"); }, 1000);
@@ -92,8 +91,9 @@ function toggleTheme() {
              console.log("change to light");
             setTimeout(function () { $("#loadLogo").css("backgroundColor", "#E00043"); },1000);
         }
-        setTimeout(function () { $("loadLogo").css("opacity", "0"); }, 5000);
-        setTimeout(function () { $("loadLogo").css("display", "none"); }, 6000);
+        setTimeout(function () { $("#loadLogoImg").css("opacity", "0"); }, 3000);
+        setTimeout(function () { $("#loadLogo").css("opacity", "0"); }, 5000);
+        setTimeout(function () { $("#loadLogo").css("display", "none"); }, 6000);
         sessionStorage.setItem('toggle', 'false');
         switchTheme();
         setTimeout(function() {location.reload();}, 4900);
