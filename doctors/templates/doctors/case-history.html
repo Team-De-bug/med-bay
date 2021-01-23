@@ -3,10 +3,51 @@
 {% block body %}
 
 <div class="root-container">
-    <h3 class="list-title">Patient History</h3><br>
-    <div class="list-container">
+    <h3 class="list-title">Patient Case History</h3><br>
+    <div>
         <div class="container">
+            <label class="case-full-detail-label">Name:</label><br>
+            <input class="item-detail" tabindex="-1" id="{{patient.id}}_name" type="text" value="{{patient.name}}" readonly><br>
+            <label class="case-full-detail-label">Age:</label><br>
+            <input class="item-detail" tabindex="-1" id="{{patient.id}}_age" type="text" value="{{patient.age}}" readonly><br>
+            <label class="case-full-detail-label">Gender:</label><br>
+            <input class="item-detail" tabindex="-1" id="{{patient.id}}_gender" type="text" value="{{patient.gender | upper}}" readonly>
         </div>
+        <div>
+        {% for case in cases %}
+            <div class="container">
+                <label class="case-full-detail-label">Case #{{forloop.counter}}</label><br>
+                <span>
+                    <label class="case-full-detail-label">Case ID:</label>
+                    <input class="item-detail" tabindex="-1" id="{{patient.id}}_{{case.id}}" type="text" value="{{case.id}}" readonly><br>
+                    <label class="case-full-detail-label">Assigned Docotr:</label>
+                    <input class="item-detail" tabindex="-1" id="{{case.id}}_doctor" type="text" value="{{case.doctor.user.user.username}}" readonly><br>
+                    <label class="case-full-detail-label">Appointed Date:</label>
+                    <input class="item-detail" tabindex="-1" id="{{case.id}}_date" type="text" value="{{case.appointed_date.date}}" readonly><br>
+                    <label class="case-full-detail-label">Appointed Time:</label>
+                    <input class="item-detail" tabindex="-1" id="{{case.id}}_time" type="text" value="{{case.appointed_date.time}}" readonly><br>
+                        <label class="case-full-detail-label">Diagnosis:</label><br>
+                        <textarea class="item-detail" tabindex="-1" id="{{patient.id}}_diagnosis" style="margin-left: 3vw; resize: vertical" cols="87%" rows="6" readonly>{{case.desc}}</textarea>
+                </span><br>
+                {% if case.prescription.medicine_set.all %}
+                <label class="case-full-detail-label">Prescribed Medicines:</label>
+                    <ol class="item-detail" style="margin-left: 3vw;">
+                        {% for medicine in case.prescription.medicine_set.all %}
+                        <li style="margin-left: 2vw;">{{medicine.item.name}} x {{medicine.quantity}}</li>
+                        {% endfor %}
+                    </ol>
+                {%endif%}
+                {% if case.prescription.editedprescription.medicines.all %}
+                <label> Edited By {{case.prescription.editedprescription.user.user.username}}</label>
+                    <ol class="item-detail" style="margin-left: 3vw;">
+                        {% for medicine in case.prescription.editedprescription.medicines.all %}
+                        <li style="margin-left: 2vw;">{{medicine.item.name}} x {{medicine.quantity}}</li>
+                        {% endfor %}
+                    </ol>
+                {%endif%}
+            </div>
+        </div>
+        {%endfor%}
     </div>
 </div>
 

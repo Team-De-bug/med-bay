@@ -11,7 +11,7 @@ function closeSidebar() {
         document.getElementById('root-grid').setAttribute("style", "grid-template-columns: 0% auto");
         document.getElementById('side-bar-title').style.opacity = "0%";
         document.getElementById('side-bar-title').style.fontSize = "0vw";
-        for (i = 0; i < navItems.length; i++) {
+        for (var i = 0; i < navItems.length; i++) {
             navItems.item(i).style.opacity = "0%";
             navItems.item(i).style.fontSize = "0vw";
         }
@@ -32,9 +32,8 @@ function closeSidebar() {
 }
 
 function showLogo() {
-    
+    setTheme();    
     closeSidebar();
-    setTheme();
 
     if (sessionStorage.getItem('newSession') === null) {
         document.getElementById("loadLogoImg").style.opacity = "100%";
