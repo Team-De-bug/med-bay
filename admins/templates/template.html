@@ -4,8 +4,14 @@
     <head>
         <title>Med-Bay</title>
         <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+        <!-- setting the theme of the website -->
+        {% if not request.COOKIES.theme %}
+        <link rel="stylesheet" id="css" type="text/css" href="{% static 'style.css' %}">
+        {% elif request.COOKIES.theme == "w" %}
+        <link rel="stylesheet" id="css" type="text/css" href="{% static 'style.css' %}">
+        {% elif request.COOKIES.theme == "d" %}
         <link rel="stylesheet" id="css" type="text/css" href="{% static 'dark_theme.css' %}">
-        
+        {% endif %}
 <!--        scripts-->
         <script type="text/javascript" src="{% static 'template.js' %}"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>

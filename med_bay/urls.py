@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import LogoutView
-from admins.views import LoginView, confirm_logout, home, redirect_login
+from admins.views import LoginView, confirm_logout, home, redirect_login, set_theme
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,7 +28,8 @@ urlpatterns = [
     path("logout", LogoutView.as_view(template_name="admins/logout.html"), name="logout"),
     path("confirm", confirm_logout, name='confirm_logout'),
     path("", home, name="home"),
-    path("redirect", redirect_login, name="red")
+    path("redirect", redirect_login, name="red"),
+    path("set_theme", set_theme, name="set_theme")
 ]
 
 

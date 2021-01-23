@@ -190,3 +190,17 @@ def redirect_login(request):
 # Edit the function below.
 def home(request):
     return render(request, "admins/home.html")
+
+
+# Setting the theme for the site
+def set_theme(request):
+    theme = request.COOKIES.get('theme')
+    if not theme:
+        theme = 'w'
+    elif theme == 'w':
+         theme = 'd'
+    else:
+        theme = 'w'
+    response = HttpResponse('set theme')
+    response.set_cookie('theme', theme)
+    return response
