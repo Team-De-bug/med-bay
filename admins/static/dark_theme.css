@@ -699,6 +699,10 @@ button {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.75);
 }
 
+#cart-total {
+    color: white;
+}
+
 /* #region Pharmacy Cart Bill */
 
 .bill-table {
@@ -709,8 +713,8 @@ button {
 }
 
 .bill-header, .bill-item, .bill-item-grandtotal {
-    color: black;
-    border: 3px solid black;
+    color: white;
+    border: 3px solid white;
     border-top: none;
     padding: 2vh;
 }
@@ -721,7 +725,11 @@ button {
 
 .bill-item-grandtotal {
     border-bottom: none;
-    border-top: 3px solid #6C6C6C;
+    border-top: 3px solid #c0c0c0;
+}
+
+#bill-detail-table {
+    color: white;
 }
 /* #endregion Pharmacy Cart Bill */
 /* #endregion Pharmacy */

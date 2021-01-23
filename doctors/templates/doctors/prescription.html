@@ -3,6 +3,7 @@
 {%block body%}
 <div class="root-container">
     <h3 class="list-title">Patient Prescription</h3><br>
+    {% if prescriptions %}
     {% for pres in prescriptions %}
     <div class="container">
         <label class="patient-detail-label">Patient Name:</label>
@@ -18,6 +19,11 @@
         <button class="item-detail" onclick="redirectToAdd({{pres.case.id}})">Edit Prescription</button>
     </div>
     {% endfor %}
+    {% else %}
+    <div class="container">
+        <label class="item-detail-label">No Unsaved Prescriptions</label>
+    </div>
+    {% endif %}
 </div>
 {%endblock%}
 

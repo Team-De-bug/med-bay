@@ -58,15 +58,16 @@
 <div class="root-container">
     <h3 class="list-title">Patient Archive</h3><br>
     <div class="list-container">
+        {% if patients %}
         {% for patient, cases in patients.items %}
         <div class="container">
-            <label class="detail-label" class="patient-detail-label">Name: </label>
+            <label class="detail-label patient-detail-label">Name: </label>
             <input class="item-detail" id="{{patient.id}}_name" type="text" value="{{patient.name}}" readonly><br>
-            <label class="detail-label" class="patient-detail-label">Age: </label>
+            <label class="detail-label patient-detail-label">Age: </label>
             <input class="item-detail" id="{{patient.id}}_age" type="text" value="{{patient.age}}" readonly><br>
-            <label class="detail-label" class="patient-detail-label">Gender: </label>
+            <label class="detail-label patient-detail-label">Gender: </label>
             <input class="item-detail" id="{{patient.id}}_gender" type="text" value="{{patient.gender | upper}}" readonly><br>
-            <label class="detail-label" class="patient-detail-label">No. Cases: </label>
+            <label class="detail-label patient-detail-label">No. Cases: </label>
             <input class="item-detail" id="{{patient.id}}_cases" type="text" value="{{cases.count}}" readonly><br>
             <div>
                 <label class="prescriptions-label">Cases:</label>
@@ -81,6 +82,11 @@
             <button class="item-detail" onclick="location.href='view_history?id={{patient.id}}'">View History</button>
         </div>
         {% endfor %}
+        {% else %}
+        <div class="container">
+            <label class="detail-label patient-detail-label">No Patients Handled Yet</label>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

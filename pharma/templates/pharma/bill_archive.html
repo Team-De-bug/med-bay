@@ -7,6 +7,7 @@
         <button class="item-detail default-button" id="remove-stock-btn" onclick="document.location='{% url 'pharma:shop' %}'">Back to Pharmacy</button>
     </span>
     <div class="list-container">
+        {% if bills %}
         {%for bill in bills%}
         <div id="{{item.id}}" class="container" style="width: 20vw;">
             <label class="item-detail-label">Bill ID: {{bill.id}}</label>
@@ -25,6 +26,11 @@
             <button class="item-detail" onclick="viewBill({{bill.id}})">View Bill</button>
         </div>
         {%endfor%}
+        {% else %}
+        <div class="container">
+            <label class="item-detail-label">No Previous Bills Found</label>
+        </div>
+        {% endif %}
     </div>
 </div>
 {%endblock%}

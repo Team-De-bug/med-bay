@@ -7,6 +7,7 @@
         <th>Name</th>
         <th style="width: 1vw">Attendance</th>
     </tr>
+    {% if doctorsa %}
     {% for doctor in doctors %}
     <tr>
         <th>{{forloop.counter}}.</th>
@@ -16,6 +17,13 @@
         </td>
     </tr>
     {%endfor%}
+    {% else %}
+    <tr>
+        <td> </td>
+        <td id="doctor-name-attendance" style="color: white;"> No Doctors Registered </td>
+        <td> </td>
+    </tr>
+    {% endif %}
     <tr>
         <td> </td>
         <td><button id="submit-btn" onclick="submitAttendance()">Submit</button></td>

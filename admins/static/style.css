@@ -4,8 +4,13 @@
 :root {
     --header-height: 7vh;
     --base-red: #E00043;
+    --base-red-hover: #F00048;
     --darker-red: #B40036;
     --dark-blue: #215880;
+    --dark-blue-hover: #1B4969;
+    --dark-blue-active: #153851;
+    --base-blue: #2C82C1;
+    --body-background: white;
 }
 /* #endregion Variables */
 
@@ -121,7 +126,7 @@
 .container:hover {
     transform: scale(1.025, 1.025);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    background-color: #F00048;
+    background-color: var(--base-red-hover);
 }
 
 .full-container {
@@ -181,7 +186,7 @@ body {
     height: 100%;
     color: white;
     font-family: 'Rubik';
-    background-color: white;
+    background-color: var(--body-background);
     overflow-x: hidden;
     transition: all 0.2s ease-in-out;
 }
@@ -346,7 +351,7 @@ button {
 }
 
 .side-bar-btn:active {
-    background-color: #A30031
+    background-color: #A30031;
 }
 
 .user-btn {
@@ -418,7 +423,7 @@ button {
     flex-direction: column;
     width: 50%;
     margin: 5vh auto 5vh auto;
-    background-color: #2C82C1;
+    background-color: var(--base-blue);
     padding: 0% 0% 2% 0%;
     border-radius: 16px;
 }
@@ -486,12 +491,12 @@ button {
 }
 
 .form-input:hover, .form-input-dropdown:hover {
-    background-color: #153851;
+    background-color: var(--dark-blue-hover);
     width: 70%;
 }
 
 .form-input:focus, .form-input-dropdown:focus {
-    background-color: #1B4969;
+    background-color: var(--dark-blue-active);
     width: 100%;
 }
 
@@ -688,6 +693,10 @@ button {
     cursor: pointer;
 }
 
+#cart-total {
+    color: black;
+}
+
 /* #region Pharmacy Cart Bill */
 
 .bill-table {
@@ -711,6 +720,10 @@ button {
 .bill-item-grandtotal {
     border-bottom: none;
     border-top: 3px solid #6C6C6C;
+}
+
+#bill-detail-table {
+    color: black;
 }
 /* #endregion Pharmacy Cart Bill */
 /* #endregion Pharmacy */

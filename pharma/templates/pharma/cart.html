@@ -4,9 +4,10 @@
 <div class="root-container">
     <span style="display: flex; align-content: space-between; align-items: flex-start">
         <h3 class="list-title">Items In Cart</h3><br>
-        <button class="item-detail default-button" id="remove-stock-btn" onclick="document.location='{% url 'pharma:shop' %}'">Back to Pharmacy</button>
+        <button class="item-detail default-button" id="return-pharma-btn" onclick="document.location='{% url 'pharma:shop' %}'">Back to Pharmacy</button>
     </span>
     <div class="list-container">
+        {% if cart %}
         {% for order in cart %}
         <div id="{{order.id}}" class="container" style="width: 20vw;">
             <label class="item-detail-label">Item: </label>
@@ -26,9 +27,15 @@
         {% endfor %}
         
         <span>
-            <h3 id="cart-total" style="color: black; margin: 2vh 2vw -2vh 2vw">Grand Total: &#8377;{{total}}</h3>
-            <button class="item-detail" id="proceed-checkout-btn" onclick="document.location='{% url 'pharma:bill_info' %}'" style="margin: 2vh 2vw -2vh 2vw; font-size: 3vh">Proceed to checkout</button>
+            <h3 id="cart-total" style="margin: 2vh 2vw -2vh 2vw">Grand Total: &#8377;{{total}}</h3>
+            <button class="item-detail default-button" id="proceed-checkout-btn" onclick="document.location='{% url 'pharma:bill_info' %}'" style="margin: 2vh 2vw -2vh 2vw; font-size: 3vh">Proceed to checkout</button>
         </span>
+        {% else %}
+        <span>
+            <h3 id="cart-total" style="margin: 2vh 2vw -2vh 2vw">No items in cart. Add items to cart in the shop page.</h3>
+            <button class="item-detail default-button" id="proceed-checkout-btn" onclick="document.location='{% url 'pharma:shop' %}'" style="margin: 2vh 2vw -2vh 2vw; font-size: 3vh">Return To Pharmacy</button>
+        </span>
+        {% endif %}
     </div>
 </div>
 {%endblock%}
