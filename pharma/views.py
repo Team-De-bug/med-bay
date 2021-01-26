@@ -10,7 +10,7 @@ import json
 
 
 # Create your views here.
-@login_required
+@login_required()
 def shop(request):
 
     # Checking if user is allowed visit the site
@@ -33,54 +33,57 @@ def shop(request):
 def place(request):
 
     user = validate_access(request, 'p')
-    if request.method == "GET":
-        ID = request.GET['product_id']
-        qty = int(request.GET['product_amount'])
-        item = Stock.objects.filter(id=ID)[0]
-        orders = user.staff.order_set.all()
+    ID = request.GET['product_id']
+    qty = int(request.GET['product_amount'])
+    item = Stock.objects.filter(id=ID)[0]
+    orders = user.staff.order_set.all()
 
-        # Checking if item already in cart
-        in_cart = False
-        for order in orders:
-            if order.item.id == item.id:
-                in_cart = True
+    # Checking if item already in cart
+    in_cart = False
+    for order in orders:
+        if order.item.id == item.id:
+            in_cart = True
 
-        # If the item is already in cart
-        if in_cart:
-            order = user.staff.order_set.filter(item__id=item.id)[0]
-            order.quantity += qty
+    # If the item is already in cart
+    if in_cart:
+        order = user.staff.order_set.filter(item__id=item.id)[0]
+        order.quantity += qty
 
-        # Creating a new order if not already there
-        else:
-            order = Order(user=user.staff, item=item, quantity=qty)
+    # Creating a new order if not already there
+    else:
+        order = Order(user=user.staff, item=item, quantity=qty)
 
-        # Updating the item stock and saving changes
-        item.quantity -= qty
-        order.save()
-        item.save()
+    # Updating the item stock and saving changes
+    item.quantity -= qty
+    order.save()
+    item.save()
 
-        return HttpResponse("success")
+    return HttpResponse("success")
 
 
 @login_required()
 def remove(request):
+
     user = validate_access(request, 'p')
-    if request.method == "GET":
-        ID = int(request.GET['product_id'])
-        reduce = int(request.GET['remove_amount'])
-        item = Stock.objects.filter(id=ID)[0]
-        order = user.staff.order_set.filter(item__id=item.id)[0]
 
-        # Checking if the quantity in order will be 0
-        if order.quantity == reduce:
-            order.delete()
-        else:
-            order.quantity -= reduce
-            order.save()
+    # Getting the item id and quantity to reduce from request
+    ID = int(request.GET['product_id'])
+    reduce = int(request.GET['remove_amount'])
 
-        # Updating item quantity and saving changes
-        item.quantity += reduce
-        item.save()
+    # Getting the respective items and objects from the table
+    item = Stock.objects.filter(id=ID)[0]
+    order = user.staff.order_set.filter(item__id=item.id)[0]
+
+    # Checking if the quantity in order will be 0
+    if order.quantity == reduce:
+        order.delete()
+    else:
+        order.quantity -= reduce
+        order.save()
+
+    # Updating item quantity and saving changes
+    item.quantity += reduce
+    item.save()
 
     return render(request, "pharma/cart.html", {'cart': cart})
 
@@ -89,15 +92,22 @@ def remove(request):
 def add_one(request):
 
     user = validate_access(request, "p")
-    if request.method == "GET":
-        ID = int(request.GET['product_id'])
-        increase = 1
-        item = Stock.objects.get(id=ID)
-        order = user.staff.order_set.get(item__id=item.id)
-        order.quantity += increase
-        item.quantity -= increase
-        order.save()
-        item.save()
+
+    # Getting the product id from the request
+    ID = int(request.GET['product_id'])
+
+    # Getting the respective items and orders
+    item = Stock.objects.get(id=ID)
+    order = user.staff.order_set.get(item__id=item.id)
+
+    # Changing the quantity accordingly
+    order.quantity += 1
+    item.quantity -= 1
+
+    # Saving the changes
+    order.save()
+    item.save()
+
     return render(request, "pharma/cart.html", {'cart': cart})
 
 
@@ -105,30 +115,10 @@ def add_one(request):
 def cart(request):
 
     user = validate_access(request, 'p')
-    if request.method == "POST":
-        cq = int(request.POST['qty'])
-        order = Order.objects.filter(id=request.POST['order_id'])[0]
-        item = Stock.objects.filter(id=order.product.id)[0]
 
-        print(order, item)
-        if item.quantity > cq > 1:
-            change = int(request.Post['qty']) - order.quantity
-            order.quantity = int(request.Post['qty'])
-            item.quantity -= change
-            order.save()
-            item.save()
-        
-        else:
-            print(user)
-            cart = user.staff.order_set.all()
-            print(cart)
-            
-            return render(request, "pharma/cart.html", {'cart': cart})
-
-    cart = user.staff
-    orders = cart.order_set.all()
-    print(cart)
+    orders = user.staff.order_set.all()
     total = utils.get_total(orders)
+
     return render(request, "pharma/cart.html", {'cart': orders, 'total': total})
 
 
