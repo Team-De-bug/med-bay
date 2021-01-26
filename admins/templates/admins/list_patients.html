@@ -4,6 +4,7 @@
 <div class="root-container">
     <h3 class="list-title">Patients List</h3><br>
     <div class="list-container">
+    {% if patients %}
     {% for patient in patients %}
         <div id="{{patient.id}}" class="container" style="width: 20vw;">
             <label class="patient-detail-label">Patient Name:</label>
@@ -17,6 +18,11 @@
             <button class="item-detail" onclick="editPatient({{patient.id}})">Edit Patient</button>
         </div>
     {%endfor%}
+    {% else %}
+    <div class="container">
+        <label class="item-detail-label">No Patients Created</label>
+    </div>
+    {% endif %}
     </div>
 </div>
 {%endblock%}

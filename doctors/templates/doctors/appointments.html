@@ -41,6 +41,7 @@
     <h3 class="list-title">Doctor's Dashboard</h3><br>
     <h4 class="list-title">Appointed Patients</h4><br>
     <div class="list-container">
+        {% if cases %}
         {% for case in cases %}
         <div class="container" onclick="showCaseFull({{case.id}})" style="cursor: pointer">
             <label class="item-detail-label patient-detail-label" onclick="showCaseFull({{case.id}})">Name: </label>
@@ -53,6 +54,11 @@
             <input class="item-detail" id="date" type="text" value="{{case.appointed_date.date}}" onclick="showPatientFull({{case.id}})" readonly>
         </div>
         {% endfor %}
+        {%else%}
+        <div class="container" style="cursor: pointer">
+            <label class="item-detail-label">No Appointments For Today</label>
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

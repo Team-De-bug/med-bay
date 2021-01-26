@@ -8,6 +8,7 @@
         <button class="item-detail default-button" id="remove-stock-btn" onclick="document.location='{% url 'pharma:shop' %}'">Back to Pharmacy</button>
     </span>
     <div class="list-container">
+        {% if items %}
         {%for item in items%}
         <div id="{{item.id}}" class="container" style="width: 20vw;">
             <span style="display: flex; flex-direction: row; justify-content: flex-end; align-content: center">
@@ -21,6 +22,11 @@
             <label>{{item.quantity}}</label><br>
         </div>
         {%endfor%}
+        {% else %}
+        <div class="container">
+            <label class="item-detail-label">No Items In Stock</label>
+        </div>
+        {% endif %}
     </div>
 </div>
 {%endblock%}

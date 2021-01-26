@@ -11,6 +11,7 @@
         
     </span>
     <div class="list-container">
+        {% if items %}
         {%for item in items%}
         <div id="{{item.id}}" class="container" style="width: 20vw;">
             <label class="item-detail-label">Item: </label>
@@ -25,6 +26,11 @@
             </span>
         </div>
         {%endfor%}
+        {% else %}
+        <div class="container">
+            <label class="item-detail-label">No Items In Stock</label>
+        </div>
+        {% endif %}
         <div id="add-stock" class="container" style="align-content: center; justify-content: center; cursor: pointer; width: 20vw;" onclick="document.location='{% url 'pharma:add_stock' %}'">
             <label style="font-size: 10vh;">+</label>
         </div>
