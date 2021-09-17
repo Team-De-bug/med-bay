@@ -35,7 +35,6 @@
 {%block script%}
 <script>
     function removeStock(id) {
-      console.log("item id: " + id);
         var name = $('#' + id + '_name').val();
         
         if (confirm("Removing " + name + " From Stock")) {

@@ -42,7 +42,6 @@
 {%block script%}
 <script>
     function addtocart(id) {
-      console.log("item id: " + id);
         var name = $('#' + id + '_name').val();
         var inputAmount = $('#' + id + '_amount');
         var amount = inputAmount.val();
@@ -59,7 +58,6 @@
             inputAmount.val(amount.toString());
         }
         
-        console.log("item amount: " + amount);
         $.ajax({
             url : "{% url 'pharma:place' %}",
             data : {

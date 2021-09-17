@@ -1,0 +1,15 @@
+{
+  "short_name": "Med-Bay",
+  "name": "Med-Bay",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#e00043",
+  "background_color": "#ffffff"
+}

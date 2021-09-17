@@ -231,7 +231,7 @@ button {
 .side-bar {
     background-color: #383B3C;
     position: fixed;
-    z-index: 1;
+    z-index: 6;
     transform: translate(-100%);
     top: 0;
     left: 0;
@@ -469,6 +469,10 @@ button {
     font-size: 1rem;
     font-weight: bold;
     transition: all 0.5s;
+}
+
+.form-input:valid {
+    border: 2px red;
 }
 
 .form-input:hover, .form-input-dropdown:hover {
