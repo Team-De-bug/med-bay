@@ -2,16 +2,17 @@
 
 /* #region Variables */
 :root {
-    --header-height: 7vh;
-    --base-red: #E00043;
-    --base-red-hover: #F00048;
-    --darker-red: #B40036;
-    --dark-blue: #215880;
-    --dark-blue-hover: #1B4969;
-    --dark-blue-active: #153851;
-    --base-blue: #2C82C1;
+    --header-height: 3rem;
+    --base-red: hsl(342, 100%, 44%);
+    --base-red-hover: hsl(342, 100%, 47%);
+    --darker-red: hsl(342, 100%, 41%);
+    --dark-blue: hsl(205, 59%, 32%);
+    --dark-blue-hover: hsl(205, 59%, 26%);
+    --dark-blue-active: hsl(205, 59%, 20%);
+    --base-blue: hsl(205, 63%, 46%);
     --body-background: white;
 }
+
 /* #endregion Variables */
 
 /* #region Common Styling */
@@ -202,19 +203,16 @@ button {
 }
 
 #loadLogo {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-    height: 100vh;
-    width: 100vw;
+    display: grid;
+    place-items: center;
     position: fixed;
     left: 0;
     right: 0;
     top: 0;
+    bottom: 0;
     background-color: var(--base-red);
     transition: all 0.5s, background-color 2.5s;
-    z-index: 99999;
+    z-index: 2;
 }
 
 #loadLogoImg {
@@ -223,61 +221,47 @@ button {
     transition: opacity, 2s;
 }
 
-.root-grid {
-    display: inline-grid;
-    grid-gap: 0;
-    height: 100%;
-    min-height: 100vh;
-    width: 100vw;
-    transition: width, 1s;
-    grid-template-rows: auto 6vh;
-    grid-template-columns: 0% auto;
-    background-color: transparent;
-    grid-template-areas: 
-        'side-bar   main'
-        'footer     footer';
-}
-
 .floating-bar {
-    display: grid;
-    grid-gap: 0;
     position: sticky;
-    left: 0;
-    right: 0;
     top: 0;
-    height: var(--header-height);
-    grid-template-columns: 0% auto;
-    grid-template-areas: 'side-bar-top   menu-bar';
     transition: all 1s;
-    z-index: 9999;
+    z-index: 1;
 }
 
 .side-bar {
     background-color: #383B3C;
-    grid-area: side-bar;
+    position: fixed;
+    z-index: 1;
+    transform: translate(-100%);
+    top: 0;
+    left: 0;
+    right: 80%;
+    bottom: 0;
+    transition: transform 0.25s ease-out;
 }
 
 .side-bar-top {
+    height: var(--header-height);
     display: flex;
-    background-color: #CC003D;
-    grid-area: side-bar-top;
-    
-    flex-wrap: wrap;
-    align-content: center;
+    flex-direction: row;
+    background-color: var(--darker-red);
+    font-size: 150%;
+    /* padding: 0.25em; */
+    align-items: center;
+    box-sizing: border-box;
 }
 
-#side-bar-title {
-    margin-left: 2vh;
-    font-size: 0vw;
-    transition: all 0.75s;
+.side-bar-top > label {
+    margin-left: 1em;
 }
 
-.menu-bar { 
-    display: inline-flex;
+.nav-bar { 
+    display: flex;
     height: var(--header-height);
     background-color: var(--base-red);
-    grid-area: menu-bar;
     justify-content: space-between;
+    z-index: 1;
+    position: relative;
 }
 
 .main {
@@ -286,47 +270,61 @@ button {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
+    padding: var(--header-height) 0;
 }
 
 .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
     display: flex;
-    background-color: #1C1C1C;
-    grid-area: footer;
-    border-width: 0.5vh 0px 0px 0px;
-    border-style: solid;
-    border-color: var(--base-red);
-    flex-wrap: wrap;
     align-content: center;
     justify-content: center;
-    font-size: 2vh;
+
+    background-color: #1C1C1C;
+
+    padding: 0.5rem 0;
+
+    border-color: var(--base-red);
+    border-width: 0.5vh 0px 0px 0px;
+    border-style: solid;
+
+    font-size: 1rem;
 }
 
 .user-btns {
-    display: grid;
-    grid-gap: 0px;
+    display: flex;
+    gap: 0.25rem;
     height: var(--header-height);
-    grid-template-columns: auto auto;
+    flex-direction: row;
 }
 
 /* #region Decorative Objects */
 
 /* #region Menu Bar Logo */
 #logo-div {
-    height: var(--header-height);
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: grid;
+    place-items: center;
+    z-index: -1;
 }
 
 #logo {
-    padding-top: 4vh;
-    height: 6vh;
+    padding-top: 1rem;
+    width: 5.5rem;
     border-radius: 0 0 8px 8px;
     background-color: var(--darker-red);
-    border: solid 4px var(--darker-red);
-    border-top-width: 0;
+    outline: solid 4px var(--darker-red);
     transition: padding-top, 0.25s;
+    box-shadow: 0 0 0.5em black;
 }
 
 #logo:hover {
-    padding-top: 8vh;
+    padding-top: 2rem;
     cursor: pointer;
     border-top-width: 0;
 }
@@ -339,11 +337,8 @@ button {
 /* #region Side Bar Button */
 .side-bar-btn {
     height: var(--header-height);
-    width: var(--header-height);
-    background-color: var(--base-red);
-    border-style: none;
-    padding: 0px;
-    margin: 0px;
+    background-color: transparent;
+    aspect-ratio: 1/1;
 }
 
 .side-bar-btn:hover {
@@ -351,14 +346,11 @@ button {
 }
 
 .side-bar-btn:active {
-    background-color: #A30031;
+    filter: brightness(0.9);
 }
 
 .user-btn {
-    height: var(--header-height);
     background-color: transparent;
-    display: flex;
-    flex-direction: column;
 }
 
 .user-btn-img {
@@ -372,6 +364,7 @@ button {
     padding-top: 4vh;
     background-color: var(--darker-red);
     cursor: pointer;
+    box-shadow: 0 0 0.5em black;
 }
 
 /* #endregion Side Bar Button */
@@ -385,31 +378,24 @@ button {
 
 .nav-item {
     width: inherit;
-    background-color: RGBA(0, 0, 0, 0.3);
+    background-color: transparent;
     padding: 2vh 0 2vh 1vw;
+    transition: background-color 100ms;
 }
 
 .nav-item:hover {
-    background-color: RGBA(0, 0, 0, 0.45);
+    background-color: RGBA(0, 0, 0, 0.25);
 }
 
 .nav-link {
     display: block;
-    background-color: #2C2C2C;
     font-size: 1.5vw;
-}
-
-.nav-link:link {
-    color: white;
-    opacity: 0%;
     text-decoration: none;
-    transition: all 0.75s;
-    text-overflow: clip;
+    color: white;
 }
 
 .nav-link:visited {
     color: white;
-    text-decoration: none;
 }
 /*#endregion Side Bar */
 
@@ -467,13 +453,13 @@ button {
 }
 
 #submit-btn:hover {
-    background-color: #1B4969;
+    background-color: var(--dark-blue-hover);
     width: 100%;
     cursor: pointer;
 }
 
 #submit-btn:active {
-    background-color: #153851;
+    background-color: var(--dark-blue-active);
 }
 
 .form-input {
@@ -736,7 +722,7 @@ button {
     border-collapse: collapse;
     font-size: 4vh;
     border-radius: 8px;
-    background-color: #2C82C1;
+    background-color: var(--base-blue);
 }
 
 .attendance-table th {
@@ -761,8 +747,8 @@ button {
 .attendance-custom-checkbox {
     display: block;
     margin: 1vh auto 1vh auto;
-    height: 14vh;
     width: 40%;
+    aspect-ratio: 1/1;
     background-color: RGBA(0, 0, 0, 0.2);
     border-radius: 8px;
     transition: all, 0.25s;
@@ -770,17 +756,16 @@ button {
 }
 
 .attendance-custom-checkbox:hover {
-    transform: scale(1.2, 1.2);
+    scale: 1.1;
     background-color: RGBA(0, 0, 0, 0.5);
-    box-shadow: 0 0 10px RGBA(0, 0, 0, 0.5);
 }
 
 .attendance-custom-checkbox.true {
-    background: #3DC12C;
+    background: hsl(113, 63%, 46%);
 }
 
 .attendance-custom-checkbox.true:hover {
-    background: #218025;
+    background: hsl(113, 63%, 40%);
 }
 
 #doctor-name-attendance {

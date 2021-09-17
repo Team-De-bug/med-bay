@@ -41,12 +41,10 @@
                 'id': prescriptionId
             },
             success: function(response) {
-                console.log(response);
                 location="{% url 'pharma:bill_archive_viewer' %}?id="+response['id'];
             },
             statusCode: {
                 418: function(response) {
-                    console.log(response['responseJSON']);
                     var medicines = response['responseJSON'];
                     for (var medicine in medicines) {
                         showMessage(medicines[medicine] + " Is Out Of Stock");
