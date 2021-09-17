@@ -20,6 +20,7 @@ from admins.views import LoginView, confirm_logout, home, redirect_login, set_th
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('api.urls')),
     path('staff/', include('admins.urls')),
     path('doctor/', include('doctors.urls')),
     path('pharmacy/', include('pharma.urls')),
