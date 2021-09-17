@@ -11,7 +11,5 @@ class ListPrescriptionView(APIView):
 
     def get(self, request):
         prescriptions = Prescription.objects.all()
-        print(prescriptions)
         serialized = PrescriptionsSerializer(prescriptions, many=True)
-        print(serialized.data)
         return Response(serialized.data)
