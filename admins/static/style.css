@@ -315,7 +315,7 @@ button {
 
 #logo {
     padding-top: 1rem;
-    width: 5.5rem;
+    width: 7rem;
     border-radius: 0 0 8px 8px;
     background-color: var(--darker-red);
     outline: solid 4px var(--darker-red);
@@ -361,7 +361,7 @@ button {
 }
 
 .user-btn-img:hover {
-    padding-top: 4vh;
+    padding-top: 2em;
     background-color: var(--darker-red);
     cursor: pointer;
     box-shadow: 0 0 0.5em black;
@@ -424,7 +424,6 @@ button {
     justify-content: center;
     font-weight: bold;
     font-size: 30px;
-    margin-bottom: 5%;
     border-radius: 16px 16px 0 0;
 }
 
@@ -434,25 +433,22 @@ button {
     margin: auto;
     width: 80%;
     justify-content: center;
-    font-size: 3vh;
     font-weight: bold;
 }
 
 #submit-btn {
     width: 50%;
-    height: 6vh;
     background-color: var(--dark-blue);
     border-style: none;
     border-radius: 16px;
-    margin-top: 1vh;
-    padding: 1vh;
+    padding: 1em 0;
     color: white;
     font-weight: bold;
-    font-size: 2.5vh;
+    font-size: 1rem;
     transition: all 0.5s;
 }
 
-#submit-btn:hover {
+#submit-btn:hover, #submit-btn:focus {
     background-color: var(--dark-blue-hover);
     width: 100%;
     cursor: pointer;
@@ -467,11 +463,10 @@ button {
     border-style: none;
     border-radius: 16px;
     width: 50%;
-    height: 4vh;
-    margin: 1vh 0 1vh 0;
-    padding: 1vh 1vw 1vh 1vw;
+    margin: 1em 0;
+    padding: 1em 0.5em;
     color: white;
-    font-size: 2.5vh;
+    font-size: 1rem;
     font-weight: bold;
     transition: all 0.5s;
 }
@@ -491,11 +486,10 @@ button {
     border-style: none;
     border-radius: 16px;
     width: 50%;
-    height: 8vh;
-    margin: 1vh 0 1vh 0;
-    padding: 1vh 1vw 1vh 1vw;
+    margin: 1em 0;
+    padding: 1em;
     color: white;
-    font-size: 2.5vh;
+    font-size: 1rem;
     font-weight: bold;
     transition: all 0.5s;
 }
@@ -509,27 +503,13 @@ button {
 .dropdown-option {
     background-color: var(--base-red);
     color: white;
-    font-size: 3vh;
+    font-size: 1.25rem;
     border-radius: 8px;
 }
 
-.dropdown-option:hover {
-    background-color: var(--darker-red);
-}
-
-.dropdown-option:focus {
-    background-color: var(--darker-red);
-}
-
+.dropdown-option:hover,
+.dropdown-option:focus,
 .dropdown-option:active {
-    background-color: var(--darker-red);
-}
-
-.dropdown-option:focus-visible {
-    background-color: var(--darker-red);
-}
-
-.dropdown-option:focus-within {
     background-color: var(--darker-red);
 }
 
@@ -546,16 +526,13 @@ button {
     left: 0;
     right: 0;
     top: 0;
-    height: 100vh;
-    width: 100vw;
+    bottom: 0;
     display: none;
-    flex-direction: column;
-    overflow: scroll;
-    align-content: center;
-    justify-content: center;
+    place-items: center;
+    overflow: auto;
     background-color: RGBA(0, 0, 0, 0.4);
     backdrop-filter: blur(2px);
-    z-index: 9999;
+    z-index: 5;
     transition: all 0.1s;
 }
 
@@ -572,12 +549,12 @@ button {
     width: 10%;
     height: 4vh;
     align-self: flex-end;
-    font-size: 2.25vh;
+    font-size: 1.25em;
     cursor: pointer;
     transition: all 0.5s;
 }
 
-.save-diagnosis-btn:hover {
+.save-diagnosis-btn:hover, .save-diagnosis-btn:focus {
     width: 25%;
     transform: scale(1.01, 1.01);
     box-shadow: 0 0 5px RGBA(0, 0, 0, 0.75);
