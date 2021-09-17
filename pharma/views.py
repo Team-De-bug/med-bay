@@ -25,6 +25,7 @@ def shop(request):
         if item.quantity < 1:
             items.remove(item)
 
+    print(render(request, "pharma/shop.html", context={'items': items}).content)
     return render(request, "pharma/shop.html", context={'items': items})
 
 
