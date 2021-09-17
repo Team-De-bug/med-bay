@@ -48,10 +48,8 @@
         $(".attendance-custom-checkbox").each(function(index, checkbox) {
             if (checkbox.classList.contains("true")){
                 doctorAttendance[parseInt(checkbox.id)] = true;
-                console.log(checkbox.id+" is present")
             } else {
                 doctorAttendance[parseInt(checkbox.id)] = false;
-                console.log(checkbox.id+" is absent")
             }
         });
 

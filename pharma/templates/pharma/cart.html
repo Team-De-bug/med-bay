@@ -43,11 +43,9 @@
 {%block script%}
 <script>
 function removeFromCart(id, amount) {
-    console.log(id);
     
     var name = $('#' + id + '_name').val();
     
-    console.log(name);
     
     $.ajax({
         url : "{% url 'pharma:remove' %}",
@@ -68,7 +66,6 @@ function removeFromCart(id, amount) {
 }
 
 function plusone(id) {
-    console.log("item id: " + id);
     var name = $('#' + id + '_name').val();
     var amount =$('#' + id + '_amount').val();
     amount += 1;
