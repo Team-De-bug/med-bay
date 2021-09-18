@@ -6,7 +6,7 @@ from .views import ping, csrf
 urlpatterns = [
    path('api-token-auth/', views.obtain_auth_token),
    path('api-auth/', include('rest_framework.urls')),
-   path('pres', api_views.ListPrescriptionView.as_view()),
+   path('last-pres', api_views.LastPrescriptionView.as_view()),
    path('stock', api_views.ListStockView.as_view()),
    path('csrf', csrf),
    path('ping', ping),

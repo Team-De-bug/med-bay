@@ -6,16 +6,32 @@ from rest_framework.response import Response
 from .serializer import *
 from .models import *
 from api.permissions import IsPharma
+from patients.models import Patient
 
 
-class ListPrescriptionView(APIView):
+class LastPrescriptionView(APIView):
 
     authentication_classes = [TokenAuthentication, BasicAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated, IsPharma]
 
     def get(self, request):
-        prescriptions = Prescription.objects.all()
-        serialized = PrescriptionsSerializer(prescriptions, many=True)
+        patient_id = request.GET['patient_id']
+
+        # Getting the patient using the id
+        try:
+            patient = Patient.objects.get(id=patient_id)
+        except :
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        # Getting prescription
+        case = list(patient.cases_set.all().order_by('appointed_date'))[-1]
+        print(case)
+        prescription = case.prescription
+
+        # Getting medicines from prescription
+        medicines = prescription.medicine_set.all()
+        serialized = MedicineSerializer(medicines, many=True)
+
         return Response(serialized.data)
 
 
